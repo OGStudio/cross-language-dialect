@@ -3,15 +3,32 @@
 import os
 import sys
 
-from lib.cld import *
-from ctx.ctx import *
-
-DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
-
 if len(sys.argv) < 2:
     print("Usage: /path/to/do-translate /path/to/cld.config")
     sys.exit(1)
 
-CFG = sys.argv[-1]
+CFG = os.path.realpath(sys.argv[1])
+SCRIPT_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 
-print(CFG)
+sys.path.append(f"{SCRIPT_DIR}/ctx")
+sys.path.append(f"{SCRIPT_DIR}/lib")
+sys.path.append(f"{SCRIPT_DIR}/tr")
+
+from cld import *
+from ctx import *
+from fs import *
+from tr_Context import *
+
+ctrl = ctx_Controller(tr_Context())
+
+def printDbg(c):
+    print(f"Dbg key->value: '{c.recentField}'->'{c.field(c.recentField)}'")
+ctrl.registerCallback(printDbg)
+
+ctrl.registerFunctions([
+    fs_locateConfigDir,
+    fs_readConfig,
+])
+
+ctrl.set("cfgPath", CFG)
+ctrl.set("scriptDir", SCRIPT_DIR)
