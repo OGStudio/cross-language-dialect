@@ -5,6 +5,7 @@ class tr_Context:
         self.cfgContents = []
         self.cfgDir = None
         self.cfgPath = None
+        self.jsConversions = {}
         self.scriptDir = None
 
     def field(self, fieldName):
@@ -12,3 +13,6 @@ class tr_Context:
 
     def setField(self, fieldName, value):
         setattr(self, fieldName, value)
+
+def tr_createContext():
+  return tr_Context()

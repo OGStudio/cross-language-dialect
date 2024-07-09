@@ -14,6 +14,14 @@ def cld_by_value(f):
 def cld_isdigit(s):
     return s.isdigit()
 
+# Get length
+def cld_len(s):
+    return len(s)
+
+# Split string by separator
+def cld_split(s, sep):
+    return s.split(sep)
+
 # Tell if string starts with certain prefix.
 def cld_startswith(s, prefix):
     return s.startswith(prefix)

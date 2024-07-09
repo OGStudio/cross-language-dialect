@@ -17,9 +17,10 @@ sys.path.append(f"{SCRIPT_DIR}/tr")
 from cld import *
 from ctx import *
 from fs import *
+from js import *
 from tr_Context import *
 
-ctrl = ctx_Controller(tr_Context())
+ctrl = ctx_Controller(tr_createContext())
 
 def printDbg(c):
     print(f"Dbg key->value: '{c.recentField}'->'{c.field(c.recentField)}'")
@@ -28,6 +29,7 @@ ctrl.registerCallback(printDbg)
 ctrl.registerFunctions([
     fs_locateConfigDir,
     fs_readConfig,
+    js_prepareConversions,
 ])
 
 ctrl.set("cfgPath", CFG)

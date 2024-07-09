@@ -9,7 +9,7 @@ from tr_Context import *
 # 1. Config path has just been set
 @cld_by_value
 def fs_locateConfigDir(
-  c: tr_Context
+    c: tr_Context
 ) -> tr_Context:
     if (
         c.recentField == "cfgPath"
@@ -27,7 +27,7 @@ def fs_locateConfigDir(
 # 1. Config path has just been set
 @cld_by_value
 def fs_readConfig(
-  c: tr_Context
+    c: tr_Context
 ) -> tr_Context:
     if (
         c.recentField == "cfgPath"
