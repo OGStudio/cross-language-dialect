@@ -6,6 +6,7 @@ class tr_Context:
         self.cfgDir = None
         self.cfgPath = None
         self.jsConversions = {}
+        self.jsSrcFiles = {}
         self.scriptDir = None
 
     def field(self, fieldName):

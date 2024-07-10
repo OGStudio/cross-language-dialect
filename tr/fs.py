@@ -38,3 +38,26 @@ def fs_readConfig(
 
     c.recentField = "none"
     return c
+
+# Read input files for JS conversion
+#
+# Conditions:
+# 1. JS conversion has just been arranged
+@cld_by_value
+def fs_readJSSrcFiles(
+    c: tr_Context
+) -> tr_Context:
+    if (
+        c.recentField == "jsConversions" and
+        cld_len(c.jsConversions) != 0
+    ):
+        fileContents = { }
+        for file in c.jsConversions:
+            path = c.cfgDir + "/" + file
+            fileContents[file] = fs_aux_readFile(path)
+        c.jsSrcFiles = fileContents
+        c.recentField = "jsSrcFiles"
+        return c
+
+    c.recentField = "none"
+    return c

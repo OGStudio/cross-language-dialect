@@ -10,13 +10,14 @@ class ctx_Controller:
     
     def executeFunctions(self):
         c = self.queue.pop(0)
+        self.context.recentField = c.recentField
+        self.context.setField(c.recentField, c.field(c.recentField))
+
         for f in self.functions:
-            ctx = f(c)
+            ctx = f(self.context)
             if ctx.recentField != "none":
                 self.queue.append(ctx)
       
-        self.context.recentField = c.recentField
-        self.context.setField(c.recentField, c.field(c.recentField))
         self.reportContext()
 
     def processQueue(self):
