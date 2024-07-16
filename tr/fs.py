@@ -86,3 +86,27 @@ def fs_readJSSrcFiles(
 
     c.recentField = "none"
     return c
+
+# Write JS files
+#
+# Conditions:
+# 1. Copy has just been made
+@cld_by_value
+def fs_writeJSFiles(
+    c: Context
+) -> Context:
+    if (
+        c.recentField == "jsFilesCopy"
+    ):
+        for file in c.jsFilesCopy:
+            path = c.cfgDir + "/" + file
+            contents = "\n".join(c.jsFilesCopy[file])
+            with open(path, "w") as f:
+                f.write(contents)
+
+        c.didWriteJSFiles = True
+        c.recentField = "didWriteJSFiles"
+        return c
+
+    c.recentField = "none"
+    return c

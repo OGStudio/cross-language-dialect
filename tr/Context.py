@@ -5,6 +5,7 @@ class Context:
         self.cfgContents = []
         self.cfgDir = None
         self.cfgPath = None
+        self.didWriteJSFiles = False
         self.jsConversions = {}
         self.jsFiles = []
         self.jsFilesCopy = {}
