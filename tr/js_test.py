@@ -1,9 +1,9 @@
 from js import *
-from tr_Context import *
+from Context import *
 
 def test_js_prepareConversions(
 ) -> str:
-    c = tr_createContext()
+    c = createContext()
     c.cfgContents = [
         "[abc]",
         "else",

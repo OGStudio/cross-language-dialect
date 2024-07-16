@@ -1,7 +1,7 @@
 import os
 from cld import *
 from js_aux import *
-from tr_Context import *
+from Context import *
 
 # Prepare dictionary of src->dst conversions based on config
 #
@@ -9,8 +9,8 @@ from tr_Context import *
 # 1. Config contents have just become available
 @cld_by_value
 def js_prepareConversions(
-    c: tr_Context
-) -> tr_Context:
+    c: Context
+) -> Context:
     if (
         c.recentField == "cfgContents"
     ):

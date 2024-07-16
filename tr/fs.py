@@ -1,7 +1,7 @@
 import os
 from cld import *
+from Context import *
 from fs_aux import *
-from tr_Context import *
 
 # Extract directory from config path
 #
@@ -9,8 +9,8 @@ from tr_Context import *
 # 1. Config path has just been set
 @cld_by_value
 def fs_locateConfigDir(
-    c: tr_Context
-) -> tr_Context:
+    c: Context
+) -> Context:
     if (
         c.recentField == "cfgPath"
     ):
@@ -27,8 +27,8 @@ def fs_locateConfigDir(
 # 1. Config path has just been set
 @cld_by_value
 def fs_readConfig(
-    c: tr_Context
-) -> tr_Context:
+    c: Context
+) -> Context:
     if (
         c.recentField == "cfgPath"
     ):
@@ -45,8 +45,8 @@ def fs_readConfig(
 # 1. JS conversion has just been arranged
 @cld_by_value
 def fs_readJSSrcFiles(
-    c: tr_Context
-) -> tr_Context:
+    c: Context
+) -> Context:
     if (
         c.recentField == "jsConversions" and
         cld_len(c.jsConversions) != 0

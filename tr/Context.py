@@ -1,6 +1,6 @@
 from cld import *
 
-class tr_Context:
+class Context:
     def __init__(self):
         self.cfgContents = []
         self.cfgDir = None
@@ -15,5 +15,5 @@ class tr_Context:
     def setField(self, fieldName, value):
         setattr(self, fieldName, value)
 
-def tr_createContext():
-  return tr_Context()
+def createContext():
+  return Context()
