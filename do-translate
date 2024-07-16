@@ -28,6 +28,7 @@ ctrl.registerCallback(printDbg)
 
 ctrl.registerFunctions([
     fs_locateConfigDir,
+    fs_mkJSFiles,
     fs_readConfig,
     fs_readJSSrcFiles,
     js_prepareConversions,

@@ -21,6 +21,31 @@ def fs_locateConfigDir(
     c.recentField = "none"
     return c
 
+# Make output files for JS conversion and intermediate directories
+#
+# Conditions:
+# 1. JS conversion has just been arranged
+@cld_by_value
+def fs_mkJSFiles(
+    c: Context
+) -> Context:
+    if (
+        c.recentField == "jsConversions" and
+        cld_len(c.jsConversions) != 0
+    ):
+        files = []
+        for src in c.jsConversions:
+            dst = c.cfgDir + "/" + c.jsConversions[src]
+            fs_aux_mkDirs(dst)
+            fs_aux_touch(dst)
+            files.append(dst)
+        c.jsFiles = files
+        c.recentField = "jsFiles"
+        return c
+
+    c.recentField = "none"
+    return c
+
 # Read config file contents
 #
 # Conditions:
