@@ -7,6 +7,7 @@ class Context:
         self.cfgPath = None
         self.jsConversions = {}
         self.jsFiles = []
+        self.jsFilesCopy = {}
         self.jsSrcFiles = {}
         self.scriptDir = None
 

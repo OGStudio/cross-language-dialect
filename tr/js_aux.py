@@ -42,3 +42,19 @@ def js_aux_conversions(
             res[parts[0]] = parts[1]
 
     return res
+
+# Copy JS files
+def js_aux_copy(
+    conversions: dict[str, str],
+    fileContents: dict[str, [str]]
+) -> dict[str, [str]]:
+    dst: dict[str, [str]] = {}
+    for file in fileContents:
+        linesIn = fileContents[file]
+        linesOut = []
+        for line in linesIn:
+            linesOut.append(line)
+        dstFile = conversions[file]
+        dst[dstFile] = linesOut
+    return dst
+

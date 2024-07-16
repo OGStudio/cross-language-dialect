@@ -32,6 +32,10 @@ ctrl.registerFunctions([
     fs_readConfig,
     fs_readJSSrcFiles,
     js_prepareConversions,
+
+    # Actual Python to JavaScript source translation.
+    # WARNING: Keep the order of functions.
+    js_copy,
 ])
 
 ctrl.set("cfgPath", CFG)

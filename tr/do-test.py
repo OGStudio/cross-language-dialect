@@ -11,6 +11,7 @@ from js_test import *
 
 functions = [
     test_js_aux_conversions,
+    test_js_aux_copy,
     test_js_prepareConversions,
 ]
 
