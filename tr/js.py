@@ -38,3 +38,22 @@ def js_prepareConversions(
 
     c.recentField = "none"
     return c
+
+# Remove imports
+#
+# Conditions:
+# 1. JS source files' copy became available
+@cld_by_value
+def js_removeImports(
+    c: Context
+) -> Context:
+    if (
+        c.recentField == "jsFilesCopy"
+    ):
+        c.jsFilesRemoveImports = js_aux_removeImports(c.jsFilesCopy)
+        c.recentField = "jsFilesRemoveImports"
+        return c
+
+    c.recentField = "none"
+    return c
+

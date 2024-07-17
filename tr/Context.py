@@ -9,7 +9,9 @@ class Context:
         self.jsConversions = {}
         self.jsFiles = []
         self.jsFilesCopy = {}
+        self.jsFilesRemoveImports = {}
         self.jsSrcFiles = {}
+        self.recentField = None
         self.scriptDir = None
 
     def field(self, fieldName):

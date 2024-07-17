@@ -90,17 +90,17 @@ def fs_readJSSrcFiles(
 # Write JS files
 #
 # Conditions:
-# 1. Copy has just been made
+# 1. Imports have just been removed
 @cld_by_value
 def fs_writeJSFiles(
     c: Context
 ) -> Context:
     if (
-        c.recentField == "jsFilesCopy"
+        c.recentField == "jsFilesRemoveImports"
     ):
-        for file in c.jsFilesCopy:
+        for file, contents in c.jsFilesRemoveImports.items():
             path = c.cfgDir + "/" + file
-            contents = "\n".join(c.jsFilesCopy[file])
+            contents = "\n".join(contents)
             with open(path, "w") as f:
                 f.write(contents)
 

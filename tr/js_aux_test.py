@@ -40,3 +40,26 @@ def test_js_aux_copy(
     ):
         return "OK: js_aux_copy"
     return "ERR: js_aux_copy"
+
+def test_js_aux_removeImports(
+) -> str:
+    src = {
+        "js/memory.js": [
+            "import X",
+            "from Y import X",
+            "def someFunc():",
+        ],
+        "js/memory_test.js": [
+            "import Y",
+            "print ABC",
+            "@cld_by_value",
+        ],
+    }
+    dst = js_aux_removeImports(src)
+    if (
+        cld_len(dst) == 2 and
+        cld_len(dst["js/memory.js"]) == 1 and
+        cld_len(dst["js/memory_test.js"]) == 2
+    ):
+        return "OK: js_aux_removeImports"
+    return "ERR: js_aux_removeImports"

@@ -58,3 +58,18 @@ def js_aux_copy(
         dst[dstFile] = linesOut
     return dst
 
+def js_aux_removeImports(
+    src: dict[str, [str]]
+) -> dict[str, [str]]:
+    dst: dict[str, [str]] = {}
+    for file in src:
+        linesIn = src[file]
+        linesOut = []
+        for line in linesIn:
+            if not (
+                cld_startswith(line, "import ") or
+                cld_startswith(line, "from ")
+            ):
+                linesOut.append(line)
+        dst[file] = linesOut
+    return dst

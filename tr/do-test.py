@@ -12,7 +12,10 @@ from js_test import *
 functions = [
     test_js_aux_conversions,
     test_js_aux_copy,
+    test_js_aux_removeImports,
+    test_js_copy,
     test_js_prepareConversions,
+    test_js_removeImports,
 ]
 
 for f in functions:
