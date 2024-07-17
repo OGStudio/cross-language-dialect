@@ -10,15 +10,29 @@ def cld_by_value(f):
         return f(*argsCopy, **kwargsCopy)
     return _f
 
+# Find substring position in string.
+#
+# Not found == -1
+def cld_find(s, sub):
+    return s.find(sub)
+
 # Tell if string is a digit.
 def cld_isdigit(s):
     return s.isdigit()
 
-# Get length
+# Get length.
 def cld_len(s):
     return len(s)
 
-# Split string by separator
+# Strip spaces from the left.
+def cld_lstrip(s):
+    return s.lstrip()
+
+# Replace all occurences.
+def cld_replace(s, src, dst):
+    return s.replace(src, dst)
+
+# Split string by separator.
 def cld_split(s, sep):
     return s.split(sep)
 

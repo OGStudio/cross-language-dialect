@@ -73,3 +73,22 @@ def js_aux_removeImports(
                 linesOut.append(line)
         dst[file] = linesOut
     return dst
+
+def js_aux_replaceComments(
+    src: dict[str, [str]]
+) -> dict[str, [str]]:
+    dst: dict[str, [str]] = {}
+    for file in src:
+        linesIn = src[file]
+        linesOut = []
+        for line in linesIn:
+            ln = cld_lstrip(line)
+            if (
+                cld_startswith(ln, "#")
+            ):
+                ln = cld_replace(line, "#", "//")
+                linesOut.append(ln)
+            else:
+                linesOut.append(line)
+        dst[file] = linesOut
+    return dst

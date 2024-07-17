@@ -34,6 +34,8 @@ ctrl.registerFunctions([
     fs_writeJSFiles,
     js_copy,
     js_prepareConversions,
+    js_removeImports,
+    js_replaceComments,
 ])
 
 ctrl.set("cfgPath", CFG)

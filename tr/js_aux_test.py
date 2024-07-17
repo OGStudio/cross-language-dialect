@@ -63,3 +63,19 @@ def test_js_aux_removeImports(
     ):
         return "OK: js_aux_removeImports"
     return "ERR: js_aux_removeImports"
+
+def test_js_aux_replaceComments(
+) -> str:
+    src = {
+        "js/memory.js": [
+            "# This is something",
+            "a = 1 # This stays intact",
+        ],
+    }
+    dst = js_aux_replaceComments(src)
+    if (
+        cld_len(dst) == 1 and
+        cld_startswith(dst["js/memory.js"][0], "//")
+    ):
+        return "OK: js_aux_replaceComments"
+    return "ERR: js_aux_replaceComments"

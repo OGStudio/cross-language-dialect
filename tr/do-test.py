@@ -13,9 +13,11 @@ functions = [
     test_js_aux_conversions,
     test_js_aux_copy,
     test_js_aux_removeImports,
+    test_js_aux_replaceComments,
     test_js_copy,
     test_js_prepareConversions,
     test_js_removeImports,
+    test_js_replaceComments,
 ]
 
 for f in functions:

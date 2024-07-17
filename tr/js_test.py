@@ -71,3 +71,22 @@ def test_js_removeImports(
         return "OK: js_removeImports"
     return "ERR: js_removeImports"
 
+def test_js_replaceComments(
+) -> str:
+    c = createContext()
+    c.jsFilesRemoveImports = {
+        "js/memory.js": [
+            "# This is something",
+            "a = 1 # This stays intact",
+        ],
+    }
+    c.recentField = "jsFilesRemoveImports"
+
+    c = js_replaceComments(c)
+    if (
+        c.recentField == "jsFilesReplaceComments" and
+        cld_startswith(c.jsFilesReplaceComments["js/memory.js"][0], "//")
+    ):
+        return "OK: js_replaceComments"
+    return "ERR: js_replaceComments"
+

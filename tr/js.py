@@ -57,3 +57,20 @@ def js_removeImports(
     c.recentField = "none"
     return c
 
+# Replace comments
+#
+# Conditions:
+# 1. Imports have just been removed
+@cld_by_value
+def js_replaceComments(
+    c: Context
+) -> Context:
+    if (
+        c.recentField == "jsFilesRemoveImports"
+    ):
+        c.jsFilesReplaceComments = js_aux_replaceComments(c.jsFilesRemoveImports)
+        c.recentField = "jsFilesReplaceComments"
+        return c
+
+    c.recentField = "none"
+    return c

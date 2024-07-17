@@ -10,6 +10,7 @@ class Context:
         self.jsFiles = []
         self.jsFilesCopy = {}
         self.jsFilesRemoveImports = {}
+        self.jsFilesReplaceComments = {}
         self.jsSrcFiles = {}
         self.recentField = None
         self.scriptDir = None

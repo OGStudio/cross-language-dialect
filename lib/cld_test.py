@@ -1,5 +1,13 @@
 from cld import *
 
+def test_cld_find(
+) -> str:
+    if (
+        cld_find("abc", "b") == 1
+    ):
+        return "OK: cld_find"
+    return "ERR: cld_find"
+
 def test_cld_isdigit_digit(
 ) -> str:
     if (
@@ -24,6 +32,22 @@ def test_cld_len(
         return "OK: cld_len"
     return "ERR: cld_len"
 
+def test_cld_lstrip(
+) -> str:
+    if (
+        cld_lstrip("  abc") == "abc"
+    ):
+        return "OK: cld_lstrip"
+    return "ERR: cld_lstrip"
+
+def test_cld_replace(
+) -> str:
+    if (
+        cld_replace("abc", "b", "c") == "acc"
+    ):
+        return "OK: cld_replace"
+    return "ERR: cld_replace"
+
 def test_cld_split(
 ) -> str:
     sample = "file1 -> file2"
@@ -33,6 +57,14 @@ def test_cld_split(
     ):
         return "OK: cld_split"
     return "ERR: cld_split"
+
+def test_cld_startswith(
+) -> str:
+    if (
+        cld_startswith("# something", "#")
+    ):
+        return "OK: cld_startswith"
+    return "ERR: cld_startswith"
 
 def test_cld_strtoint(
 ) -> str:
