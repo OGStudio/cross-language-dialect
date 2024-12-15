@@ -1,2 +1,7 @@
 #!/bin/bash
-swiftc -o do-test main.swift CLDContext.swift CLDContext_test.swift
+swiftc \
+    -o do-test \
+    CLDContext.swift \
+    CLDContext_test.swift \
+    CLDController.swift \
+    main.swift
