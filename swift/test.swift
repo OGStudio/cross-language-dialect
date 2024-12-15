@@ -33,14 +33,14 @@ struct ExampleContext: CLDContext {
     }
 }
 
-/// 01. Validate field access by name
+/// Validate field access by name
 func t01_ExampleContext_field() -> Bool {
     var c = ExampleContext()
     c.host = "abc"
     return c.host == c.field("host")
 }
 
-/// 02. Validate field access by name for optional value
+/// Validate field access by name for optional value
 func t02_ExampleContext_field_optional() -> Bool {
     var c = ExampleContext()
     let ok1 = c.field("sometimes") == nil
@@ -51,7 +51,7 @@ func t02_ExampleContext_field_optional() -> Bool {
     return ok1 && ok2
 }
 
-/// 03. Validate changing field value by name
+/// Validate changing field value by name
 func t03_ExampleContext_setField() -> Bool {
     var c = ExampleContext()
     c.didLaunch = true
@@ -59,7 +59,7 @@ func t03_ExampleContext_setField() -> Bool {
     return c.didLaunch == false
 }
 
-/// 04. Validate changing field optional value by name
+/// Validate changing field optional value by name
 func t04_ExampleContext_setField_optional() -> Bool {
     var c = ExampleContext()
     c.sometimes = "anything"
@@ -70,4 +70,36 @@ func t04_ExampleContext_setField_optional() -> Bool {
     let ok2 = c.sometimes == c.field("sometimes") ?? "N/A"
 
     return ok1 && ok2
+}
+
+/// Validate `executeFunctions()` and `set()`
+func t05_CLDController_executeFunctions_set() -> Bool {
+    let ctrl = CLDController(ExampleContext())
+
+    // Disable the execution of `executeFunctions()` for testing purpose.
+    ctrl.isProcessingQueue = true
+
+    ctrl.set("host", "123")
+    func hostToDidLaunch(_ c: ExampleContext) -> ExampleContext {
+        var cc = c
+        if cc.recentField == "host" {
+            cc.didLaunch = true
+            cc.recentField = "didLaunch"
+            return cc
+        }
+        cc.recentField = "none"
+        return cc
+    }
+    ctrl.registerFunction { c in
+        hostToDidLaunch(c as! ExampleContext)
+    }
+
+    // Apply `host` value.
+    ctrl.executeFunctions()
+    // Apply `didLaunch` value.
+    ctrl.executeFunctions()
+
+    let c = ctrl.context as! ExampleContext
+    return c.host == "123" &&
+        c.didLaunch == true
 }
