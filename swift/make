@@ -1,0 +1,2 @@
+#!/bin/bash
+swiftc -o run-test main.swift ReactiveContext.swift ReactiveContext_test.swift

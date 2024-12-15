@@ -1,0 +1,5 @@
+print("Testing...")
+print("01", test01_ExampleContext_field())
+print("02", test02_ExampleContext_field_optional())
+print("03", test03_ExampleContext_setField())
+print("04", test04_ExampleContext_setField_optional())
