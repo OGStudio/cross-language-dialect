@@ -1,21 +1,22 @@
-class CLDController {
+public class CLDController {
     var callbacks = [(CLDContext) -> Void]()
+    var context: CLDContext
     var functions = [(CLDContext) -> CLDContext]()
     var isProcessingQueue = false
     var queue = [CLDContext]()
 
-    init(_ context: CLDContext) {
+    public init(_ context: CLDContext) {
         self.context = context
     }
 
     func executeFunctions() {
         let c = queue.removeFirst()
         context.recentField = c.recentField
-        context.setField(c.recentField, c.field(c.recentField))
+        context.setField(c.recentField, c.fieldAny(c.recentField))
       
-        for (f in functions) {
+        for f in functions {
             let ctx = f(context)
-            if (ctx.recentField != "none") {
+            if ctx.recentField != "none" {
                 queue.append(ctx)
             }
         }
@@ -25,7 +26,7 @@ class CLDController {
 
     func processQueue() {
         // Prevent recursion.
-        if (isProcessingQueue) {
+        if isProcessingQueue {
             return
         }
       
@@ -38,28 +39,32 @@ class CLDController {
         isProcessingQueue = false
     }
 
-    func registerCallback(_ cb: (CLDContext) -> Void) {
+    public func registerCallback(_ cb: @escaping (CLDContext) -> Void) {
         callbacks.append(cb)
     }
 
-    func registerFieldCallback(
+    public func registerFieldCallback(
         _ fieldName: String,
-        _ cb: (CLDContext) -> Void
+        _ cb: @escaping (CLDContext) -> Void
     ) {
-        callbacks.append({c in if (c.recentField == fieldName) cb(c) })
+        callbacks.append({ c in
+            if c.recentField == fieldName {
+                cb(c)
+            }
+        })
     }
 
-    func registerFunction(_ f: (CLDContext) -> CLDContext) {
+    public func registerFunction(_ f: @escaping (CLDContext) -> CLDContext) {
         functions.append(f)
     }
 
     func reportContext() {
-        for (cb in callbacks) {
+        for cb in callbacks {
             cb(context)
         }
     }
 
-    func set(
+    public func set(
         _ fieldName: String,
         _ value: Any
     ) {
