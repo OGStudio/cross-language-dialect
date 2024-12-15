@@ -2,6 +2,6 @@
 swiftc \
     -o do-test \
     CLDContext.swift \
-    CLDContext_test.swift \
     CLDController.swift \
+    test.swift \
     main.swift
