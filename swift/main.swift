@@ -1,5 +1,12 @@
 print("Testing...")
-print("01", test01_ExampleContext_field())
-print("02", test02_ExampleContext_field_optional())
-print("03", test03_ExampleContext_setField())
-print("04", test04_ExampleContext_setField_optional())
+
+let tests = [
+    t01_ExampleContext_field,
+    t02_ExampleContext_field_optional,
+    t03_ExampleContext_setField,
+    t04_ExampleContext_setField_optional,
+]
+
+for (i, test) in tests.enumerated() {
+    print(i, test())
+}

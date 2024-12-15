@@ -1,15 +1,11 @@
 
-/// Sample ReactiveContext used for testing only
-struct ExampleContext: ReactiveContext {
+/// Sample Context used for testing
+struct ExampleContext: CLDContext {
     var didLaunch = false
     var host = ""
     var sometimes: String?
 
     var recentField = ""
-
-    func fieldAny(_ name: String) -> Any {
-        return field(name)
-    }
 
     func field<T>(_ name: String) -> T {
         if (name == "didLaunch") {
@@ -38,14 +34,14 @@ struct ExampleContext: ReactiveContext {
 }
 
 /// 01. `field()` call for string value
-func test01_ExampleContext_field() -> Bool {
+func t01_ExampleContext_field() -> Bool {
     var c = ExampleContext()
     c.host = "abc"
     return c.host == c.field("host")
 }
 
 /// 02. `field()` call for optional string value
-func test02_ExampleContext_field_optional() -> Bool {
+func t02_ExampleContext_field_optional() -> Bool {
     var c = ExampleContext()
     let ok1 = c.field("sometimes") == nil
 
@@ -56,7 +52,7 @@ func test02_ExampleContext_field_optional() -> Bool {
 }
 
 /// 03. `setField()` call for boolean value
-func test03_ExampleContext_setField() -> Bool {
+func t03_ExampleContext_setField() -> Bool {
     var c = ExampleContext()
     c.didLaunch = true
     c.setField("didLaunch", false)
@@ -64,7 +60,7 @@ func test03_ExampleContext_setField() -> Bool {
 }
 
 /// 04. `setField()` call for optional string value
-func test04_ExampleContext_setField_optional() -> Bool {
+func t04_ExampleContext_setField_optional() -> Bool {
     var c = ExampleContext()
     c.sometimes = "anything"
     c.setField("sometimes", Optional<String>.none as Any)
