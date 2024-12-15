@@ -33,14 +33,14 @@ struct ExampleContext: CLDContext {
     }
 }
 
-/// 01. `field()` call for string value
+/// 01. Validate field access by name
 func t01_ExampleContext_field() -> Bool {
     var c = ExampleContext()
     c.host = "abc"
     return c.host == c.field("host")
 }
 
-/// 02. `field()` call for optional string value
+/// 02. Validate field access by name for optional value
 func t02_ExampleContext_field_optional() -> Bool {
     var c = ExampleContext()
     let ok1 = c.field("sometimes") == nil
@@ -51,7 +51,7 @@ func t02_ExampleContext_field_optional() -> Bool {
     return ok1 && ok2
 }
 
-/// 03. `setField()` call for boolean value
+/// 03. Validate changing field value by name
 func t03_ExampleContext_setField() -> Bool {
     var c = ExampleContext()
     c.didLaunch = true
@@ -59,7 +59,7 @@ func t03_ExampleContext_setField() -> Bool {
     return c.didLaunch == false
 }
 
-/// 04. `setField()` call for optional string value
+/// 04. Validate changing field optional value by name
 func t04_ExampleContext_setField_optional() -> Bool {
     var c = ExampleContext()
     c.sometimes = "anything"
