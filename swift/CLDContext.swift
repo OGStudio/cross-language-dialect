@@ -1,4 +1,4 @@
-protocol ReactiveContext {
+protocol CLDContext {
     var recentField: String { get set }
 
     func field<T>(_ name: String) -> T
