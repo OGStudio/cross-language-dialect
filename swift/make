@@ -1,7 +1,9 @@
-#!/bin/bash
+#!/bin/bash -e
+SCRIPT_DIR=$(cd "$(dirname "$0")" ; pwd -P)
+
 swiftc \
-    -o do-test \
-    CLDContext.swift \
-    CLDController.swift \
-    test.swift \
-    main.swift
+    -o $SCRIPT_DIR/do-test \
+    $SCRIPT_DIR/CLDContext.swift \
+    $SCRIPT_DIR/CLDController.swift \
+    $SCRIPT_DIR/test.swift \
+    $SCRIPT_DIR/main.swift
