@@ -118,3 +118,20 @@ func t06_CLDController_processQueue() -> Bool {
     let c = ctrl.context as! ExampleContext
     return c.didLaunch == true
 }
+
+/// Validate `registerFieldCallback()` if an expected field was changed
+func t07_CLDController_registerFieldCallback_match() -> Bool {
+    var c = ExampleContext()
+    c.host = "123"
+    c.recentField = "host"
+    var callbackHost = ""
+
+    let ctrl = CLDController(c)
+    ctrl.registerFieldCallback("host", { c in
+        callbackHost = (c as! ExampleContext).host
+    }
+    ctrl.reportContext()
+
+    let c = ctrl.context as! ExampleContext
+    return c.host == callbackHost
+}
