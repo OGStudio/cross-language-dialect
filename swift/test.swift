@@ -135,3 +135,20 @@ func t07_CLDController_registerFieldCallback_match() -> Bool {
     let c = ctrl.context as! ExampleContext
     return c.host == callbackHost
 }
+
+/// Validate `registerFieldCallback()` if an unexpected field was changed, i.e.,
+/// callback should not be called
+func t08_CLDController_registerFieldCallback_mismatch() -> Bool {
+    var ec = ExampleContext()
+    ec.host = "123"
+    ec.recentField = "host"
+    var callbackHost = ""
+
+    let ctrl = CLDController(ec)
+    ctrl.registerFieldCallback("didLaunch") { c in
+        callbackHost = (c as! ExampleContext).host
+    }
+    ctrl.reportContext()
+
+    return callbackHost == ""
+}

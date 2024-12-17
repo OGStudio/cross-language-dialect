@@ -8,6 +8,7 @@ let tests = [
     t05_CLDController_executeFunctions_set,
     t06_CLDController_processQueue,
     t07_CLDController_registerFieldCallback_match,
+    t08_CLDController_registerFieldCallback_mismatch,
 ]
 
 for (i, test) in tests.enumerated() {
