@@ -1,13 +1,17 @@
-# Contents
+Cross-language dialect (**CLD**) is a set of tools and rules to write
+portable code for select programming languages at once.
 
-| Directory | Description |
-| --- | --- |
-| ctx | Context controller |
-| lib | Cross-language library of frequently used functions like `cld_startswith()` |
-| tr | Translator of Python cross-language dialect to supported languages |
+Kotlin subset is the source that can be translated to the subsets of the following
+languages:
 
-# Tests
+* Swift
 
-$ `./ctx/do-test.py`
+# Swift
 
-$ `./lib/do-test.py`
+Build tests on macOS:
+
+$ `./swift/make`
+
+Run tests on macOS:
+
+$ `./swift/do-test`
