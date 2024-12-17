@@ -33,6 +33,18 @@ struct ExampleContext: CLDContext {
     }
 }
 
+/// Sample function for processing context change
+func hostToDidLaunch(_ c: ExampleContext) -> ExampleContext {
+    var c = c
+    if c.recentField == "host" {
+        c.didLaunch = true
+        c.recentField = "didLaunch"
+        return c
+    }
+    c.recentField = "none"
+    return c
+}
+
 /// Validate field access by name
 func t01_ExampleContext_field() -> Bool {
     var c = ExampleContext()
@@ -80,16 +92,7 @@ func t05_CLDController_executeFunctions_set() -> Bool {
     ctrl.isProcessingQueue = true
 
     ctrl.set("host", "123")
-    func hostToDidLaunch(_ c: ExampleContext) -> ExampleContext {
-        var cc = c
-        if cc.recentField == "host" {
-            cc.didLaunch = true
-            cc.recentField = "didLaunch"
-            return cc
-        }
-        cc.recentField = "none"
-        return cc
-    }
+
     ctrl.registerFunction { c in
         hostToDidLaunch(c as! ExampleContext)
     }
@@ -102,4 +105,16 @@ func t05_CLDController_executeFunctions_set() -> Bool {
     let c = ctrl.context as! ExampleContext
     return c.host == "123" &&
         c.didLaunch == true
+}
+
+/// Validate `processQueue()`
+func t06_CLDController_processQueue() -> Bool {
+    let ctrl = CLDController(ExampleContext())
+
+    ctrl.registerFunction { c in
+        hostToDidLaunch(c as! ExampleContext)
+    }
+    ctrl.set("host", "123")
+    let c = ctrl.context as! ExampleContext
+    return c.didLaunch == true
 }

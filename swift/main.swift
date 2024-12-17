@@ -6,6 +6,7 @@ let tests = [
     t03_ExampleContext_setField,
     t04_ExampleContext_setField_optional,
     t05_CLDController_executeFunctions_set,
+    t06_CLDController_processQueue,
 ]
 
 for (i, test) in tests.enumerated() {
