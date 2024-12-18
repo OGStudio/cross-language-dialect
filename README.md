@@ -15,3 +15,13 @@ $ `./swift/make`
 Run tests on macOS:
 
 $ `./swift/do-test`
+
+# Kotlin
+
+Build tests on macOS:
+
+$ `./kotlin/make`
+
+Run tests on macOS:
+
+$ `./kotlin/do-test.kexe`

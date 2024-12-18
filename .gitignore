@@ -1,3 +1,8 @@
 __pycache__
 .DS_Store
+kotlin/do-test*
 swift/do-test
+local.properties
+.gradle
+build
+translator
