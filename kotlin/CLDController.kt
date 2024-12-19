@@ -9,7 +9,7 @@ class CLDController(
     fun executeFunctions() {
         val c = queue.removeFirst()
         context.recentField = c.recentField
-        context.setField(c.recentField, c.field(c.recentField))
+        context.setField(c.recentField, c.fieldAny(c.recentField))
        
         for (f in functions) {
             val ctx = f(context.selfCopy())

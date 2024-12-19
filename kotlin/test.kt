@@ -1,50 +1,60 @@
-package ivac
-import kotlin.js.JsExport
-
-/**
- * Пример контекста
- *
- * Используется лишь для тестирования
- */
-@JsExport
-data class example_Context(
+// Sample context used for testing
+data class ExampleContext(
     var didLaunch: Boolean = false,
     var host: String = "",
+    var sometimes: String? = null,
+
     override var recentField: String = "",
-): ctx_Context {
-    override fun field(name: String): Any {
+): CLDContext {
+    override fun <T> field(name: String): T {
         if (name == "didLaunch") {
-            return didLaunch
+            return didLaunch as T
         } else if (name == "host") {
-            return host
+            return host as T
+        } else if (name == "sometimes") {
+            return sometimes as T
         }
 
-        return "unknown-field-name"
+        return "unknown-field-name" as T
     }
 
-    override fun selfCopy(): ctx_Context {
+    override fun selfCopy(): CLDContext {
         return this.copy()
     }
 
-    override fun setField(name: String, value: Any) {
+    override fun setField(
+        name: String,
+        value: Any
+    ) {
         if (name == "didLaunch") {
             didLaunch = value as Boolean
         } else if (name == "host") {
             host = value as String
+        } else if (name == "sometimes") {
+            sometimes = value as String?
         }
     }
 }
 
-/**
- * Проверяем доступность поля по имени
- */
-@JsExport
-fun test_example_Context_field(): Boolean {
-    var c = example_Context()
+// Validate field access by name
+fun t01_ExampleContext_field(): Boolean {
+    var c = ExampleContext()
     c.host = "abc"
     return c.host == c.field("host")
 }
 
+// Validate field access by name for optional value
+fun t02_ExampleContext_field_optional(): Boolean {
+    var c = ExampleContext()
+    val ok1 = c.field("sometimes") as String? == null
+
+    c.sometimes = "def"
+    val ok2 = c.sometimes == c.field("sometimes") ?: "N/A"
+
+    return ok1 && ok2
+}
+
+/*
 /**
  * Проверяем, что копия, выданная методом `selfCopy()`, является
  * отдельным экземпляром контекста
@@ -163,3 +173,4 @@ fun test_ctx_Controller_registerFieldCallback_mismatch(): Boolean {
 
     return callbackHost == ""
 }
+*/

@@ -10,7 +10,12 @@ interface CLDContext {
     /**
      * Get field's value by its name
      */
-    fun field(name: String): Any
+    fun <T> field(name: String): T
+
+    fun fieldAny(name: String): Any {
+        return field(name)
+    }
+
     /**
      * Create a copy of the CLDContext derivative
      *
