@@ -2,8 +2,8 @@ interface CLDContext {
     /**
      * Name of the field that has just changed
      *
-     * Allows shoulds/handlers/behaviour functions to react to
-     * only relevant changes and ignore other changes of CLDContext
+     * Allows shoulds/handlers/behaviour functions to react to only
+     * relevant changes and ignore other changes of CLDContext
      */
     var recentField: String
 

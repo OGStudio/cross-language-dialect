@@ -4,7 +4,7 @@ SCRIPT_DIR=$(cd "$(dirname "$0")" ; pwd -P)
 kotlinc-native \
     -o $SCRIPT_DIR/do-test \
     $SCRIPT_DIR/CLDContext.kt \
+    $SCRIPT_DIR/CLDController.kt \
     $SCRIPT_DIR/main.kt
 
-#    $SCRIPT_DIR/CLDController.swift \
 #    $SCRIPT_DIR/test.swift \
