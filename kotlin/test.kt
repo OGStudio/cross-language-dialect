@@ -130,26 +130,24 @@ fun t07_CLDController_processQueue(): Boolean {
     return c.didLaunch == true
 }
 
-/*
-/**
- * Проверяем работу `registerFieldCallback()` при изменении ожидаемого поля
- */
-@JsExport
-fun test_ctx_Controller_registerFieldCallback_match(): Boolean {
-    var c = example_Context()
-    c.host = "123"
-    c.recentField = "host"
+// Validate `registerFieldCallback()` if an expected field was changed
+fun t08_CLDController_registerFieldCallback_match(): Boolean {
+    var ec = ExampleContext()
+    ec.host = "123"
+    ec.recentField = "host"
     var callbackHost = ""
 
-    val ctrl = ctx_Controller(c)
-    ctrl.registerFieldCallback("host", { c: ctx_Context ->
-      callbackHost = (c as example_Context).host
+    val ctrl = CLDController(ec)
+    ctrl.registerFieldCallback("host", { c: CLDContext ->
+        callbackHost = (c as ExampleContext).host
     })
     ctrl.reportContext()
 
+    val c = ctrl.context as ExampleContext
     return c.host == callbackHost
 }
 
+/*
 /**
  * Проверяем работу `registerFieldCallback()` при изменении поля, которое мы не ждём,
  * т.е. callback не будет вызван
