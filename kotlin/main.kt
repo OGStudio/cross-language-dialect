@@ -8,8 +8,8 @@ fun main() {
         ::t04_ExampleContext_setField,
         ::t05_ExampleContext_setField_optional,
         ::t06_CLDController_executeFunctions_set,
+        ::t07_CLDController_processQueue,
         /*
-        t06_CLDController_processQueue,
         t07_CLDController_registerFieldCallback_match,
         t08_CLDController_registerFieldCallback_mismatch,
         */

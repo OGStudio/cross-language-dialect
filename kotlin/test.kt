@@ -118,32 +118,19 @@ fun t06_CLDController_executeFunctions_set(): Boolean {
         c.didLaunch == true
 }
 
-/*
-/**
- * Проверяем работу `processQueue()`
- */
-@JsExport
-fun test_ctx_Controller_processQueue(): Boolean {
-    var c = example_Context()
-    val ctrl = ctx_Controller(c)
+// Validate `processQueue()`
+fun t07_CLDController_processQueue(): Boolean {
+    val ctrl = CLDController(ExampleContext())
 
-    fun hostToDidLaunch(c: example_Context): example_Context {
-        if (c.recentField == "host") {
-            c.didLaunch = true
-            c.recentField = "didLaunch"
-            return c
-        }
-        c.recentField = "none"
-        return c
-    }
-
-    ctrl.registerFunction({ c: ctx_Context ->
-      hostToDidLaunch(c as example_Context)
+    ctrl.registerFunction({ c: CLDContext ->
+        hostToDidLaunch(c as ExampleContext)
     })
     ctrl.set("host", "123")
+    val c = ctrl.context as ExampleContext
     return c.didLaunch == true
 }
 
+/*
 /**
  * Проверяем работу `registerFieldCallback()` при изменении ожидаемого поля
  */
