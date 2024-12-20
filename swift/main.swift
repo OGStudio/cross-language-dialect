@@ -1,4 +1,4 @@
-print("Testing...")
+print("Testing... ", terminator: "")
 
 let tests = [
     t01_ExampleContext_field,
@@ -11,6 +11,12 @@ let tests = [
     t08_CLDController_registerFieldCallback_mismatch,
 ]
 
-for (i, test) in tests.enumerated() {
-    print(i + 1, test())
+var okCount = 0
+for test in tests {
+    let result = test()
+    if result {
+        okCount += 1
+    }
 }
+let totalCount = tests.count
+print("\(okCount)/\(totalCount)")

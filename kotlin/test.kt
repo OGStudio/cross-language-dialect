@@ -54,20 +54,16 @@ fun t02_ExampleContext_field_optional(): Boolean {
     return ok1 && ok2
 }
 
-/*
-/**
- * Проверяем, что копия, выданная методом `selfCopy()`, является
- * отдельным экземпляром контекста
- */
-@JsExport
-fun test_example_Context_selfCopy(): Boolean {
-    var c1 = example_Context()
+// Validate `selfCopy()` returns the deep copy of a context
+fun t03_ExampleContext_selfCopy(): Boolean {
+    var c1 = ExampleContext()
     c1.host = "abc"
-    var c2 = c1.selfCopy() as example_Context
+    var c2 = c1.selfCopy() as ExampleContext
     c2.host = "123"
     return c1.host == "abc"
 }
 
+/*
 /**
  * Проверяем задание значения полю по имени
  */
