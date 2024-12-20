@@ -147,24 +147,19 @@ fun t08_CLDController_registerFieldCallback_match(): Boolean {
     return c.host == callbackHost
 }
 
-/*
-/**
- * Проверяем работу `registerFieldCallback()` при изменении поля, которое мы не ждём,
- * т.е. callback не будет вызван
- */
-@JsExport
-fun test_ctx_Controller_registerFieldCallback_mismatch(): Boolean {
-    var c = example_Context()
-    c.host = "123"
-    c.recentField = "host"
+/// Validate `registerFieldCallback()` if an unexpected field was changed, i.e.,
+/// callback should not be called
+fun t09_CLDController_registerFieldCallback_mismatch(): Boolean {
+    var ec = ExampleContext()
+    ec.host = "123"
+    ec.recentField = "host"
     var callbackHost = ""
 
-    val ctrl = ctx_Controller(c)
-    ctrl.registerFieldCallback("didLaunch", { c: ctx_Context ->
-      callbackHost = (c as example_Context).host
+    val ctrl = CLDController(ec)
+    ctrl.registerFieldCallback("didLaunch", { c: CLDContext ->
+        callbackHost = (c as ExampleContext).host
     })
     ctrl.reportContext()
 
     return callbackHost == ""
 }
-*/

@@ -10,9 +10,7 @@ fun main() {
         ::t06_CLDController_executeFunctions_set,
         ::t07_CLDController_processQueue,
         ::t08_CLDController_registerFieldCallback_match,
-        /*
-        t08_CLDController_registerFieldCallback_mismatch,
-        */
+        ::t09_CLDController_registerFieldCallback_mismatch,
     )
 
     var okCount = 0
