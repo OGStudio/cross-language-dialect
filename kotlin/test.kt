@@ -24,7 +24,7 @@ data class ExampleContext(
 
     override fun setField(
         name: String,
-        value: Any
+        value: Any?
     ) {
         if (name == "didLaunch") {
             didLaunch = value as Boolean
@@ -63,22 +63,28 @@ fun t03_ExampleContext_selfCopy(): Boolean {
     return c1.host == "abc"
 }
 
-/*
-/**
- * Проверяем задание значения полю по имени
- */
-@JsExport
-fun test_example_Context_setField(): Boolean {
-    var c = example_Context()
-    c.host = "abc"
-    c.setField("host", "123")
-    return c.host == "123"
+// Validate changing field value by name
+fun t04_ExampleContext_setField(): Boolean {
+    var c = ExampleContext()
+    c.didLaunch = true
+    c.setField("didLaunch", false)
+    return c.didLaunch == false
 }
 
-/**
- * Проверяем работу `executeFunctions()` и `set()`
- */
-@JsExport
+// Validate changing field optional value by name
+fun t05_ExampleContext_setField_optional(): Boolean {
+    var c = ExampleContext()
+    c.sometimes = "anything"
+    c.setField("sometimes", null)
+    val ok1 = c.field("sometimes") as String? == null
+
+    c.setField("sometimes", "make it quick")
+    val ok2 = c.sometimes == c.field("sometimes") ?: "N/A"
+
+    return ok1 && ok2
+}
+
+/*
 fun test_ctx_Controller_executeFunctions_set(): Boolean {
     var c = example_Context()
     val ctrl = ctx_Controller(c)

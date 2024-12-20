@@ -25,5 +25,5 @@ interface CLDContext {
     /**
      * Set field's value by its name
      */
-    fun setField(name: String, value: Any)
+    fun setField(name: String, value: Any?)
 }
