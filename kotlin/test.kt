@@ -36,6 +36,17 @@ data class ExampleContext(
     }
 }
 
+// Sample function for processing context change
+fun hostToDidLaunch(c: ExampleContext): ExampleContext {
+    if (c.recentField == "host") {
+        c.didLaunch = true
+        c.recentField = "didLaunch"
+        return c
+    }
+    c.recentField = "none"
+    return c
+}
+
 // Validate field access by name
 fun t01_ExampleContext_field(): Boolean {
     var c = ExampleContext()
@@ -84,34 +95,30 @@ fun t05_ExampleContext_setField_optional(): Boolean {
     return ok1 && ok2
 }
 
-/*
-fun test_ctx_Controller_executeFunctions_set(): Boolean {
-    var c = example_Context()
-    val ctrl = ctx_Controller(c)
-    // Отключаем автоматическое исполнение executeFunctions.
+// Validate `executeFunctions()` and `set()`
+fun t06_CLDController_executeFunctions_set(): Boolean {
+    val ctrl = CLDController(ExampleContext())
+
+    // Disable the execution of `executeFunctions()` for testing purpose.
     ctrl.isProcessingQueue = true
+
     ctrl.set("host", "123")
 
-    fun hostToDidLaunch(c: example_Context): example_Context {
-        if (c.recentField == "host") {
-            c.didLaunch = true
-            c.recentField = "didLaunch"
-            return c
-        }
-        c.recentField = "none"
-        return c
-    }
-    ctrl.registerFunction({ c: ctx_Context ->
-      hostToDidLaunch(c as example_Context)
+    ctrl.registerFunction({ c: CLDContext ->
+        hostToDidLaunch(c as ExampleContext)
     })
 
-    // Применяем задание host.
+    // Apply `host` value.
     ctrl.executeFunctions()
-    // Применяем задание didLaunch.
+    // Apply `didLaunch` value.
     ctrl.executeFunctions()
-    return c.host == "123" && c.didLaunch == true
+
+    val c = ctrl.context as ExampleContext
+    return c.host == "123" &&
+        c.didLaunch == true
 }
 
+/*
 /**
  * Проверяем работу `processQueue()`
  */
