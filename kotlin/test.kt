@@ -104,7 +104,7 @@ fun t06_CLDController_executeFunctions_set(): Boolean {
 
     ctrl.set("host", "123")
 
-    ctrl.registerFunction({ c: CLDContext ->
+    ctrl.registerFunction({ c ->
         hostToDidLaunch(c as ExampleContext)
     })
 
@@ -122,7 +122,7 @@ fun t06_CLDController_executeFunctions_set(): Boolean {
 fun t07_CLDController_processQueue(): Boolean {
     val ctrl = CLDController(ExampleContext())
 
-    ctrl.registerFunction({ c: CLDContext ->
+    ctrl.registerFunction({ c ->
         hostToDidLaunch(c as ExampleContext)
     })
     ctrl.set("host", "123")
@@ -138,7 +138,7 @@ fun t08_CLDController_registerFieldCallback_match(): Boolean {
     var callbackHost = ""
 
     val ctrl = CLDController(ec)
-    ctrl.registerFieldCallback("host", { c: CLDContext ->
+    ctrl.registerFieldCallback("host", { c ->
         callbackHost = (c as ExampleContext).host
     })
     ctrl.reportContext()
@@ -156,7 +156,7 @@ fun t09_CLDController_registerFieldCallback_mismatch(): Boolean {
     var callbackHost = ""
 
     val ctrl = CLDController(ec)
-    ctrl.registerFieldCallback("didLaunch", { c: CLDContext ->
+    ctrl.registerFieldCallback("didLaunch", { c ->
         callbackHost = (c as ExampleContext).host
     })
     ctrl.reportContext()

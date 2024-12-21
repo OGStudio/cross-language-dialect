@@ -44,7 +44,7 @@ class CLDController(
         fieldName: String,
         cb: (CLDContext) -> Unit
     ) {
-        callbacks.add({c: CLDContext ->
+        callbacks.add({ c ->
             if (c.recentField == fieldName) {
                 cb(c)
             }
