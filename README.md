@@ -24,4 +24,4 @@ $ `./kotlin/make`
 
 Run tests on macOS:
 
-$ `./kotlin/do-test.kexe`
+$ `./kotlin/do-test`
