@@ -11,11 +11,14 @@ interface CLDContext {
      * Get field's value by its name
      */
     fun <T> field(name: String): T
-
+    /**
+     * Erase type
+     *
+     * Used by CLDController to assign recent field's value
+     */
     fun fieldAny(name: String): Any {
         return field(name)
     }
-
     /**
      * Create a copy of the CLDContext derivative
      *
