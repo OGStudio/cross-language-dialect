@@ -1,0 +1,12 @@
+#!/bin/bash -e
+SCRIPT_DIR=$(cd "$(dirname "$0")" ; pwd -P)
+
+kotlinc-native \
+    -o $SCRIPT_DIR/do-test \
+    $SCRIPT_DIR/CLDContext.kt \
+    $SCRIPT_DIR/CLDController.kt \
+    $SCRIPT_DIR/test.kt \
+    $SCRIPT_DIR/main.kt
+
+# Remove weird `kexe` extension
+mv $SCRIPT_DIR/do-test{.kexe,}
