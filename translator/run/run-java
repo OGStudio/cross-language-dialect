@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+SCRIPT_DIR=$(cd "$(dirname "$0")" ; pwd -P)
+
+java -jar $SCRIPT_DIR/../jvm/build/libs/jvm.jar $@
