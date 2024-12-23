@@ -1,3 +1,5 @@
+import org.opengamestudio.*
+
 // Sample context used for testing
 data class ExampleContext(
     var didLaunch: Boolean = false,

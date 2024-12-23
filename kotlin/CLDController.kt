@@ -1,3 +1,5 @@
+package org.opengamestudio
+
 class CLDController(
     var context: CLDContext
 ) {
