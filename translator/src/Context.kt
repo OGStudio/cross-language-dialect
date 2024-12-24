@@ -9,7 +9,7 @@ data class Context(
     // The application did finish launching
     var didLaunch: Boolean = false,
     // Path to input file
-    var pathInput: String = "",
+    var inputFile: String = "",
     override var recentField: String = "",
 ): CLDContext {
     override fun <T> field(name: String): T {
@@ -19,8 +19,8 @@ data class Context(
             return consoleOutput as T
         } else if (name == "didLaunch") {
             return didLaunch as T
-        } else if (name == "pathInput") {
-            return pathInput as T
+        } else if (name == "inputFile") {
+            return inputFile as T
         }
         return "unknown-field-name" as T
     }
@@ -39,8 +39,8 @@ data class Context(
             consoleOutput = value as String
         } else if (name == "didLaunch") {
             didLaunch = value as Boolean
-        } else if (name == "pathInput") {
-            pathInput = value as String
+        } else if (name == "inputFile") {
+            inputFile = value as String
         }
     }
 }

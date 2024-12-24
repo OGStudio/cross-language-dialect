@@ -8,6 +8,7 @@ fun main(args: Array<String>) {
 
     // Register behaviour.
     arrayOf(
+        ::shouldParseInputFilePath,
         ::shouldPrintToConsole,
     ).forEach { f ->
         ctrl.registerFunction { c -> f(c as Context) }
