@@ -10,6 +10,8 @@ data class Context(
     var didLaunch: Boolean = false,
     // Path to input file
     var inputFile: String = "",
+    // Input file contents as lines
+    var inputFileLines: Array<String> = arrayOf(),
     override var recentField: String = "",
 ): CLDContext {
     override fun <T> field(name: String): T {
@@ -21,6 +23,8 @@ data class Context(
             return didLaunch as T
         } else if (name == "inputFile") {
             return inputFile as T
+        } else if (name == "inputFileLines") {
+            return inputFileLines as T
         }
         return "unknown-field-name" as T
     }
@@ -41,6 +45,8 @@ data class Context(
             didLaunch = value as Boolean
         } else if (name == "inputFile") {
             inputFile = value as String
+        } else if (name == "inputFileLines") {
+            inputFileLines = value as Array<String>
         }
     }
 }

@@ -10,6 +10,7 @@ fun main(args: Array<String>) {
     arrayOf(
         ::shouldParseInputFilePath,
         ::shouldPrintToConsole,
+        ::shouldReadInputFile,
     ).forEach { f ->
         ctrl.registerFunction { c -> f(c as Context) }
     }
