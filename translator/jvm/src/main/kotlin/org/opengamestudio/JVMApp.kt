@@ -3,12 +3,18 @@ package org.opengamestudio
 class JVMApp { }
 
 fun main(args: Array<String>) {
-    println("Hello, World, this is translator stub")
     val ctrl = CLDController(Context())
-    //trgRegisterCommonPlatformFunctions(p)
-    //trgRegisterCommonShoulds(ctrl)
-    //trgRegisterCommonSettings(ctrl)
+    consoleRegisterCallbacks(ctrl)
 
+    // Register behaviour.
+    arrayOf(
+        ::shouldPrintToConsole,
+    ).forEach { f ->
+        ctrl.registerFunction { c -> f(c as Context) }
+    }
+
+    // Pass CLI parameters.
     ctrl.set("arguments", args)
+    // Launch.
     ctrl.set("didLaunch", true)
 }
