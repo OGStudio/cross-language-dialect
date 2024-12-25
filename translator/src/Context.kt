@@ -12,6 +12,8 @@ data class Context(
     var inputFile: String = "",
     // Input file contents as lines
     var inputFileLines: Array<String> = arrayOf(),
+    // Input line that is parsed at this iteration
+    var parseLineId: Int = 0,
     override var recentField: String = "",
 ): CLDContext {
     override fun <T> field(name: String): T {
@@ -25,6 +27,8 @@ data class Context(
             return inputFile as T
         } else if (name == "inputFileLines") {
             return inputFileLines as T
+        } else if (name == "parseLineId") {
+            return parseLineId as T
         }
         return "unknown-field-name" as T
     }
@@ -47,6 +51,8 @@ data class Context(
             inputFile = value as String
         } else if (name == "inputFileLines") {
             inputFileLines = value as Array<String>
+        } else if (name == "parseLineId") {
+            parseLineId = value as Int
         }
     }
 }

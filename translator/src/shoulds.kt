@@ -18,11 +18,36 @@ fun shouldParseInputFilePath(c: Context): Context {
     return c
 }
 
+// Parse input file line
+//
+// Conditions:
+// 1. Input file lines are available
+// 2. Line is parsed and there are more lines to parse
+fun shouldParseLine(c: Context): Context {
+    if (c.recentField == "inputFileLines") {
+        c.parseLineId = 0
+        c.recentField = "parseLineId"
+        return c
+    }
+
+    if (
+        c.recentField == "parseLineId" &&
+        c.parseLineId < c.inputFileLines.size - 1
+    ) {
+        c.parseLineId += 1
+        c.recentField = "parseLineId"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Print to console
 //
 // Conditions:
 // 1. At app launch no command line arguments were provided
-// 2. Input file lines are available
+// 2. Line is parsed
 fun shouldPrintToConsole(c: Context): Context {
     if (
         c.recentField == "didLaunch" &&
@@ -33,11 +58,21 @@ fun shouldPrintToConsole(c: Context): Context {
         return c
     }
 
+    if (c.recentField == "parseLineId") {
+        val id = c.parseLineId
+        val line = c.inputFileLines[id]
+        c.consoleOutput = "parseLI id/text: '$id'/'$line'"
+        c.recentField = "consoleOutput"
+        return c
+    }
+
+    /*
     if (c.recentField == "inputFileLines") {
         c.consoleOutput = "inputFL:\n" + c.inputFileLines.joinToString("\n")
         c.recentField = "consoleOutput"
         return c
     }
+    */
 
     c.recentField = "none"
     return c

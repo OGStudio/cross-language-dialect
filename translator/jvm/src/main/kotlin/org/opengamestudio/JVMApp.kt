@@ -9,6 +9,7 @@ fun main(args: Array<String>) {
     // Register behaviour.
     arrayOf(
         ::shouldParseInputFilePath,
+        ::shouldParseLine,
         ::shouldPrintToConsole,
         ::shouldReadInputFile,
     ).forEach { f ->
