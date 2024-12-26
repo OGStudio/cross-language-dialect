@@ -1,5 +1,49 @@
 package org.opengamestudio
 
+// Collect entity
+//
+// Conditions:
+// 1. This is entity line
+fun shouldCollectEntity(c: Context): Context {
+    if (c.recentField == "isParsingEntity") {
+        println("ИГР shouldCE lineI: '${c.parseLineId}'")
+        val line = c.inputFileLines[c.parseLineId]
+        // Remove the last colon
+        val name = line.dropLast(1)
+        println("ИГР shouldCE-0 name: '$name'")
+        println("ИГР shouldCE-1 entities: '${c.entities.map { it }}'")
+        c.entities += name
+        println("ИГР shouldCE-2 entities: '${c.entities.map { it }}'")
+        c.recentField = "entities"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+
+// Parse entity line
+//
+// Conditions:
+// 1. The first letter is capitalized and not a comment
+fun shouldParseEntityLine(c: Context): Context {
+    if (
+        c.recentField == "isParsingTopLevelLine" &&
+        c.inputFileLines[c.parseLineId].length > 0 &&
+        c.inputFileLines[c.parseLineId][0] != '#' &&
+        c.inputFileLines[c.parseLineId] == c.inputFileLines[c.parseLineId].capitalize()
+    ) {
+        c.isParsingEntity = true
+        c.recentField = "isParsingEntity"
+        println("ИГР shouldPEL lineI: '${c.parseLineId}'")
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Parse input file path
 //
 // Conditions:
@@ -36,6 +80,25 @@ fun shouldParseLine(c: Context): Context {
     ) {
         c.parseLineId += 1
         c.recentField = "parseLineId"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Parse top level line
+//
+// Conditions:
+// 1. No indentation
+fun shouldParseTopLevelLine(c: Context): Context {
+    if (
+        c.recentField == "parseLineId" &&
+        c.inputFileLines[c.parseLineId].length > 0 &&
+        c.inputFileLines[c.parseLineId][0] != ' '
+    ) {
+        c.isParsingTopLevelLine = true
+        c.recentField = "isParsingTopLevelLine"
         return c
     }
 
