@@ -10,10 +10,7 @@ fun shouldCollectEntity(c: Context): Context {
         val line = c.inputFileLines[c.parseLineId]
         // Remove the last colon
         val name = line.dropLast(1)
-        println("ИГР shouldCE-0 name: '$name'")
-        println("ИГР shouldCE-1 entities: '${c.entities.map { it }}'")
         c.entities += name
-        println("ИГР shouldCE-2 entities: '${c.entities.map { it }}'/'${c.entities}'")
         c.recentField = "entities"
         return c
     }
@@ -26,12 +23,18 @@ fun shouldCollectEntity(c: Context): Context {
 //
 // Conditions:
 // 1. Top level line that should not be parsed
-// 2. Finished parsing entity?
+// 2. Finished parsing entity
 fun shouldFinishParsingLine(c: Context): Context {
     if (
         c.recentField == "isParsingTopLevelLine" &&
         !c.isParsingTopLevelLine
     ) {
+        c.finishParsingLine = true
+        c.recentField = "finishParsingLine"
+        return c
+    }
+
+    if (c.recentField == "entities") {
         c.finishParsingLine = true
         c.recentField = "finishParsingLine"
         return c
