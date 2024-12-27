@@ -10,13 +10,16 @@ data class Context(
     var didLaunch: Boolean = false,
     // Entities in the order of appearance
     var entities: Array<String> = arrayOf(),
+    // Report the end of current line parsing
+    var finishParsingLine: Boolean = false,
     // Path to input file
     var inputFile: String = "",
     // Input file contents as lines
     var inputFileLines: Array<String> = arrayOf(),
     // Entity line
     var isParsingEntity: Boolean = false,
-    // Input line without indentations
+    // True: non-empty/non-comment line without indentation
+    // False: top level line should not be parsed
     var isParsingTopLevelLine: Boolean = false,
     // Input line that is parsed at this iteration
     var parseLineId: Int = 0,
@@ -29,8 +32,10 @@ data class Context(
             return consoleOutput as T
         } else if (name == "didLaunch") {
             return didLaunch as T
-        } else if (name == "entitites") {
+        } else if (name == "entities") {
             return entities as T
+        } else if (name == "finishParsingLine") {
+            return finishParsingLine as T
         } else if (name == "inputFile") {
             return inputFile as T
         } else if (name == "inputFileLines") {
@@ -61,6 +66,8 @@ data class Context(
             didLaunch = value as Boolean
         } else if (name == "entities") {
             entities = value as Array<String>
+        } else if (name == "finishParsingLine") {
+            finishParsingLine = value as Boolean
         } else if (name == "inputFile") {
             inputFile = value as String
         } else if (name == "inputFileLines") {

@@ -13,7 +13,7 @@ fun shouldCollectEntity(c: Context): Context {
         println("ИГР shouldCE-0 name: '$name'")
         println("ИГР shouldCE-1 entities: '${c.entities.map { it }}'")
         c.entities += name
-        println("ИГР shouldCE-2 entities: '${c.entities.map { it }}'")
+        println("ИГР shouldCE-2 entities: '${c.entities.map { it }}'/'${c.entities}'")
         c.recentField = "entities"
         return c
     }
@@ -22,6 +22,24 @@ fun shouldCollectEntity(c: Context): Context {
     return c
 }
 
+// Finish parsing current line
+//
+// Conditions:
+// 1. Top level line that should not be parsed
+// 2. Finished parsing entity?
+fun shouldFinishParsingLine(c: Context): Context {
+    if (
+        c.recentField == "isParsingTopLevelLine" &&
+        !c.isParsingTopLevelLine
+    ) {
+        c.finishParsingLine = true
+        c.recentField = "finishParsingLine"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
 
 // Parse entity line
 //
@@ -30,6 +48,7 @@ fun shouldCollectEntity(c: Context): Context {
 fun shouldParseEntityLine(c: Context): Context {
     if (
         c.recentField == "isParsingTopLevelLine" &&
+        c.isParsingTopLevelLine &&
         c.inputFileLines[c.parseLineId].length > 0 &&
         c.inputFileLines[c.parseLineId][0] != '#' &&
         c.inputFileLines[c.parseLineId] == c.inputFileLines[c.parseLineId].capitalize()
@@ -66,7 +85,7 @@ fun shouldParseInputFilePath(c: Context): Context {
 //
 // Conditions:
 // 1. Input file lines are available
-// 2. Line is parsed and there are more lines to parse
+// 2. Finished parsing current line
 fun shouldParseLine(c: Context): Context {
     if (c.recentField == "inputFileLines") {
         c.parseLineId = 0
@@ -75,7 +94,7 @@ fun shouldParseLine(c: Context): Context {
     }
 
     if (
-        c.recentField == "parseLineId" &&
+        c.recentField == "finishParsingLine" &&
         c.parseLineId < c.inputFileLines.size - 1
     ) {
         c.parseLineId += 1
@@ -90,8 +109,39 @@ fun shouldParseLine(c: Context): Context {
 // Parse top level line
 //
 // Conditions:
-// 1. No indentation
+// 1. Empty line
+// 2. Comment line
+// 3. Version line
+// 4. No indentation
 fun shouldParseTopLevelLine(c: Context): Context {
+    if (
+        c.recentField == "parseLineId" &&
+        c.inputFileLines[c.parseLineId].length == 0
+    ) {
+        c.isParsingTopLevelLine = false
+        c.recentField = "isParsingTopLevelLine"
+        return c
+    }
+
+    if (
+        c.recentField == "parseLineId" &&
+        c.inputFileLines[c.parseLineId].length > 0 &&
+        c.inputFileLines[c.parseLineId][0] == '#'
+    ) {
+        c.isParsingTopLevelLine = false
+        c.recentField = "isParsingTopLevelLine"
+        return c
+    }
+
+    if (
+        c.recentField == "parseLineId" &&
+        c.inputFileLines[c.parseLineId].startsWith("version:")
+    ) {
+        c.isParsingTopLevelLine = false
+        c.recentField = "isParsingTopLevelLine"
+        return c
+    }
+
     if (
         c.recentField == "parseLineId" &&
         c.inputFileLines[c.parseLineId].length > 0 &&
