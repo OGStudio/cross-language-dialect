@@ -3,7 +3,7 @@ package org.opengamestudio
 // Debug controller/context changes to console
 fun consoleDebug(c: Context) {
     val key = c.recentField
-    val value = "${c.fieldAny(c.recentField)}".take(30)
+    val value = "${c.fieldAny(c.recentField)}"//.take(30)
     println("CLD-DBG key/value: '$key'/'$value'")
 }
 

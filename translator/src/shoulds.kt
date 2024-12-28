@@ -95,11 +95,12 @@ fun shouldParseField(c: Context): Context {
         c.recentField == "isParsingIndentedLine" &&
         c.isParsingFields
     ) {
+        val entityName = c.entities[c.entityId]
         val line = c.inputFileLines[c.parseLineId].trim()
         val parts = line.split(": ")
-        entityAddField(c.entityFields, parts[0], parts[1])
-        //c.recentField = "entityFields"
-        //return c
+        entityAddField(c.entityFields, entityName, parts[0], parts[1])
+        c.recentField = "entityFields"
+        return c
     }
 
     c.recentField = "none"

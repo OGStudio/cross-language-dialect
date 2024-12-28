@@ -2,9 +2,16 @@ package org.opengamestudio
 
 // Add field to entity
 fun entityAddField(
-    entities: MutableMap<String, MutableMap<String, String>>
+    entities: MutableMap<String, MutableMap<String, String>>,
+    entityName: String,
+    fieldName: String,
+    fieldType: String
 ) {
-    //todo
+    // Add first-level map if it's not yet present.
+    if (!entities.contains(entityName)) {
+        entities[entityName] = mutableMapOf<String, String>()
+    }
+    entities[entityName]!![fieldName] = fieldType
 }
 
 // Extract input file path from command line arguments
