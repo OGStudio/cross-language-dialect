@@ -6,7 +6,6 @@ package org.opengamestudio
 // 1. This is entity line
 fun shouldCollectEntity(c: Context): Context {
     if (c.recentField == "isParsingEntity") {
-        println("ИГР shouldCE lineI: '${c.parseLineId}'")
         val line = c.inputFileLines[c.parseLineId]
         // Remove the last colon
         val name = line.dropLast(1)
@@ -58,7 +57,6 @@ fun shouldParseEntityLine(c: Context): Context {
     ) {
         c.isParsingEntity = true
         c.recentField = "isParsingEntity"
-        println("ИГР shouldPEL lineI: '${c.parseLineId}'")
         return c
     }
 
@@ -171,6 +169,26 @@ fun shouldParseTopLevelLine(c: Context): Context {
     ) {
         c.isParsingTopLevelLine = true
         c.recentField = "isParsingTopLevelLine"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Parse type line
+//
+// Conditions:
+// 1. Indented line starts with "type:"
+fun shouldParseTypeLine(c: Context): Context {
+    if (
+        c.recentField == "isParsingIndentedLine" &&
+        c.inputFileLines[c.parseLineId].trim().startsWith(PREFIX_TYPE)
+    ) {
+        val line = c.inputFileLines[c.parseLineId].trim()
+        val typeName = line.substring(PREFIX_TYPE.length)
+        c.entityTypes[c.entityName] = typeName
+        c.recentField = "entityTypes"
         return c
     }
 

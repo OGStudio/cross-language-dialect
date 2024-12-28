@@ -16,6 +16,7 @@ fun main(args: Array<String>) {
         ::shouldParseEntityLine,
         ::shouldParseIndentedLine,
         ::shouldParseTopLevelLine,
+        ::shouldParseTypeLine,
         ::shouldReadInputFile,
     ).forEach { f ->
         ctrl.registerFunction { c -> f(c as Context) }

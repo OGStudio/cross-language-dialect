@@ -23,6 +23,8 @@ data class Context(
     // True: non-empty/non-comment line without indentation
     // False: top level line should not be parsed
     var isParsingTopLevelLine: Boolean = false,
+    // Entity type line
+    var isParsingTypeLine: Boolean = false,
     // Input line that is parsed at this iteration
     var parseLineId: Int = 0,
     override var recentField: String = "",
@@ -48,6 +50,8 @@ data class Context(
             return isParsingIndentedLine as T
         } else if (name == "isParsingTopLevelLine") {
             return isParsingTopLevelLine as T
+        } else if (name == "isParsingTypeLine") {
+            return isParsingTypeLine as T
         } else if (name == "parseLineId") {
             return parseLineId as T
         }
@@ -82,6 +86,8 @@ data class Context(
             isParsingIndentedLine = value as Boolean
         } else if (name == "isParsingTopLevelLine") {
             isParsingTopLevelLine = value as Boolean
+        } else if (name == "isParsingTypeLine") {
+            isParsingTypeLine = value as Boolean
         } else if (name == "parseLineId") {
             parseLineId = value as Int
         }
