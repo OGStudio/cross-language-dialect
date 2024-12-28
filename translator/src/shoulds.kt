@@ -18,11 +18,27 @@ fun shouldCollectEntity(c: Context): Context {
     return c
 }
 
+// Reset entity id
+//
+// Conditions:
+// 1. Entity has just been collected
+fun shouldResetEntityId(c: Context): Context {
+    if (c.recentField == "entities") {
+        c.entityId = c.entities.size - 1
+        c.recentField = "entityId"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Finish parsing current line
 //
 // Conditions:
 // 1. Top level line that should not be parsed
 // 2. Finished parsing entity
+// 3. Finished parsing entity type
 fun shouldFinishParsingLine(c: Context): Context {
     if (
         c.recentField == "isParsingTopLevelLine" &&
@@ -33,7 +49,13 @@ fun shouldFinishParsingLine(c: Context): Context {
         return c
     }
 
-    if (c.recentField == "entities") {
+    if (c.recentField == "entityId") {
+        c.finishParsingLine = true
+        c.recentField = "finishParsingLine"
+        return c
+    }
+
+    if (c.recentField == "entityTypes") {
         c.finishParsingLine = true
         c.recentField = "finishParsingLine"
         return c
@@ -186,8 +208,9 @@ fun shouldParseTypeLine(c: Context): Context {
         c.inputFileLines[c.parseLineId].trim().startsWith(PREFIX_TYPE)
     ) {
         val line = c.inputFileLines[c.parseLineId].trim()
-        val typeName = line.substring(PREFIX_TYPE.length)
-        c.entityTypes[c.entityName] = typeName
+        val type = line.substring(PREFIX_TYPE.length)
+        val name = c.entities[c.entityId]
+        c.entityTypes[name] = type
         c.recentField = "entityTypes"
         return c
     }

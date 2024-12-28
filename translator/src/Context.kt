@@ -10,6 +10,10 @@ data class Context(
     var didLaunch: Boolean = false,
     // Entities in the order of appearance
     var entities: Array<String> = arrayOf(),
+    // Last parsed entity id
+    var entityId: Int = 0,
+    // Entity -> type map
+    var entityTypes: MutableMap<String, String> = mutableMapOf(),
     // Report the end of current line parsing
     var finishParsingLine: Boolean = false,
     // Path to input file
@@ -38,6 +42,10 @@ data class Context(
             return didLaunch as T
         } else if (name == "entities") {
             return entities as T
+        } else if (name == "entityId") {
+            return entityId as T
+        } else if (name == "entityTypes") {
+            return entityTypes as T
         } else if (name == "finishParsingLine") {
             return finishParsingLine as T
         } else if (name == "inputFile") {
@@ -74,6 +82,10 @@ data class Context(
             didLaunch = value as Boolean
         } else if (name == "entities") {
             entities = value as Array<String>
+        } else if (name == "entityId") {
+            entityId = value as Int
+        } else if (name == "entityTypes") {
+            entityTypes = value as MutableMap<String, String>
         } else if (name == "finishParsingLine") {
             finishParsingLine = value as Boolean
         } else if (name == "inputFile") {
