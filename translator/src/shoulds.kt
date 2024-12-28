@@ -86,6 +86,24 @@ fun shouldParseEntityLine(c: Context): Context {
     return c
 }
 
+// Start parsing fields
+//
+// Conditions:
+// 1. Indented line reads "fields:"
+fun shouldParseFields(c: Context): Context {
+    if (
+        c.recentField == "isParsingIndentedLine" &&
+        c.inputFileLines[c.parseLineId].trim() == SECTION_FIELDS
+    ) {
+        c.isParsingFields = true
+        c.recentField = "isParsingFields"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Parse indented line
 //
 // Conditions:

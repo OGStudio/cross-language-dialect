@@ -22,6 +22,8 @@ data class Context(
     var inputFileLines: Array<String> = arrayOf(),
     // Entity line
     var isParsingEntity: Boolean = false,
+    // Parsing fields now
+    var isParsingFields: Boolean = false,
     // Non-top level line
     var isParsingIndentedLine: Boolean = false,
     // True: non-empty/non-comment line without indentation
@@ -54,6 +56,8 @@ data class Context(
             return inputFileLines as T
         } else if (name == "isParsingEntity") {
             return isParsingEntity as T
+        } else if (name == "isParsingFields") {
+            return isParsingFields as T
         } else if (name == "isParsingIndentedLine") {
             return isParsingIndentedLine as T
         } else if (name == "isParsingTopLevelLine") {
@@ -94,6 +98,8 @@ data class Context(
             inputFileLines = value as Array<String>
         } else if (name == "isParsingEntity") {
             isParsingEntity = value as Boolean
+        } else if (name == "isParsingFields") {
+            isParsingFields = value as Boolean
         } else if (name == "isParsingIndentedLine") {
             isParsingIndentedLine = value as Boolean
         } else if (name == "isParsingTopLevelLine") {
