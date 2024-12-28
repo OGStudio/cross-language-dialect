@@ -1,5 +1,12 @@
 package org.opengamestudio
 
+// Add field to entity
+fun entityAddField(
+    entities: MutableMap<String, MutableMap<String, String>>
+) {
+    //todo
+}
+
 // Extract input file path from command line arguments
 fun cliInputFile(args: Array<String>): String {
     for (arg in args) {

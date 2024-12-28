@@ -86,6 +86,26 @@ fun shouldParseEntityLine(c: Context): Context {
     return c
 }
 
+// Parse single field
+//
+// Conditions:
+// 1. Line is indented while we are parsing fields
+fun shouldParseField(c: Context): Context {
+    if (
+        c.recentField == "isParsingIndentedLine" &&
+        c.isParsingFields
+    ) {
+        val line = c.inputFileLines[c.parseLineId].trim()
+        val parts = line.split(": ")
+        entityAddField(c.entityFields, parts[0], parts[1])
+        //c.recentField = "entityFields"
+        //return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Start parsing fields
 //
 // Conditions:

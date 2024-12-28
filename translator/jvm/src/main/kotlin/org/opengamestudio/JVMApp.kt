@@ -14,6 +14,7 @@ fun main(args: Array<String>) {
         ::shouldParseLine,
         ::shouldPrintToConsole,
         ::shouldParseEntityLine,
+        ::shouldParseField,
         ::shouldParseFields,
         ::shouldParseIndentedLine,
         ::shouldParseTopLevelLine,
