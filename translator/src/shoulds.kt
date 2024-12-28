@@ -66,6 +66,25 @@ fun shouldParseEntityLine(c: Context): Context {
     return c
 }
 
+// Parse indented line
+//
+// Conditions:
+// 1. Has indentation
+fun shouldParseIndentedLine(c: Context): Context {
+    if (
+        c.recentField == "parseLineId" &&
+        c.inputFileLines[c.parseLineId].length > 0 &&
+        c.inputFileLines[c.parseLineId][0] == ' '
+    ) {
+        c.isParsingIndentedLine = true
+        c.recentField = "isParsingIndentedLine"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Parse input file path
 //
 // Conditions:
