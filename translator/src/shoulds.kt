@@ -39,6 +39,8 @@ fun shouldResetEntityId(c: Context): Context {
 // 1. Top level line that should not be parsed
 // 2. Finished parsing entity
 // 3. Finished parsing entity type
+// 4. Started parsing fields
+// 5. Parsed entity field
 fun shouldFinishParsingLine(c: Context): Context {
     if (
         c.recentField == "isParsingTopLevelLine" &&
@@ -56,6 +58,18 @@ fun shouldFinishParsingLine(c: Context): Context {
     }
 
     if (c.recentField == "entityTypes") {
+        c.finishParsingLine = true
+        c.recentField = "finishParsingLine"
+        return c
+    }
+
+    if (c.recentField == "isParsingFields") {
+        c.finishParsingLine = true
+        c.recentField = "finishParsingLine"
+        return c
+    }
+
+    if (c.recentField == "entityFields") {
         c.finishParsingLine = true
         c.recentField = "finishParsingLine"
         return c
@@ -111,12 +125,22 @@ fun shouldParseField(c: Context): Context {
 //
 // Conditions:
 // 1. Indented line reads "fields:"
+// 2. Top level line goes after indented one
 fun shouldParseFields(c: Context): Context {
     if (
         c.recentField == "isParsingIndentedLine" &&
         c.inputFileLines[c.parseLineId].trim() == SECTION_FIELDS
     ) {
         c.isParsingFields = true
+        c.recentField = "isParsingFields"
+        return c
+    }
+
+    if (
+        c.recentField == "isParsingTopLevelLine" &&
+        c.isParsingFields
+    ) {
+        c.isParsingFields = false
         c.recentField = "isParsingFields"
         return c
     }
