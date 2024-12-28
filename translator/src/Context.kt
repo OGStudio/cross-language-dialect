@@ -10,6 +10,8 @@ data class Context(
     var didLaunch: Boolean = false,
     // Entities in the order of appearance
     var entities: Array<String> = arrayOf(),
+    // Entity -> field name -> field type map of maps
+    var entityFields: MutableMap<String, MutableMap<String, String>> = mutableMapOf(),
     // Last parsed entity id
     var entityId: Int = 0,
     // Entity -> type map
@@ -44,6 +46,8 @@ data class Context(
             return didLaunch as T
         } else if (name == "entities") {
             return entities as T
+        } else if (name == "entityFields") {
+            return entityFields as T
         } else if (name == "entityId") {
             return entityId as T
         } else if (name == "entityTypes") {
@@ -86,6 +90,8 @@ data class Context(
             didLaunch = value as Boolean
         } else if (name == "entities") {
             entities = value as Array<String>
+        } else if (name == "entityFields") {
+            entityFields = value as MutableMap<String, MutableMap<String, String>>
         } else if (name == "entityId") {
             entityId = value as Int
         } else if (name == "entityTypes") {
