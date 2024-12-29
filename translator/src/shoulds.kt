@@ -83,6 +83,7 @@ fun shouldFinishParsingLine(c: Context): Context {
 //
 // Conditions:
 // 1. The first letter is capitalized and not a comment
+// 2. Empty top level line
 fun shouldParseEntityLine(c: Context): Context {
     if (
         c.recentField == "isParsingTopLevelLine" &&
@@ -92,6 +93,16 @@ fun shouldParseEntityLine(c: Context): Context {
         c.inputFileLines[c.parseLineId] == c.inputFileLines[c.parseLineId].capitalize()
     ) {
         c.isParsingEntity = true
+        c.recentField = "isParsingEntity"
+        return c
+    }
+
+    if (
+        c.recentField == "isParsingTopLevelLine" &&
+        c.isParsingTopLevelLine &&
+        c.isParsingEntity
+    ) {
+        c.isParsingEntity = false
         c.recentField = "isParsingEntity"
         return c
     }
