@@ -66,7 +66,10 @@ fun shouldFinishParsingLine(c: Context): Context {
         return c
     }
 
-    if (c.recentField == "isParsingFields") {
+    if (
+        c.recentField == "isParsingFields" &&
+        c.isParsingFields
+    ) {
         c.finishParsingLine = true
         c.recentField = "finishParsingLine"
         println("ИГР shouldFPL-4 lineI: '${c.parseLineId}'")
