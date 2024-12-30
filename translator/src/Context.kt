@@ -22,6 +22,8 @@ data class Context(
     var inputFile: String = "",
     // Input file contents as lines
     var inputFileLines: Array<String> = arrayOf(),
+    // Parsing input file
+    var isParsing: Boolean = false,
     // Entity line
     var isParsingEntity: Boolean = false,
     // Parsing fields now
@@ -58,6 +60,8 @@ data class Context(
             return inputFile as T
         } else if (name == "inputFileLines") {
             return inputFileLines as T
+        } else if (name == "isParsing") {
+            return isParsing as T
         } else if (name == "isParsingEntity") {
             return isParsingEntity as T
         } else if (name == "isParsingFields") {
@@ -102,6 +106,8 @@ data class Context(
             inputFile = value as String
         } else if (name == "inputFileLines") {
             inputFileLines = value as Array<String>
+        } else if (name == "isParsing") {
+            isParsing = value as Boolean
         } else if (name == "isParsingEntity") {
             isParsingEntity = value as Boolean
         } else if (name == "isParsingFields") {

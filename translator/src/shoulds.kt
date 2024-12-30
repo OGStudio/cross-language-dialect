@@ -18,21 +18,6 @@ fun shouldCollectEntity(c: Context): Context {
     return c
 }
 
-// Reset entity id
-//
-// Conditions:
-// 1. Entity has just been collected
-fun shouldResetEntityId(c: Context): Context {
-    if (c.recentField == "entities") {
-        c.entityId = c.entities.size - 1
-        c.recentField = "entityId"
-        return c
-    }
-
-    c.recentField = "none"
-    return c
-}
-
 // Finish parsing current line
 //
 // Conditions:
@@ -208,10 +193,13 @@ fun shouldParseInputFilePath(c: Context): Context {
 // Parse input file line
 //
 // Conditions:
-// 1. Input file lines are available
+// 1. Started parsing
 // 2. Finished parsing current line
 fun shouldParseLine(c: Context): Context {
-    if (c.recentField == "inputFileLines") {
+    if (
+        c.recentField == "isParsing" &&
+        c.isParsing
+    ) {
         c.parseLineId = 0
         c.recentField = "parseLineId"
         return c
@@ -344,6 +332,46 @@ fun shouldReadInputFile(c: Context): Context {
     if (c.recentField == "inputFile") {
         c.inputFileLines = fsReadFile(c.inputFile)
         c.recentField = "inputFileLines"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Reset entity id
+//
+// Conditions:
+// 1. Entity has just been collected
+fun shouldResetEntityId(c: Context): Context {
+    if (c.recentField == "entities") {
+        c.entityId = c.entities.size - 1
+        c.recentField = "entityId"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Detect if we start or finish parsing
+//
+// Conditions:
+// 1. Input file lines are available
+// 2. Finished parsing last line
+fun shouldResetParsing(c: Context): Context {
+    if (c.recentField == "inputFileLines") {
+        c.isParsing = true
+        c.recentField = "isParsing"
+        return c
+    }
+
+    if (
+        c.recentField == "finishParsingLine" &&
+        c.parseLineId == c.inputFileLines.size - 1
+    ) {
+        c.isParsing = false
+        c.recentField = "isParsing"
         return c
     }
 
