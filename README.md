@@ -25,3 +25,9 @@ $ `./kotlin/make`
 Run tests on macOS:
 
 $ `./kotlin/do-test`
+
+# Translator
+
+Parse entities' YML:
+
+$ `./run/run-java --file=test/test-dir/entities.yml`
