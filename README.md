@@ -28,6 +28,10 @@ $ `./kotlin/do-test`
 
 # Translator
 
+Build translator:
+
+$ `cd translator && ./gradlew jar`
+
 Parse entities' YML:
 
 $ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml`
