@@ -1,0 +1,32 @@
+version: 1
+
+# Application state context
+Context:
+    type: context
+    fields:
+        arguments: [String]
+        consoleOutput: String
+        defaultDir: String
+        didLaunch: Bool
+        dir: String
+        httpDefaultPort: Int
+        httpLaunch: Bool
+        httpPort: Int
+        httpReply: String
+        httpRequest: NetRequest
+
+# File system item representation
+FSFile:
+    type: struct
+    fields:
+        isDirectory: Bool
+        isFile: Bool
+        name: String
+
+# Client request representation
+NetRequest:
+    type: struct
+    fields:
+        body: String
+        method: String
+        path: String

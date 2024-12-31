@@ -1,3 +1,5 @@
+package org.opengamestudio
+
 interface CLDContext {
     /**
      * Name of the field that has just changed
