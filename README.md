@@ -30,4 +30,4 @@ $ `./kotlin/do-test`
 
 Parse entities' YML:
 
-$ `cd translator && ./run/run-java --file=test/test-dir/entities.yml`
+$ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml`
