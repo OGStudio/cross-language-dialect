@@ -25,3 +25,15 @@ fun cliInputFile(args: Array<String>): String {
     }
     return ""
 }
+
+// Extract output file path from command line arguments
+fun cliOutputFile(args: Array<String>): String {
+    for (arg in args) {
+        if (arg.startsWith(ARGUMENT_OUT)) {
+            val prefix = ARGUMENT_OUT + "="
+            val path = arg.substring(prefix.length)
+            return path
+        }
+    }
+    return ""
+}
