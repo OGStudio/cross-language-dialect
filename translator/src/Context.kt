@@ -6,8 +6,6 @@ data class Context(
     var arguments: Array<String> = arrayOf(),
     // String to print to console
     var consoleOutput: String = "",
-    // Path to output file if it wasn't explicitly specified
-    var defaultOutputFile: String = "",
     // The application did finish launching
     var didLaunch: Boolean = false,
     // Entities in the order of appearance
@@ -48,8 +46,6 @@ data class Context(
             return arguments as T
         } else if (name == "consoleOutput") {
             return consoleOutput as T
-        } else if (name == "defaultOutputFile") {
-            return defaultOutputFile as T
         } else if (name == "didLaunch") {
             return didLaunch as T
         } else if (name == "entities") {
@@ -98,8 +94,6 @@ data class Context(
             arguments = value as Array<String>
         } else if (name == "consoleOutput") {
             consoleOutput = value as String
-        } else if (name == "defaultOutputFile") {
-            defaultOutputFile = value as String
         } else if (name == "didLaunch") {
             didLaunch = value as Boolean
         } else if (name == "entities") {

@@ -218,6 +218,24 @@ fun shouldParseLine(c: Context): Context {
     return c
 }
 
+// Parse output file path
+//
+// Conditions:
+// 1. At app launch output file was specified with command line argument
+fun shouldParseOutputFilePath(c: Context): Context {
+    if (
+        c.recentField == "didLaunch" &&
+        cliOutputFile(c.arguments).length > 0
+    ) {
+        c.outputFile = cliOutputFile(c.arguments)
+        c.recentField = "outputFile"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Parse top level line
 //
 // Conditions:
@@ -299,7 +317,7 @@ fun shouldPrintToConsole(c: Context): Context {
         c.recentField == "didLaunch" &&
         c.arguments.isEmpty()
     ) {
-        c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml"
+        c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml --out=/path/to/file.kt"
         c.recentField = "consoleOutput"
         return c
     }

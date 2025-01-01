@@ -17,6 +17,7 @@ fun main(args: Array<String>) {
         ::shouldParseField,
         ::shouldParseFields,
         ::shouldParseIndentedLine,
+        ::shouldParseOutputFilePath,
         ::shouldParseTopLevelLine,
         ::shouldParseTypeLine,
         ::shouldReadInputFile,
