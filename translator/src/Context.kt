@@ -39,6 +39,8 @@ data class Context(
     var outputFile: String = "",
     // Input line that is parsed at this iteration
     var parseLineId: Int = 0,
+    // Generate code for the specified language
+    var targetLanguage: String = "",
     override var recentField: String = "",
 ): CLDContext {
     override fun <T> field(name: String): T {
@@ -78,6 +80,8 @@ data class Context(
             return outputFile as T
         } else if (name == "parseLineId") {
             return parseLineId as T
+        } else if (name == "targetLanguage") {
+            return targetLanguage as T
         }
         return "unknown-field-name" as T
     }
@@ -126,6 +130,8 @@ data class Context(
             outputFile = value as String
         } else if (name == "parseLineId") {
             parseLineId = value as Int
+        } else if (name == "targetLanguage") {
+            targetLanguage = value as String
         }
     }
 }

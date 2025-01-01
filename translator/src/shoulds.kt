@@ -396,3 +396,18 @@ fun shouldResetParsing(c: Context): Context {
     c.recentField = "none"
     return c
 }
+
+// Detect target language
+//
+// Conditions:
+// 1. Output file was specified
+fun shouldResetTargetLanguage(c: Context): Context {
+    if (c.recentField == "outputFile") {
+        c.targetLanguage = fileExtTargetLang(c.outputFile)
+        c.recentField = "targetLanguage"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}

@@ -23,6 +23,7 @@ fun main(args: Array<String>) {
         ::shouldReadInputFile,
         ::shouldResetEntityId,
         ::shouldResetParsing,
+        ::shouldResetTargetLanguage,
     ).forEach { f ->
         ctrl.registerFunction { c -> f(c as Context) }
     }

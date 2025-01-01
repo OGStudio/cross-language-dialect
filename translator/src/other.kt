@@ -37,3 +37,12 @@ fun cliOutputFile(args: Array<String>): String {
     }
     return ""
 }
+
+// Detect target language based on output file extension
+fun fileExtTargetLang(outputFile: String): String {
+    if (outputFile.endsWith(".kt")) {
+        return "Kotlin"
+    }
+
+    return "unknown-language"
+}
