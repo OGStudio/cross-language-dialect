@@ -41,7 +41,7 @@ data class Context(
     var isParsingTypeLine: Boolean = false,
     // Path to output file
     var outputFile: String = "",
-    // Contents to write to output ile
+    // Contents to write to output file
     var outputFileContents: String = "",
     // Input line that is parsed at this iteration
     var parseLineId: Int = 0,

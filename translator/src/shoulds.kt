@@ -360,6 +360,7 @@ fun shouldReadInputFile(c: Context): Context {
 // Conditions:
 // 1. Entity has been collected during parsing
 // 2. Started generating
+// 3. Cycle through entities while generating
 fun shouldResetEntityId(c: Context): Context {
     if (c.recentField == "entities") {
         c.entityId = c.entities.size - 1
@@ -376,6 +377,17 @@ fun shouldResetEntityId(c: Context): Context {
         return c
     }
 
+    // TMP replace with real condition
+    if (
+        c.recentField == "outputFileContents" &&
+        c.isGenerating &&
+        c.entityId < c.entities.size - 1
+    ) {
+        c.entityId += 1
+        c.recentField = "entityId"
+        return c
+    }
+
     c.recentField = "none"
     return c
 }
@@ -384,7 +396,7 @@ fun shouldResetEntityId(c: Context): Context {
 //
 // Conditions:
 // 1. Finished parsing
-// 2. ??? TMP: started generating, but should: Out of entities?
+// 2. Out of entities to generate
 fun shouldResetGenerating(c: Context): Context {
     if (
         c.recentField == "isParsing" &&
@@ -396,10 +408,11 @@ fun shouldResetGenerating(c: Context): Context {
     }
 
     /*
-    // TMP replace with real condition
     if (
-        c.recentField == "isGenerating" &&
-        c.isGenerating
+        c.recentField == "outputFileContents" &&
+        c.isGenerating &&
+        c.outputFileContents.size == c.entities.size
+        //c.entityId == c.entities.size - 1
     ) {
         c.isGenerating = false
         c.recentField = "isGenerating"
@@ -414,13 +427,25 @@ fun shouldResetGenerating(c: Context): Context {
 // Reset contents for output file
 //
 // Conditions:
-// 1. Finished generating output file
+// 1. Finished parsing
+// 2. Generating entity
 fun shouldResetOutputFileContents(c: Context): Context {
     if (
-        c.recentField == "isGenerating" &&
-        !c.isGenerating
+        c.recentField == "isParsing" &&
+        !c.isParsing
     ) {
-        c.outputFileContents = "TODO Entities in Kotlin"
+        c.outputFileContents = ""
+        c.recentField = "outputFileContents"
+        return c
+    }
+
+    if (
+        c.recentField == "entityId" &&
+        c.isGenerating &&
+        c.targetLanguage == "Kotlin"
+    ) {
+        val name = c.entities[c.entityId]
+        c.outputFileContents += KOTLIN_ENTITY_START_FORMAT.replace("%NAME%", name)
         c.recentField = "outputFileContents"
         return c
     }
@@ -474,7 +499,10 @@ fun shouldResetTargetLanguage(c: Context): Context {
 // Conditions:
 // 1. Output contents are ready
 fun shouldWriteOutputFile(c: Context): Context {
-    if (c.recentField == "outputFileContents") {
+    if (
+        c.recentField == "isGenerating" &&
+        !c.isGenerating
+    ) {
         fsWriteFile(c.outputFile, c.outputFileContents)
         c.didWriteOutputFile = true
         c.recentField = "didWriteOutputFile"
