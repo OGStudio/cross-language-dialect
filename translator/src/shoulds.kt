@@ -36,7 +36,10 @@ fun shouldFinishParsingLine(c: Context): Context {
         return c
     }
 
-    if (c.recentField == "entityId") {
+    if (
+        c.recentField == "entityId" &&
+        c.isParsing
+    ) {
         c.finishParsingLine = true
         c.recentField = "finishParsingLine"
         return c
@@ -355,10 +358,20 @@ fun shouldReadInputFile(c: Context): Context {
 // Reset entity id
 //
 // Conditions:
-// 1. Entity has just been collected
+// 1. Entity has been collected during parsing
+// 2. Started generating
 fun shouldResetEntityId(c: Context): Context {
     if (c.recentField == "entities") {
         c.entityId = c.entities.size - 1
+        c.recentField = "entityId"
+        return c
+    }
+
+    if (
+        c.recentField == "isGenerating" &&
+        c.isGenerating
+    ) {
+        c.entityId = 0
         c.recentField = "entityId"
         return c
     }
@@ -382,6 +395,7 @@ fun shouldResetGenerating(c: Context): Context {
         return c
     }
 
+    /*
     // TMP replace with real condition
     if (
         c.recentField == "isGenerating" &&
@@ -391,6 +405,7 @@ fun shouldResetGenerating(c: Context): Context {
         c.recentField = "isGenerating"
         return c
     }
+    */
 
     c.recentField = "none"
     return c
