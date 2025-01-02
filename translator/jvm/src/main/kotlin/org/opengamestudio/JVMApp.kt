@@ -22,6 +22,7 @@ fun main(args: Array<String>) {
         ::shouldParseTypeLine,
         ::shouldReadInputFile,
         ::shouldResetEntityId,
+        ::shouldResetGenerating,
         ::shouldResetOutputFileContents,
         ::shouldResetParsing,
         ::shouldResetTargetLanguage,

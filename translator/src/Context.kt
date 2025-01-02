@@ -24,6 +24,8 @@ data class Context(
     var inputFile: String = "",
     // Input file contents as lines
     var inputFileLines: Array<String> = arrayOf(),
+    // Generating output file
+    var isGenerating: Boolean = false,
     // Parsing input file
     var isParsing: Boolean = false,
     // Entity line
@@ -70,6 +72,8 @@ data class Context(
             return inputFile as T
         } else if (name == "inputFileLines") {
             return inputFileLines as T
+        } else if (name == "isGenerating") {
+            return isGenerating as T
         } else if (name == "isParsing") {
             return isParsing as T
         } else if (name == "isParsingEntity") {
@@ -124,6 +128,8 @@ data class Context(
             inputFile = value as String
         } else if (name == "inputFileLines") {
             inputFileLines = value as Array<String>
+        } else if (name == "isGenerating") {
+            isGenerating = value as Boolean
         } else if (name == "isParsing") {
             isParsing = value as Boolean
         } else if (name == "isParsingEntity") {

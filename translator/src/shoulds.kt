@@ -367,14 +367,43 @@ fun shouldResetEntityId(c: Context): Context {
     return c
 }
 
-// Reset contents for output file
+// Detect if we start or finish generating
 //
 // Conditions:
-// 1. Finished parsing input file
-fun shouldResetOutputFileContents(c: Context): Context {
+// 1. Finished parsing
+// 2. ??? TMP: started generating, but should: Out of entities?
+fun shouldResetGenerating(c: Context): Context {
     if (
         c.recentField == "isParsing" &&
         !c.isParsing
+    ) {
+        c.isGenerating = true
+        c.recentField = "isGenerating"
+        return c
+    }
+
+    // TMP replace with real condition
+    if (
+        c.recentField == "isGenerating" &&
+        c.isGenerating
+    ) {
+        c.isGenerating = false
+        c.recentField = "isGenerating"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Reset contents for output file
+//
+// Conditions:
+// 1. Finished generating output file
+fun shouldResetOutputFileContents(c: Context): Context {
+    if (
+        c.recentField == "isGenerating" &&
+        !c.isGenerating
     ) {
         c.outputFileContents = "TODO Entities in Kotlin"
         c.recentField = "outputFileContents"
