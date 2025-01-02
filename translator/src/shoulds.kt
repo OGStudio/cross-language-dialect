@@ -429,3 +429,19 @@ fun shouldResetTargetLanguage(c: Context): Context {
     c.recentField = "none"
     return c
 }
+
+// Save generated contents to output file
+//
+// Conditions:
+// 1. Output contents are ready
+fun shouldWriteOutputFile(c: Context): Context {
+    if (c.recentField == "outputFileContents") {
+        fsWriteFile(c.outputFile, c.outputFileContents)
+        c.didWriteOutputFile = true
+        c.recentField = "didWriteOutputFile"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}

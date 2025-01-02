@@ -8,6 +8,8 @@ data class Context(
     var consoleOutput: String = "",
     // The application did finish launching
     var didLaunch: Boolean = false,
+    // Finished writing to output file
+    var didWriteOutputFile: Boolean = false,
     // Entities in the order of appearance
     var entities: Array<String> = arrayOf(),
     // Entity -> field name -> field type map of maps
@@ -52,6 +54,8 @@ data class Context(
             return consoleOutput as T
         } else if (name == "didLaunch") {
             return didLaunch as T
+        } else if (name == "didWriteOutputFile") {
+            return didWriteOutputFile as T
         } else if (name == "entities") {
             return entities as T
         } else if (name == "entityFields") {
@@ -104,6 +108,8 @@ data class Context(
             consoleOutput = value as String
         } else if (name == "didLaunch") {
             didLaunch = value as Boolean
+        } else if (name == "didWriteOutputFile") {
+            didWriteOutputFile = value as Boolean
         } else if (name == "entities") {
             entities = value as Array<String>
         } else if (name == "entityFields") {

@@ -25,6 +25,7 @@ fun main(args: Array<String>) {
         ::shouldResetOutputFileContents,
         ::shouldResetParsing,
         ::shouldResetTargetLanguage,
+        ::shouldWriteOutputFile,
     ).forEach { f ->
         ctrl.registerFunction { c -> f(c as Context) }
     }

@@ -5,3 +5,4 @@ swift/do-test
 local.properties
 .gradle
 build
+test/test-dir/entities.kt
