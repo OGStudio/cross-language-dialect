@@ -25,3 +25,24 @@ fun cliInputFile(args: Array<String>): String {
     }
     return ""
 }
+
+// Extract output file path from command line arguments
+fun cliOutputFile(args: Array<String>): String {
+    for (arg in args) {
+        if (arg.startsWith(ARGUMENT_OUT)) {
+            val prefix = ARGUMENT_OUT + "="
+            val path = arg.substring(prefix.length)
+            return path
+        }
+    }
+    return ""
+}
+
+// Detect target language based on output file extension
+fun fileExtTargetLang(outputFile: String): String {
+    if (outputFile.endsWith(".kt")) {
+        return "Kotlin"
+    }
+
+    return "unknown-language"
+}

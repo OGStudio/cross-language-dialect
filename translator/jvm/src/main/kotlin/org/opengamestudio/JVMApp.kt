@@ -17,11 +17,13 @@ fun main(args: Array<String>) {
         ::shouldParseField,
         ::shouldParseFields,
         ::shouldParseIndentedLine,
+        ::shouldParseOutputFilePath,
         ::shouldParseTopLevelLine,
         ::shouldParseTypeLine,
         ::shouldReadInputFile,
         ::shouldResetEntityId,
         ::shouldResetParsing,
+        ::shouldResetTargetLanguage,
     ).forEach { f ->
         ctrl.registerFunction { c -> f(c as Context) }
     }

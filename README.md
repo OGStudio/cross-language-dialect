@@ -35,3 +35,9 @@ $ `cd translator && ./gradlew jar`
 Parse entities' YML:
 
 $ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml`
+
+# Current avalability of functions
+
+| № | Function | C++ | JavaScript | Kotlin | Python | Swift |
+|---|---       |---  |---         |---     |---     |---    |
+| 1 | Generate entities | X | X   | X      | X      | X     | 
