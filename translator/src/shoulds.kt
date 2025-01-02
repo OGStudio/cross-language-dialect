@@ -372,6 +372,24 @@ fun shouldResetEntityId(c: Context): Context {
     return c
 }
 
+// Reset contents for output file
+//
+// Conditions:
+// 1. Finished parsing input file
+fun shouldResetOutputFileContents(c: Context): Context {
+    if (
+        c.recentField == "isParsing" &&
+        !c.isParsing
+    ) {
+        c.outputFileContents = "TODO Entities in Kotlin"
+        c.recentField = "outputFileContents"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Detect if we start or finish parsing
 //
 // Conditions:

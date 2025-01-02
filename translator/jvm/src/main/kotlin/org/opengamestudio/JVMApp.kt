@@ -22,6 +22,7 @@ fun main(args: Array<String>) {
         ::shouldParseTypeLine,
         ::shouldReadInputFile,
         ::shouldResetEntityId,
+        ::shouldResetOutputFileContents,
         ::shouldResetParsing,
         ::shouldResetTargetLanguage,
     ).forEach { f ->

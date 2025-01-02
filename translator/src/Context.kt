@@ -37,6 +37,8 @@ data class Context(
     var isParsingTypeLine: Boolean = false,
     // Path to output file
     var outputFile: String = "",
+    // Contents to write to output ile
+    var outputFileContents: String = "",
     // Input line that is parsed at this iteration
     var parseLineId: Int = 0,
     // Generate code for the specified language
@@ -78,6 +80,8 @@ data class Context(
             return isParsingTypeLine as T
         } else if (name == "outputFile") {
             return outputFile as T
+        } else if (name == "outputFileContents") {
+            return outputFileContents as T
         } else if (name == "parseLineId") {
             return parseLineId as T
         } else if (name == "targetLanguage") {
@@ -128,6 +132,8 @@ data class Context(
             isParsingTypeLine = value as Boolean
         } else if (name == "outputFile") {
             outputFile = value as String
+        } else if (name == "outputFileContents") {
+            outputFileContents = value as String
         } else if (name == "parseLineId") {
             parseLineId = value as Int
         } else if (name == "targetLanguage") {
