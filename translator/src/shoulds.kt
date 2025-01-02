@@ -33,21 +33,18 @@ fun shouldFinishParsingLine(c: Context): Context {
     ) {
         c.finishParsingLine = true
         c.recentField = "finishParsingLine"
-        println("ИГР shouldFPL-1 lineI: '${c.parseLineId}'")
         return c
     }
 
     if (c.recentField == "entityId") {
         c.finishParsingLine = true
         c.recentField = "finishParsingLine"
-        println("ИГР shouldFPL-2 lineI: '${c.parseLineId}'")
         return c
     }
 
     if (c.recentField == "entityTypes") {
         c.finishParsingLine = true
         c.recentField = "finishParsingLine"
-        println("ИГР shouldFPL-3 lineI: '${c.parseLineId}'")
         return c
     }
 
@@ -57,14 +54,12 @@ fun shouldFinishParsingLine(c: Context): Context {
     ) {
         c.finishParsingLine = true
         c.recentField = "finishParsingLine"
-        println("ИГР shouldFPL-4 lineI: '${c.parseLineId}'")
         return c
     }
 
     if (c.recentField == "entityFields") {
         c.finishParsingLine = true
         c.recentField = "finishParsingLine"
-        println("ИГР shouldFPL-5 lineI: '${c.parseLineId}'")
         return c
     }
 
