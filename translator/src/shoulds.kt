@@ -21,14 +21,11 @@ fun shouldCollectEntity(c: Context): Context {
 // Finish generating current entity
 //
 // Conditions:
-// 1. ...
+// 1. Generated entity start
 fun shouldFinishGeneratingEntity(c: Context): Context {
-    if (
-        c.recentField == "isParsingTopLevelLine" &&
-        !c.isParsingTopLevelLine
-    ) {
-        c.finishParsingLine = true
-        c.recentField = "finishParsingLine"
+    if (c.recentField == "outputEntityStart") {
+        c.finishGeneratingEntity = true
+        c.recentField = "finishGeneratingEntity"
         return c
     }
 
@@ -378,7 +375,7 @@ fun shouldReadInputFile(c: Context): Context {
 // Conditions:
 // 1. Entity has been collected during parsing
 // 2. Started generating
-// 3. Cycle through entities while generating
+// 3. Finished generating current entity
 fun shouldResetEntityId(c: Context): Context {
     if (c.recentField == "entities") {
         c.entityId = c.entities.size - 1
@@ -395,10 +392,8 @@ fun shouldResetEntityId(c: Context): Context {
         return c
     }
 
-    // TMP replace with real condition
     if (
-        c.recentField == "outputFileContents" &&
-        c.isGenerating &&
+        c.recentField == "finishGeneratingEntity" &&
         c.entityId < c.entities.size - 1
     ) {
         c.entityId += 1
@@ -425,28 +420,45 @@ fun shouldResetGenerating(c: Context): Context {
         return c
     }
 
-    /*
     if (
-        c.recentField == "outputFileContents" &&
-        c.isGenerating &&
-        c.outputFileContents.size == c.entities.size
-        //c.entityId == c.entities.size - 1
+        c.recentField == "finishGeneratingEntity" &&
+        c.entityId == c.entities.size - 1
     ) {
         c.isGenerating = false
         c.recentField = "isGenerating"
         return c
     }
-    */
 
     c.recentField = "none"
     return c
 }
 
+// Reset contents for the first line of entity generation
+//
+// Conditions:
+// 1. Entity was selected for generation
+fun shouldResetOutputEntityStart(c: Context): Context {
+    if (
+        c.recentField == "entityId" &&
+        c.isGenerating
+    ) {
+        val name = c.entities[c.entityId]
+        // TODO: switch language inside other.kt func
+        // TODO: no need to do it in the should
+        // c.targetLanguage == "Kotlin"
+        c.outputEntityStart = FORMAT_KOTLIN_ENTITY_START.replace("%NAME%", name)
+        c.recentField = "outputEntityStart"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
 // Reset contents for output file
 //
 // Conditions:
 // 1. Finished parsing
-// 2. Generating entity
+// 2. Entity's first line was generated
 fun shouldResetOutputFileContents(c: Context): Context {
     if (
         c.recentField == "isParsing" &&
@@ -457,13 +469,8 @@ fun shouldResetOutputFileContents(c: Context): Context {
         return c
     }
 
-    if (
-        c.recentField == "entityId" &&
-        c.isGenerating &&
-        c.targetLanguage == "Kotlin"
-    ) {
-        val name = c.entities[c.entityId]
-        c.outputFileContents += FORMAT_KOTLIN_ENTITY_START.replace("%NAME%", name)
+    if (c.recentField == "outputEntityStart") {
+        c.outputFileContents += c.outputEntityStart
         c.recentField = "outputFileContents"
         return c
     }

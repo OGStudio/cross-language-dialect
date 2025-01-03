@@ -9,6 +9,7 @@ fun main(args: Array<String>) {
     // Register behaviour.
     arrayOf(
         ::shouldCollectEntity,
+        ::shouldFinishGeneratingEntity,
         ::shouldFinishParsingLine,
         ::shouldParseInputFilePath,
         ::shouldParseLine,
@@ -23,10 +24,11 @@ fun main(args: Array<String>) {
         ::shouldReadInputFile,
         ::shouldResetEntityId,
         ::shouldResetGenerating,
+        ::shouldResetOutputEntityStart,
+        ::shouldWriteOutputFile,
         ::shouldResetOutputFileContents,
         ::shouldResetParsing,
         ::shouldResetTargetLanguage,
-        ::shouldWriteOutputFile,
     ).forEach { f ->
         ctrl.registerFunction { c -> f(c as Context) }
     }
