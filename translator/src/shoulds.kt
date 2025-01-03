@@ -18,6 +18,24 @@ fun shouldCollectEntity(c: Context): Context {
     return c
 }
 
+// Finish generating current entity
+//
+// Conditions:
+// 1. ...
+fun shouldFinishGeneratingEntity(c: Context): Context {
+    if (
+        c.recentField == "isParsingTopLevelLine" &&
+        !c.isParsingTopLevelLine
+    ) {
+        c.finishParsingLine = true
+        c.recentField = "finishParsingLine"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Finish parsing current line
 //
 // Conditions:
@@ -445,7 +463,7 @@ fun shouldResetOutputFileContents(c: Context): Context {
         c.targetLanguage == "Kotlin"
     ) {
         val name = c.entities[c.entityId]
-        c.outputFileContents += KOTLIN_ENTITY_START_FORMAT.replace("%NAME%", name)
+        c.outputFileContents += FORMAT_KOTLIN_ENTITY_START.replace("%NAME%", name)
         c.recentField = "outputFileContents"
         return c
     }
