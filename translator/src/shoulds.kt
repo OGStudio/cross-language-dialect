@@ -470,7 +470,7 @@ fun shouldResetOutputFileContents(c: Context): Context {
     }
 
     if (c.recentField == "outputEntityStart") {
-        c.outputFileContents += c.outputEntityStart
+        c.outputFileContents += c.outputEntityStart + "\n"
         c.recentField = "outputFileContents"
         return c
     }
