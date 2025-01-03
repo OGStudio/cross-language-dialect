@@ -18,6 +18,8 @@ data class Context(
     var entityId: Int = 0,
     // Entity -> type map
     var entityTypes: MutableMap<String, String> = mutableMapOf(),
+    // Report the end of current entity generation
+    var finishGeneratingEntity: Boolean = false,
     // Report the end of current line parsing
     var finishParsingLine: Boolean = false,
     // Path to input file
@@ -66,6 +68,8 @@ data class Context(
             return entityId as T
         } else if (name == "entityTypes") {
             return entityTypes as T
+        } else if (name == "finishGeneratingEntity") {
+            return finishGeneratingEntity as T
         } else if (name == "finishParsingLine") {
             return finishParsingLine as T
         } else if (name == "inputFile") {
@@ -122,6 +126,8 @@ data class Context(
             entityId = value as Int
         } else if (name == "entityTypes") {
             entityTypes = value as MutableMap<String, String>
+        } else if (name == "finishGeneratingEntity") {
+            finishGeneratingEntity = value as Boolean
         } else if (name == "finishParsingLine") {
             finishParsingLine = value as Boolean
         } else if (name == "inputFile") {
