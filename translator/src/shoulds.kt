@@ -21,13 +21,15 @@ fun shouldCollectEntity(c: Context): Context {
 // Finish generating current entity
 //
 // Conditions:
-// 1. Generated entity start
+// 1. Finished generating entity fields
 fun shouldFinishGeneratingEntity(c: Context): Context {
+  /*
     if (c.recentField == "outputEntityStart") {
         c.finishGeneratingEntity = true
         c.recentField = "finishGeneratingEntity"
         return c
     }
+    */
 
     c.recentField = "none"
     return c
@@ -370,7 +372,22 @@ fun shouldReadInputFile(c: Context): Context {
     return c
 }
 
-// Reset entity id cursor
+// Reset entity field cursor
+//
+// Conditions:
+// 1. Entity fields have been enumerated
+fun shouldResetCursorEntityFieldId(c: Context): Context {
+    if (c.recentField == "entityEnumeratedFields") {
+        c.cursorEntityFieldId = 0
+        c.recentField = "cursorEntityFieldId"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Reset entity cursor
 //
 // Conditions:
 // 1. Entity has been collected during parsing
@@ -398,6 +415,23 @@ fun shouldResetCursorEntityId(c: Context): Context {
     ) {
         c.cursorEntityId += 1
         c.recentField = "cursorEntityId"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Reset entity enumerated fields
+//
+// Conditions:
+// 1. Entity start has been added to output
+fun shouldResetEntityEnumeratedFields(c: Context): Context {
+    if (c.recentField == "outputEntityStart") {
+        val name = c.entities[c.cursorEntityId]
+        val fields = c.entityFields[name] ?: mapOf<String, String>()
+        c.entityEnumeratedFields = enumerateFields(fields)
+        c.recentField = "entityEnumeratedFields"
         return c
     }
 

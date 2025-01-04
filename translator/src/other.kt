@@ -38,6 +38,14 @@ fun cliOutputFile(args: Array<String>): String {
     return ""
 }
 
+fun enumerateFields(fields: Map<String, String>): Array<String> {
+    var sortedKeys = arrayOf<String>()
+    fields?.keys?.forEach { key ->
+        sortedKeys += key
+    }
+    return sortedKeys
+}
+
 // Detect target language based on output file extension
 fun fileExtTargetLang(outputFile: String): String {
     if (outputFile.endsWith(".kt")) {

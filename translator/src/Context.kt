@@ -6,7 +6,9 @@ data class Context(
     var arguments: Array<String> = arrayOf(),
     // String to print to console
     var consoleOutput: String = "",
-    // Entity id cursor used for both parsing and generating
+    // Entity field cursor
+    var cursorEntityFieldId: Int = 0,
+    // Entity cursor used for both parsing and generating
     var cursorEntityId: Int = 0,
     // The application did finish launching
     var didLaunch: Boolean = false,
@@ -14,6 +16,8 @@ data class Context(
     var didWriteOutputFile: Boolean = false,
     // Entities in the order of appearance
     var entities: Array<String> = arrayOf(),
+    // Currently generated entity enumerated fields to use cursor
+    var entityEnumeratedFields: Array<String> = arrayOf(),
     // Entity -> field name -> field type map of maps
     var entityFields: MutableMap<String, MutableMap<String, String>> = mutableMapOf(),
     // Entity -> type map
@@ -58,6 +62,8 @@ data class Context(
             return arguments as T
         } else if (name == "consoleOutput") {
             return consoleOutput as T
+        } else if (name == "cursorEntityFieldId") {
+            return cursorEntityFieldId as T
         } else if (name == "cursorEntityId") {
             return cursorEntityId as T
         } else if (name == "didLaunch") {
@@ -66,6 +72,8 @@ data class Context(
             return didWriteOutputFile as T
         } else if (name == "entities") {
             return entities as T
+        } else if (name == "entityEnumeratedFields") {
+            return entityEnumeratedFields as T
         } else if (name == "entityFields") {
             return entityFields as T
         } else if (name == "entityTypes") {
@@ -118,6 +126,8 @@ data class Context(
             arguments = value as Array<String>
         } else if (name == "consoleOutput") {
             consoleOutput = value as String
+        } else if (name == "cursorEntityFieldId") {
+            cursorEntityFieldId = value as Int
         } else if (name == "cursorEntityId") {
             cursorEntityId = value as Int
         } else if (name == "didLaunch") {
@@ -126,6 +136,8 @@ data class Context(
             didWriteOutputFile = value as Boolean
         } else if (name == "entities") {
             entities = value as Array<String>
+        } else if (name == "entityEnumeratedFields") {
+            entityEnumeratedFields = value as Array<String>
         } else if (name == "entityFields") {
             entityFields = value as MutableMap<String, MutableMap<String, String>>
         } else if (name == "entityTypes") {
