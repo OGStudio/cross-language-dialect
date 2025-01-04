@@ -22,7 +22,7 @@ fun main(args: Array<String>) {
         ::shouldParseTopLevelLine,
         ::shouldParseTypeLine,
         ::shouldReadInputFile,
-        ::shouldResetEntityId,
+        ::shouldResetCursorEntityId,
         ::shouldResetGenerating,
         ::shouldResetOutputEntityStart,
         ::shouldWriteOutputFile,

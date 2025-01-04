@@ -6,6 +6,8 @@ data class Context(
     var arguments: Array<String> = arrayOf(),
     // String to print to console
     var consoleOutput: String = "",
+    // Entity id cursor used for both parsing and generating
+    var cursorEntityId: Int = 0,
     // The application did finish launching
     var didLaunch: Boolean = false,
     // Finished writing to output file
@@ -14,8 +16,6 @@ data class Context(
     var entities: Array<String> = arrayOf(),
     // Entity -> field name -> field type map of maps
     var entityFields: MutableMap<String, MutableMap<String, String>> = mutableMapOf(),
-    // Last parsed entity id
-    var entityId: Int = 0,
     // Entity -> type map
     var entityTypes: MutableMap<String, String> = mutableMapOf(),
     // Report the end of current entity generation
@@ -58,6 +58,8 @@ data class Context(
             return arguments as T
         } else if (name == "consoleOutput") {
             return consoleOutput as T
+        } else if (name == "cursorEntityId") {
+            return cursorEntityId as T
         } else if (name == "didLaunch") {
             return didLaunch as T
         } else if (name == "didWriteOutputFile") {
@@ -66,8 +68,6 @@ data class Context(
             return entities as T
         } else if (name == "entityFields") {
             return entityFields as T
-        } else if (name == "entityId") {
-            return entityId as T
         } else if (name == "entityTypes") {
             return entityTypes as T
         } else if (name == "finishGeneratingEntity") {
@@ -118,6 +118,8 @@ data class Context(
             arguments = value as Array<String>
         } else if (name == "consoleOutput") {
             consoleOutput = value as String
+        } else if (name == "cursorEntityId") {
+            cursorEntityId = value as Int
         } else if (name == "didLaunch") {
             didLaunch = value as Boolean
         } else if (name == "didWriteOutputFile") {
@@ -126,8 +128,6 @@ data class Context(
             entities = value as Array<String>
         } else if (name == "entityFields") {
             entityFields = value as MutableMap<String, MutableMap<String, String>>
-        } else if (name == "entityId") {
-            entityId = value as Int
         } else if (name == "entityTypes") {
             entityTypes = value as MutableMap<String, String>
         } else if (name == "finishGeneratingEntity") {

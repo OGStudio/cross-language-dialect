@@ -52,7 +52,7 @@ fun shouldFinishParsingLine(c: Context): Context {
     }
 
     if (
-        c.recentField == "entityId" &&
+        c.recentField == "cursorEntityId" &&
         c.isParsing
     ) {
         c.finishParsingLine = true
@@ -126,7 +126,7 @@ fun shouldParseField(c: Context): Context {
         c.recentField == "isParsingIndentedLine" &&
         c.isParsingFields
     ) {
-        val entityName = c.entities[c.entityId]
+        val entityName = c.entities[c.cursorEntityId]
         val line = c.inputFileLines[c.parseLineId].trim()
         val parts = line.split(": ")
         entityAddField(c.entityFields, entityName, parts[0], parts[1])
@@ -310,7 +310,7 @@ fun shouldParseTypeLine(c: Context): Context {
     ) {
         val line = c.inputFileLines[c.parseLineId].trim()
         val type = line.substring(PREFIX_TYPE.length)
-        val name = c.entities[c.entityId]
+        val name = c.entities[c.cursorEntityId]
         c.entityTypes[name] = type
         c.recentField = "entityTypes"
         return c
@@ -370,16 +370,16 @@ fun shouldReadInputFile(c: Context): Context {
     return c
 }
 
-// Reset entity id
+// Reset entity id cursor
 //
 // Conditions:
 // 1. Entity has been collected during parsing
 // 2. Started generating
 // 3. Finished generating current entity
-fun shouldResetEntityId(c: Context): Context {
+fun shouldResetCursorEntityId(c: Context): Context {
     if (c.recentField == "entities") {
-        c.entityId = c.entities.size - 1
-        c.recentField = "entityId"
+        c.cursorEntityId = c.entities.size - 1
+        c.recentField = "cursorEntityId"
         return c
     }
 
@@ -387,17 +387,17 @@ fun shouldResetEntityId(c: Context): Context {
         c.recentField == "isGenerating" &&
         c.isGenerating
     ) {
-        c.entityId = 0
-        c.recentField = "entityId"
+        c.cursorEntityId = 0
+        c.recentField = "cursorEntityId"
         return c
     }
 
     if (
         c.recentField == "finishGeneratingEntity" &&
-        c.entityId < c.entities.size - 1
+        c.cursorEntityId < c.entities.size - 1
     ) {
-        c.entityId += 1
-        c.recentField = "entityId"
+        c.cursorEntityId += 1
+        c.recentField = "cursorEntityId"
         return c
     }
 
@@ -422,7 +422,7 @@ fun shouldResetGenerating(c: Context): Context {
 
     if (
         c.recentField == "finishGeneratingEntity" &&
-        c.entityId == c.entities.size - 1
+        c.cursorEntityId == c.entities.size - 1
     ) {
         c.isGenerating = false
         c.recentField = "isGenerating"
@@ -439,10 +439,10 @@ fun shouldResetGenerating(c: Context): Context {
 // 1. Entity was selected for generation
 fun shouldResetOutputEntityStart(c: Context): Context {
     if (
-        c.recentField == "entityId" &&
+        c.recentField == "cursorEntityId" &&
         c.isGenerating
     ) {
-        val name = c.entities[c.entityId]
+        val name = c.entities[c.cursorEntityId]
         // TODO: switch language inside other.kt func
         // TODO: no need to do it in the should
         // c.targetLanguage == "Kotlin"
