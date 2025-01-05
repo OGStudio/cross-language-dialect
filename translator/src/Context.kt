@@ -26,8 +26,6 @@ data class Context(
     var finishGeneratingEntity: Boolean = false,
     // Report the end of current line parsing
     var finishParsingLine: Boolean = false,
-    // Indentation used for generation
-    var indentation: Int = 0,
     // Path to input file
     var inputFile: String = "",
     // Input file contents as lines
@@ -86,8 +84,6 @@ data class Context(
             return finishGeneratingEntity as T
         } else if (name == "finishParsingLine") {
             return finishParsingLine as T
-        } else if (name == "indentation") {
-            return indentation as T
         } else if (name == "inputFile") {
             return inputFile as T
         } else if (name == "inputFileLines") {
@@ -154,8 +150,6 @@ data class Context(
             finishGeneratingEntity = value as Boolean
         } else if (name == "finishParsingLine") {
             finishParsingLine = value as Boolean
-        } else if (name == "indentation") {
-            indentation = value as Int
         } else if (name == "inputFile") {
             inputFile = value as String
         } else if (name == "inputFileLines") {

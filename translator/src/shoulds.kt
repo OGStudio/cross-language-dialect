@@ -487,7 +487,11 @@ fun shouldResetOutputEntityField(c: Context): Context {
         val fieldName = c.entityEnumeratedFields[c.cursorEntityFieldId]
         val entityName = c.entities[c.cursorEntityId]
         val fields = c.entityFields[entityName] ?: mapOf<String, String>()
-        c.outputEntityField = formatEntityField(fields, c.targetLanguage, fieldName)
+        c.outputEntityField = formatEntityField(
+            fields,
+            c.targetLanguage,
+            fieldName
+        )
         c.recentField = "outputEntityField"
         return c
     }
