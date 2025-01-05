@@ -49,7 +49,7 @@ fun enumerateFields(fields: Map<String, String>): Array<String> {
 // Detect target language based on output file extension
 fun fileExtTargetLang(outputFile: String): String {
     if (outputFile.endsWith(".kt")) {
-        return "Kotlin"
+        return LANGUAGE_KOTLIN
     }
 
     return "unknown-language"
@@ -61,5 +61,12 @@ fun formatEntityField(
     lang: String,
     name: String
 ): String {
-    return "TODO $name/$lang"
+    if (lang == LANGUAGE_KOTLIN) {
+      return FORMAT_KOTLIN_ENTITY_FIELD
+          .replace("%NAME%", name)
+          .replace("%TYPE%", "TODO-TYPE")
+          .replace("%DEFAULT%", "TODO-DEFAULT")
+    }
+
+    return "unknown-language field $name"
 }
