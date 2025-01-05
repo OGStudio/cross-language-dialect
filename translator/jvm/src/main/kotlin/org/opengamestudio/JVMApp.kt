@@ -26,6 +26,7 @@ fun main(args: Array<String>) {
         ::shouldResetCursorEntityId,
         ::shouldResetEntityEnumeratedFields,
         ::shouldResetGenerating,
+        ::shouldResetOutputEntityField,
         ::shouldResetOutputEntityStart,
         ::shouldWriteOutputFile,
         ::shouldResetOutputFileContents,

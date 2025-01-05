@@ -23,13 +23,14 @@ fun shouldCollectEntity(c: Context): Context {
 // Conditions:
 // 1. Finished generating entity fields
 fun shouldFinishGeneratingEntity(c: Context): Context {
-  /*
-    if (c.recentField == "outputEntityStart") {
+    if (
+        c.recentField == "outputEntityField" &&
+        c.cursorEntityFieldId == c.entityEnumeratedFields.size - 1
+    ) {
         c.finishGeneratingEntity = true
         c.recentField = "finishGeneratingEntity"
         return c
     }
-    */
 
     c.recentField = "none"
     return c
@@ -376,9 +377,19 @@ fun shouldReadInputFile(c: Context): Context {
 //
 // Conditions:
 // 1. Entity fields have been enumerated
+// 2. Entity field output has been generated
 fun shouldResetCursorEntityFieldId(c: Context): Context {
     if (c.recentField == "entityEnumeratedFields") {
         c.cursorEntityFieldId = 0
+        c.recentField = "cursorEntityFieldId"
+        return c
+    }
+
+    if (
+        c.recentField == "outputEntityField" &&
+        c.cursorEntityFieldId + 1 < c.entityEnumeratedFields.size
+    ) {
+        c.cursorEntityFieldId += 1
         c.recentField = "cursorEntityFieldId"
         return c
     }
@@ -467,6 +478,24 @@ fun shouldResetGenerating(c: Context): Context {
     return c
 }
 
+// Reset field contents
+//
+// Conditions:
+// 1. Field cursor changed
+fun shouldResetOutputEntityField(c: Context): Context {
+    if (c.recentField == "cursorEntityFieldId") {
+        val fieldName = c.entityEnumeratedFields[c.cursorEntityFieldId]
+        val entityName = c.entities[c.cursorEntityId]
+        val fields = c.entityFields[entityName] ?: mapOf<String, String>()
+        c.outputEntityField = formatEntityField(fields, c.targetLanguage, fieldName)
+        c.recentField = "outputEntityField"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Reset contents for the first line of entity generation
 //
 // Conditions:
@@ -488,11 +517,13 @@ fun shouldResetOutputEntityStart(c: Context): Context {
     c.recentField = "none"
     return c
 }
+
 // Reset contents for output file
 //
 // Conditions:
 // 1. Finished parsing
 // 2. Entity's first line was generated
+// 3. Entity's field was generated
 fun shouldResetOutputFileContents(c: Context): Context {
     if (
         c.recentField == "isParsing" &&
@@ -505,6 +536,12 @@ fun shouldResetOutputFileContents(c: Context): Context {
 
     if (c.recentField == "outputEntityStart") {
         c.outputFileContents += c.outputEntityStart + "\n"
+        c.recentField = "outputFileContents"
+        return c
+    }
+
+    if (c.recentField == "outputEntityField") {
+        c.outputFileContents += c.outputEntityField + "\n"
         c.recentField = "outputFileContents"
         return c
     }

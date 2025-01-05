@@ -47,6 +47,8 @@ data class Context(
     var isParsingTopLevelLine: Boolean = false,
     // Entity type line
     var isParsingTypeLine: Boolean = false,
+    // Currently generated entity field
+    var outputEntityField: String = "",
     // The first generated entity output line
     var outputEntityStart: String = "",
     // Path to output file
@@ -104,6 +106,8 @@ data class Context(
             return isParsingTopLevelLine as T
         } else if (name == "isParsingTypeLine") {
             return isParsingTypeLine as T
+        } else if (name == "outputEntityField") {
+            return outputEntityField as T
         } else if (name == "outputEntityStart") {
             return outputEntityStart as T
         } else if (name == "outputFile") {
@@ -170,6 +174,8 @@ data class Context(
             isParsingTopLevelLine = value as Boolean
         } else if (name == "isParsingTypeLine") {
             isParsingTypeLine = value as Boolean
+        } else if (name == "outputEntityField") {
+            outputEntityField = value as String
         } else if (name == "outputEntityStart") {
             outputEntityStart = value as String
         } else if (name == "outputFile") {

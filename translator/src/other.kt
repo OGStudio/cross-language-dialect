@@ -54,3 +54,12 @@ fun fileExtTargetLang(outputFile: String): String {
 
     return "unknown-language"
 }
+
+// Generate target language specific code for entity field
+fun formatEntityField(
+    fields: Map<String, String>,
+    lang: String,
+    name: String
+): String {
+    return "TODO $name/$lang"
+}
