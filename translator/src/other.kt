@@ -62,10 +62,7 @@ fun formatEntityField(
     name: String
 ): String {
     if (lang == LANGUAGE_KOTLIN) {
-      return FORMAT_KOTLIN_ENTITY_FIELD
-          .replace("%NAME%", name)
-          .replace("%TYPE%", "TODO-TYPE")
-          .replace("%DEFAULT%", "TODO-DEFAULT")
+        return formatKotlinEntityField(name)
     }
 
     return "unknown-language field $name"
