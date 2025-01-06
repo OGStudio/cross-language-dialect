@@ -2,7 +2,8 @@ package org.opengamestudio
 
 // Construct entity field line
 fun formatKotlinEntityField(
-    name: String
+    name: String,
+    type: String
 ): String {
     return FORMAT_KOTLIN_ENTITY_FIELD
         .replace("%NAME%", name)

@@ -57,12 +57,12 @@ fun fileExtTargetLang(outputFile: String): String {
 
 // Generate target language specific code for entity field
 fun formatEntityField(
-    fields: Map<String, String>,
     lang: String,
-    name: String
+    name: String,
+    type: String
 ): String {
     if (lang == LANGUAGE_KOTLIN) {
-        return formatKotlinEntityField(name)
+        return formatKotlinEntityField(name, type)
     }
 
     return "unknown-language field $name"

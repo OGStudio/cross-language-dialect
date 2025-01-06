@@ -484,13 +484,13 @@ fun shouldResetGenerating(c: Context): Context {
 // 1. Field cursor changed
 fun shouldResetOutputEntityField(c: Context): Context {
     if (c.recentField == "cursorEntityFieldId") {
-        val fieldName = c.entityEnumeratedFields[c.cursorEntityFieldId]
         val entityName = c.entities[c.cursorEntityId]
-        val fields = c.entityFields[entityName] ?: mapOf<String, String>()
+        val fieldName = c.entityEnumeratedFields[c.cursorEntityFieldId]
+        val fieldType = c.entityFields[entityName]!![fieldName]!!
         c.outputEntityField = formatEntityField(
-            fields,
             c.targetLanguage,
-            fieldName
+            fieldName,
+            fieldType
         )
         c.recentField = "outputEntityField"
         return c
