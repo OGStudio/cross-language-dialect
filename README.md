@@ -36,8 +36,20 @@ Parse entities' YML:
 
 $ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=../test/test-dir/entities.kt`
 
-# Current avalability of functions
+# Current status of entity generation
 
-| № | Function | C++ | JavaScript | Kotlin | Python | Swift |
-|---|---       |---  |---         |---     |---     |---    |
-| 1 | Generate entities | X | X   | X      | X      | X     | 
+## Entity types
+
+| № | Type    | Kotlin |
+|---|---      |---     |
+| 1 | struct  | √      |
+| 2 | context | X      |
+
+## Kotlin entity fields
+
+| № | YML type | Kotlin type | Default value | YML example | Kotlin example |
+|---|---       |---          |---            |---          |---             |
+| 1 | `Bool`   | `Boolean`   | `false`       | `didLaunch: Bool` | `var didLaunch: Boolean = false` |
+| 2 | `String` | `String`    | `""`          | `method: String`  | `var method: String = ""` |
+| 3 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
+
