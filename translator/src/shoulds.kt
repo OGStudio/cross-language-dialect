@@ -21,12 +21,9 @@ fun shouldCollectEntity(c: Context): Context {
 // Finish generating current entity
 //
 // Conditions:
-// 1. Finished generating entity fields
+// 1. Generated entity's ending line
 fun shouldFinishGeneratingEntity(c: Context): Context {
-    if (
-        c.recentField == "outputEntityField" &&
-        c.cursorEntityFieldId == c.entityEnumeratedFields.size - 1
-    ) {
+    if (c.recentField == "outputEntityEnd") {
         c.finishGeneratingEntity = true
         c.recentField = "finishGeneratingEntity"
         return c
@@ -478,6 +475,24 @@ fun shouldResetGenerating(c: Context): Context {
     return c
 }
 
+// Reset ending line of the generated entity
+//
+// Conditions:
+// 1. Finished generating entity fields
+fun shouldResetOutputEntityEnd(c: Context): Context {
+    if (
+        c.recentField == "outputEntityField" &&
+        c.cursorEntityFieldId == c.entityEnumeratedFields.size - 1
+    ) {
+        c.outputEntityEnd = ") {}"
+        c.recentField = "outputEntityEnd"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Reset field contents
 //
 // Conditions:
@@ -528,6 +543,7 @@ fun shouldResetOutputEntityStart(c: Context): Context {
 // 1. Finished parsing
 // 2. Entity's first line was generated
 // 3. Entity's field was generated
+// 4. Entity's last line was generated
 fun shouldResetOutputFileContents(c: Context): Context {
     if (
         c.recentField == "isParsing" &&
@@ -546,6 +562,12 @@ fun shouldResetOutputFileContents(c: Context): Context {
 
     if (c.recentField == "outputEntityField") {
         c.outputFileContents += c.outputEntityField + "\n"
+        c.recentField = "outputFileContents"
+        return c
+    }
+
+    if (c.recentField == "outputEntityEnd") {
+        c.outputFileContents += c.outputEntityEnd + "\n"
         c.recentField = "outputFileContents"
         return c
     }
