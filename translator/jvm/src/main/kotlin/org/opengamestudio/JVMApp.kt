@@ -27,6 +27,7 @@ fun main(args: Array<String>) {
         ::shouldResetCursorEntityId,
         ::shouldResetEntityEnumeratedFields,
         ::shouldResetGenerating,
+        ::shouldResetKotlinLines,
         ::shouldResetOutputEntityEnd,
         ::shouldResetOutputEntityField,
         ::shouldResetOutputEntityStart,

@@ -47,6 +47,8 @@ data class Context(
     var isParsingTopLevelLine: Boolean = false,
     // Entity type line
     var isParsingTypeLine: Boolean = false,
+    // Raw Kotlin lines
+    var kotlinLines: Array<String> = arrayOf(),
     // The last line for generated entity
     var outputEntityEnd: String = "",
     // Currently generated entity field
@@ -108,6 +110,8 @@ data class Context(
             return isParsingTopLevelLine as T
         } else if (name == "isParsingTypeLine") {
             return isParsingTypeLine as T
+        } else if (name == "kotlinLines") {
+            return kotlinLines as T
         } else if (name == "outputEntityEnd") {
             return outputEntityEnd as T
         } else if (name == "outputEntityField") {
@@ -178,6 +182,8 @@ data class Context(
             isParsingTopLevelLine = value as Boolean
         } else if (name == "isParsingTypeLine") {
             isParsingTypeLine = value as Boolean
+        } else if (name == "kotlinLines") {
+            kotlinLines = value as Array<String>
         } else if (name == "outputEntityEnd") {
             outputEntityEnd = value as String
         } else if (name == "outputEntityField") {

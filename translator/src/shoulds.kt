@@ -504,6 +504,23 @@ fun shouldResetGenerating(c: Context): Context {
 // Reset ending line of the generated entity
 //
 // Conditions:
+// 1. Raw Kotlin line was parsed
+fun shouldResetKotlinLines(c: Context): Context {
+    if (c.recentField == "isParsingKotlinLine") {
+        val line = c.inputFileLines[c.parseLineId].trim()
+        val code = line.substring(PREFIX_KOTLIN.length)
+        c.kotlinLines += code + "\n"
+        c.recentField = "kotlinLines"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Reset ending line of the generated entity
+//
+// Conditions:
 // 1. Finished generating entity fields
 fun shouldResetOutputEntityEnd(c: Context): Context {
     if (
@@ -566,17 +583,28 @@ fun shouldResetOutputEntityStart(c: Context): Context {
 // Reset contents for output file
 //
 // Conditions:
-// 1. Finished parsing
-// 2. Entity's first line was generated
-// 3. Entity's field was generated
-// 4. Entity's last line was generated
-// 5. Raw Kotlin line was parsed
+// 1. Finished parsing for non-Kotlin target generation
+// 2. Finished parsing for Kotlin target generation
+// 3. Entity's first line was generated
+// 4. Entity's field was generated
+// 5. Entity's last line was generated
 fun shouldResetOutputFileContents(c: Context): Context {
     if (
         c.recentField == "isParsing" &&
-        !c.isParsing
+        !c.isParsing &&
+        c.targetLanguage != LANGUAGE_KOTLIN
     ) {
         c.outputFileContents = ""
+        c.recentField = "outputFileContents"
+        return c
+    }
+
+    if (
+        c.recentField == "isParsing" &&
+        !c.isParsing &&
+        c.targetLanguage == LANGUAGE_KOTLIN
+    ) {
+        c.outputFileContents = c.kotlinLines.joinToString("\n")
         c.recentField = "outputFileContents"
         return c
     }
@@ -595,14 +623,6 @@ fun shouldResetOutputFileContents(c: Context): Context {
 
     if (c.recentField == "outputEntityEnd") {
         c.outputFileContents += c.outputEntityEnd + "\n"
-        c.recentField = "outputFileContents"
-        return c
-    }
-
-    if (c.recentField == "isParsingKotlinLine") {
-        val line = c.inputFileLines[c.parseLineId].trim()
-        val code = line.substring(PREFIX_KOTLIN.length)
-        c.outputFileContents += code + "\n"
         c.recentField = "outputFileContents"
         return c
     }
