@@ -31,6 +31,7 @@ data class %NAME%(
 """
 const val LANGUAGE_KOTLIN = "Kotlin"
 const val LANGUAGE_SWIFT = "Swift"
+const val PREFIX_KOTLIN = "kotlin: "
 const val PREFIX_TYPE = "type: "
 const val SECTION_FIELDS = "fields:"
 

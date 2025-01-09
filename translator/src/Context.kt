@@ -40,6 +40,8 @@ data class Context(
     var isParsingFields: Boolean = false,
     // Non-top level line
     var isParsingIndentedLine: Boolean = false,
+    // Raw Kotlin line
+    var isParsingKotlinLine: Boolean = false,
     // True: non-empty/non-comment line without indentation
     // False: top level line should not be parsed
     var isParsingTopLevelLine: Boolean = false,
@@ -100,6 +102,8 @@ data class Context(
             return isParsingFields as T
         } else if (name == "isParsingIndentedLine") {
             return isParsingIndentedLine as T
+        } else if (name == "isParsingKotlinLine") {
+            return isParsingKotlinLine as T
         } else if (name == "isParsingTopLevelLine") {
             return isParsingTopLevelLine as T
         } else if (name == "isParsingTypeLine") {
@@ -168,6 +172,8 @@ data class Context(
             isParsingFields = value as Boolean
         } else if (name == "isParsingIndentedLine") {
             isParsingIndentedLine = value as Boolean
+        } else if (name == "isParsingKotlinLine") {
+            isParsingKotlinLine = value as Boolean
         } else if (name == "isParsingTopLevelLine") {
             isParsingTopLevelLine = value as Boolean
         } else if (name == "isParsingTypeLine") {

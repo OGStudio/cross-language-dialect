@@ -203,6 +203,25 @@ fun shouldParseInputFilePath(c: Context): Context {
     return c
 }
 
+// Parse raw Kotlin line
+//
+// Conditions:
+// 1. Top-level line starts with `kotlin:`
+fun shouldParseKotlinLine(c: Context): Context {
+    if (
+        c.recentField == "isParsingTopLevelLine" &&
+        c.isParsingTopLevelLine &&
+        c.inputFileLines[c.parseLineId].startsWith(PREFIX_KOTLIN)
+    ) {
+        c.isParsingKotlinLine = true
+        c.recentField = "isParsingKotlinLine"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Parse input file line
 //
 // Conditions:
@@ -252,10 +271,10 @@ fun shouldParseOutputFilePath(c: Context): Context {
 // Parse top level line
 //
 // Conditions:
-// 1. Empty line
-// 2. Comment line
-// 3. Version line
-// 4. No indentation
+// 1. Empty (no characters) line
+// 2. Comment line (starts with `#`)
+// 3. Version line (starts with `version:`)
+// 4. Non-empty not indented line (the one we're after)
 fun shouldParseTopLevelLine(c: Context): Context {
     if (
         c.recentField == "parseLineId" &&
