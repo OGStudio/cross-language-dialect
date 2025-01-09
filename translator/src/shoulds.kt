@@ -21,9 +21,12 @@ fun shouldCollectEntity(c: Context): Context {
 // Finish generating current entity
 //
 // Conditions:
-// 1. Generated entity's ending line
+// 1. Generated last entity's field
 fun shouldFinishGeneratingEntity(c: Context): Context {
-    if (c.recentField == "outputEntityEnd") {
+    if (
+        c.recentField == "outputEntityField" &&
+        c.cursorEntityFieldId == c.entityEnumeratedFields.size - 1
+    ) {
         c.finishGeneratingEntity = true
         c.recentField = "finishGeneratingEntity"
         return c
@@ -444,7 +447,7 @@ fun shouldResetCursorEntityId(c: Context): Context {
     }
 
     if (
-        c.recentField == "finishGeneratingEntity" &&
+        c.recentField == "outputEntityEnd" &&
         c.cursorEntityId < c.entities.size - 1
     ) {
         c.cursorEntityId += 1
@@ -489,7 +492,7 @@ fun shouldResetGenerating(c: Context): Context {
     }
 
     if (
-        c.recentField == "finishGeneratingEntity" &&
+        c.recentField == "outputEntityEnd" &&
         c.cursorEntityId == c.entities.size - 1
     ) {
         c.isGenerating = false
@@ -521,12 +524,9 @@ fun shouldResetKotlinLines(c: Context): Context {
 // Reset ending line of the generated entity
 //
 // Conditions:
-// 1. Finished generating entity fields
+// 1. Finished generating entity
 fun shouldResetOutputEntityEnd(c: Context): Context {
-    if (
-        c.recentField == "outputEntityField" &&
-        c.cursorEntityFieldId == c.entityEnumeratedFields.size - 1
-    ) {
+    if (c.recentField == "finishGeneratingEntity") {
         c.outputEntityEnd = ") {}"
         c.recentField = "outputEntityEnd"
         return c
@@ -674,10 +674,10 @@ fun shouldResetTargetLanguage(c: Context): Context {
 // Save generated contents to output file
 //
 // Conditions:
-// 1. Output contents are ready
+// 1. Finished preparing file contents
 fun shouldWriteOutputFile(c: Context): Context {
     if (
-        c.recentField == "isGenerating" &&
+        c.recentField == "outputFileContents" &&
         !c.isGenerating
     ) {
         fsWriteFile(c.outputFile, c.outputFileContents)
