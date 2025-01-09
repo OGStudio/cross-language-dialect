@@ -41,6 +41,7 @@ fun shouldFinishGeneratingEntity(c: Context): Context {
 // 3. Finished parsing entity type
 // 4. Started parsing fields
 // 5. Parsed entity field
+// 6. Parsed raw Kotlin field
 fun shouldFinishParsingLine(c: Context): Context {
     if (
         c.recentField == "isParsingTopLevelLine" &&
@@ -76,6 +77,12 @@ fun shouldFinishParsingLine(c: Context): Context {
     }
 
     if (c.recentField == "entityFields") {
+        c.finishParsingLine = true
+        c.recentField = "finishParsingLine"
+        return c
+    }
+
+    if (c.recentField == "isParsingKotlinLine") {
         c.finishParsingLine = true
         c.recentField = "finishParsingLine"
         return c
@@ -563,6 +570,7 @@ fun shouldResetOutputEntityStart(c: Context): Context {
 // 2. Entity's first line was generated
 // 3. Entity's field was generated
 // 4. Entity's last line was generated
+// 5. Raw Kotlin line was parsed
 fun shouldResetOutputFileContents(c: Context): Context {
     if (
         c.recentField == "isParsing" &&
@@ -587,6 +595,14 @@ fun shouldResetOutputFileContents(c: Context): Context {
 
     if (c.recentField == "outputEntityEnd") {
         c.outputFileContents += c.outputEntityEnd + "\n"
+        c.recentField = "outputFileContents"
+        return c
+    }
+
+    if (c.recentField == "isParsingKotlinLine") {
+        val line = c.inputFileLines[c.parseLineId].trim()
+        val code = line.substring(PREFIX_KOTLIN.length)
+        c.outputFileContents += code + "\n"
         c.recentField = "outputFileContents"
         return c
     }
