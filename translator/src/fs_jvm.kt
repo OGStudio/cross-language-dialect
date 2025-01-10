@@ -7,6 +7,18 @@ import java.io.*
  *
  * JVM implementation
  */
-fun fsReadFile(path: String): Array<String>{
+fun fsReadFile(path: String): Array<String> {
     return File(path).readLines().toTypedArray()
+}
+
+/**
+ * Write text file
+ *
+ * JVM implementation
+ */
+fun fsWriteFile(
+    path: String,
+    contents: String
+) {
+    File(path).writeText(contents)
 }

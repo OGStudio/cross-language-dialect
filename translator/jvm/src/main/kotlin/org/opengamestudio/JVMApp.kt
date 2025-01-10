@@ -9,6 +9,7 @@ fun main(args: Array<String>) {
     // Register behaviour.
     arrayOf(
         ::shouldCollectEntity,
+        ::shouldFinishGeneratingEntity,
         ::shouldFinishParsingLine,
         ::shouldParseInputFilePath,
         ::shouldParseLine,
@@ -17,11 +18,23 @@ fun main(args: Array<String>) {
         ::shouldParseField,
         ::shouldParseFields,
         ::shouldParseIndentedLine,
+        ::shouldParseKotlinLine,
+        ::shouldParseOutputFilePath,
         ::shouldParseTopLevelLine,
         ::shouldParseTypeLine,
         ::shouldReadInputFile,
-        ::shouldResetEntityId,
+        ::shouldResetCursorEntityFieldId,
+        ::shouldResetCursorEntityId,
+        ::shouldResetEntityEnumeratedFields,
+        ::shouldResetGenerating,
+        ::shouldResetKotlinLines,
+        ::shouldResetOutputEntityEnd,
+        ::shouldResetOutputEntityField,
+        ::shouldResetOutputEntityStart,
+        ::shouldWriteOutputFile,
+        ::shouldResetOutputFileContents,
         ::shouldResetParsing,
+        ::shouldResetTargetLanguage,
     ).forEach { f ->
         ctrl.registerFunction { c -> f(c as Context) }
     }

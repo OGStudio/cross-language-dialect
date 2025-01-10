@@ -34,4 +34,21 @@ $ `cd translator && ./gradlew jar`
 
 Parse entities' YML:
 
-$ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml`
+$ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=../test/test-dir/entities.kt`
+
+# Current availability of functions
+
+## Generation of entities
+
+| № | Type    | Kotlin |
+|---|---      |---     |
+| 1 | struct  | √      |
+| 2 | context | X      |
+
+## Generation of entity fields for Kotlin
+
+| № | YML type | Kotlin type | Default value | YML example | Kotlin example |
+|---|---       |---          |---            |---          |---             |
+| 1 | `Bool`   | `Boolean`   | `false`       | `didLaunch: Bool` | `var didLaunch: Boolean = false` |
+| 2 | `String` | `String`    | `""`          | `method: String`  | `var method: String = ""` |
+| 3 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |

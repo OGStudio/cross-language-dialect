@@ -1,5 +1,7 @@
 version: 1
 
+kotlin: package org.opengamestudio
+
 # Application state context
 Context:
     type: context
