@@ -1,3 +1,10 @@
+/**
+ * This file is part of Cross-language dialect:
+ *     https://github.com/OGStudio/cross-language-dialect
+ * License: MIT
+ * Version: 1.0.0
+ */
+
 package org.opengamestudio
 
 interface CLDContext {
