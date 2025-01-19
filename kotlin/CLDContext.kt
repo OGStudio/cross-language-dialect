@@ -2,7 +2,7 @@
  * This file is part of Cross-language dialect:
  *     https://github.com/OGStudio/cross-language-dialect
  * License: MIT
- * Version: 2025-01-19
+ * Version: 1.0.0
  */
 
 package org.opengamestudio
