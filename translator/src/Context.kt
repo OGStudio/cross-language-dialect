@@ -30,6 +30,8 @@ data class Context(
     var inputFile: String = "",
     // Input file contents as lines
     var inputFileLines: Array<String> = arrayOf(),
+    // Debug output state
+    var isDbg: Boolean = false,
     // Generating output file
     var isGenerating: Boolean = false,
     // Parsing input file
@@ -94,6 +96,8 @@ data class Context(
             return inputFile as T
         } else if (name == "inputFileLines") {
             return inputFileLines as T
+        } else if (name == "isDbg") {
+            return isDbg as T
         } else if (name == "isGenerating") {
             return isGenerating as T
         } else if (name == "isParsing") {
@@ -166,6 +170,8 @@ data class Context(
             inputFile = value as String
         } else if (name == "inputFileLines") {
             inputFileLines = value as Array<String>
+        } else if (name == "isDbg") {
+            isDbg = value as Boolean
         } else if (name == "isGenerating") {
             isGenerating = value as Boolean
         } else if (name == "isParsing") {

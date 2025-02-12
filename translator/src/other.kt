@@ -14,6 +14,16 @@ fun entityAddField(
     entities[entityName]!![fieldName] = fieldType
 }
 
+// Detect the presence of debug command line argument
+fun cliDbg(args: Array<String>): Boolean {
+    for (arg in args) {
+        if (arg == ARGUMENT_DBG) {
+            return true
+        }
+    }
+    return false
+}
+
 // Extract input file path from command line arguments
 fun cliInputFile(args: Array<String>): String {
     for (arg in args) {
@@ -36,6 +46,24 @@ fun cliOutputFile(args: Array<String>): String {
         }
     }
     return ""
+}
+
+// Convert string array to debug string
+fun dbgStringArray(items: Array<String>): String {
+    var output = "(${items.size})["
+    var i = 0
+    // Construct the preview.
+    for (str in items) {
+        output += str + ","
+        i += 1
+        // Interrupt the preview.
+        if (i > 2) {
+            output += "..."
+            break
+        }
+    }
+    output += "]"
+    return output
 }
 
 fun enumerateFields(fields: Map<String, String>): Array<String> {

@@ -3,8 +3,18 @@ package org.opengamestudio
 // Debug controller/context changes to console
 fun consoleDebug(c: Context) {
     val key = c.recentField
-    val value = "${c.fieldAny(c.recentField)}"//.take(30)
-    println("CLD-DBG key/value: '$key'/'$value'")
+    val value = c.fieldAny(c.recentField)
+    // Limit the length of printed value for non-arrays
+    // Arrays are limited by dbgStringArray function
+    var strval = "${value}".take(DBG_LEN)
+    // Preview array of strings
+    (value as? Array<String>)?.also { items ->
+        strval = dbgStringArray(items)
+    }
+
+    if (c.isDbg) {
+        println("CLD-DBG '$key': '$strval'")
+    }
 }
 
 // Print to console

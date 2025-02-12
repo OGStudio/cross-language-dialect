@@ -1,7 +1,13 @@
 package org.opengamestudio
 
+const val ARGUMENT_DBG = "--dbg"
 const val ARGUMENT_FILE = "--file"
 const val ARGUMENT_OUT = "--out"
+const val DBG_LEN = 50
+
+
+// TODO Move some place else
+
 const val FORMAT_KOTLIN_CONTEXT = """
 data class %NAME%(
 %FIELDS%

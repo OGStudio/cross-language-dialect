@@ -459,6 +459,24 @@ fun shouldResetCursorEntityId(c: Context): Context {
     return c
 }
 
+// Reset debug output state
+//
+// Conditions:
+// 1. Arguments are available
+fun shouldResetDbg(c: Context): Context {
+    if (
+        c.recentField == "arguments" &&
+        cliDbg(c.arguments)
+    ) {
+        c.isDbg = cliDbg(c.arguments)
+        c.recentField = "isDbg"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Reset entity enumerated fields
 //
 // Conditions:

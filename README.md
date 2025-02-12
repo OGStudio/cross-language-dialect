@@ -34,7 +34,7 @@ $ `cd translator && ./gradlew jar`
 
 Parse entities' YML:
 
-$ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=../test/test-dir/entities.kt`
+$ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=../test/test-dir/entities.kt --dbg`
 
 # Current availability of functions
 
