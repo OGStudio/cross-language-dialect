@@ -50,7 +50,7 @@ fun formatKotlinEntityFieldType(type: String): String {
     if (
         type.startsWith("[") &&
         type.endsWith("]") &&
-        !type.contains(": ")
+        !type.contains(": ") // Exclude dictionary
     ) {
         val innerString = type.substring(1, type.length - 1)
         // Recursive call to format inner string
