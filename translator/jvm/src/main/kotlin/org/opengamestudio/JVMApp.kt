@@ -8,6 +8,7 @@ fun main(args: Array<String>) {
 
     // Register behaviour.
     arrayOf(
+        ::shouldCollectEntityNames,
         ::shouldParseInputFilePath,
         ::shouldPrintToConsole,
         ::shouldParseOutputFilePath,

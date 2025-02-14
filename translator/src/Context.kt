@@ -8,10 +8,10 @@ data class Context(
     var consoleOutput: String = "",
     // The application did finish launching
     var didLaunch: Boolean = false,
+    // Names of entities in the order of appearance
+    var entityNames: Array<String> = arrayOf(),
     // Finished writing to output file
     var didWriteOutputFile: Boolean = false,
-    // Entities in the order of appearance
-    var entities: Array<String> = arrayOf(),
     // Path to input file
     var inputFile: String = "",
     // Input file contents as lines
@@ -33,8 +33,8 @@ data class Context(
             return didLaunch as T
         } else if (name == "didWriteOutputFile") {
             return didWriteOutputFile as T
-        } else if (name == "entities") {
-            return entities as T
+        } else if (name == "entityNames") {
+            return entityNames as T
         } else if (name == "inputFile") {
             return inputFile as T
         } else if (name == "inputFileLines") {
@@ -65,8 +65,8 @@ data class Context(
             didLaunch = value as Boolean
         } else if (name == "didWriteOutputFile") {
             didWriteOutputFile = value as Boolean
-        } else if (name == "entities") {
-            entities = value as Array<String>
+        } else if (name == "entityNames") {
+            entityNames = value as Array<String>
         } else if (name == "inputFile") {
             inputFile = value as String
         } else if (name == "inputFileLines") {

@@ -1,5 +1,20 @@
 package org.opengamestudio
 
+// Collect names of the declared entities
+//
+// Conditions:
+// 1. Input file contents are available
+fun shouldCollectEntityNames(c: Context): Context {
+    if (c.recentField == "inputFileLines") {
+        c.entityNames = entityCollectNames(c.inputFileLines)
+        c.recentField = "entityNames"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Parse input file path
 //
 // Conditions:
