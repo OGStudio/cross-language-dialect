@@ -76,7 +76,7 @@ fun enumerateFields(fields: Map<String, String>): Array<String> {
 
 // Detect target language based on output file extension
 fun fileExtTargetLang(outputFile: String): String {
-    if (outputFile.endsWith(".kt")) {
+    if (outputFile.endsWith("." + FILE_EXTENSION_KOTLIN)) {
         return LANGUAGE_KOTLIN
     }
 
