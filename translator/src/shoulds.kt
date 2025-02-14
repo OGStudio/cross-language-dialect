@@ -94,8 +94,7 @@ fun shouldResetDbg(c: Context): Context {
 // 1. Finished preparing file contents
 fun shouldWriteOutputFile(c: Context): Context {
     if (
-        c.recentField == "outputFileContents" &&
-        !c.isGenerating
+        c.recentField == "outputFileContents"
     ) {
         fsWriteFile(c.outputFile, c.outputFileContents)
         c.didWriteOutputFile = true
