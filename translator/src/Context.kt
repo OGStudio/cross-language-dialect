@@ -8,6 +8,8 @@ data class Context(
     var consoleOutput: String = "",
     // The application did finish launching
     var didLaunch: Boolean = false,
+    // Entity comments
+    var entityComments: Map<String, String> = mapOf(),
     // Names of entities in the order of appearance
     var entityNames: Array<String> = arrayOf(),
     // Finished writing to output file
@@ -33,6 +35,8 @@ data class Context(
             return didLaunch as T
         } else if (name == "didWriteOutputFile") {
             return didWriteOutputFile as T
+        } else if (name == "entityComments") {
+            return entityComments as T
         } else if (name == "entityNames") {
             return entityNames as T
         } else if (name == "inputFile") {
@@ -65,6 +69,8 @@ data class Context(
             didLaunch = value as Boolean
         } else if (name == "didWriteOutputFile") {
             didWriteOutputFile = value as Boolean
+        } else if (name == "entityComments") {
+            entityComments = value as Map<String, String>
         } else if (name == "entityNames") {
             entityNames = value as Array<String>
         } else if (name == "inputFile") {

@@ -1,5 +1,20 @@
 package org.opengamestudio
 
+// Collect comments of the entities
+//
+// Conditions:
+// 1. Entity names are available
+fun shouldCollectEntityComments(c: Context): Context {
+    if (c.recentField == "entityNames") {
+        c.entityComments = entityCollectComments(c.entityNames, c.inputFileLines)
+        c.recentField = "entityComments"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Collect names of the declared entities
 //
 // Conditions:

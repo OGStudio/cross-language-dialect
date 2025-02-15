@@ -25,7 +25,7 @@ FSFile:
         isFile: Bool
         name: String
 
-# Client request representation
+# Network request representation
 NetRequest:
     type: struct
     fields:
