@@ -1,5 +1,11 @@
 package org.opengamestudio
 
+const val TEMPLATE_KOTLIN_STRUCT = """
+%COMMENT%
+data class %NAME%(
+%FIELDS%
+) {}
+"""
 
 /*
 const val FORMAT_KOTLIN_CONTEXT = """
@@ -25,14 +31,8 @@ data class %NAME%(
 }
 """
 */
-/*
-const val FORMAT_KOTLIN_STRUCT = """
-data class %NAME%(
-%FIELDS%
-) {}
-"""
-*/
 
+// REMOVE: OBSOLETE
 const val FORMAT_KOTLIN_ENTITY_END = ") {}"
 const val FORMAT_KOTLIN_ENTITY_FIELD = "    var %NAME%: %TYPE% = %DEFAULT%,"
 const val FORMAT_KOTLIN_ENTITY_START = "data class %NAME%("

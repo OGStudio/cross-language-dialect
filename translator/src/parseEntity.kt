@@ -5,11 +5,13 @@ fun parseEntityComments(lines: Array<String>): Map<Int, String> {
     var d = mutableMapOf<Int, String>()
     var entityId = 0
     for (ln in lines) {
-        // Assume each comment corresponds to an entity
         if (ln.startsWith(PREFIX_COMMENT)) {
             val prefixLen = PREFIX_COMMENT.length
             val comment = ln.substring(prefixLen)
-            d[entityId++] = comment 
+            d[entityId] = comment 
+        } else if (!parseEntityName(ln).isEmpty()) {
+            // Increase id only when entity declaration is met
+            entityId++
         }
     }
 

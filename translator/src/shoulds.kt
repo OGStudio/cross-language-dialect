@@ -30,6 +30,24 @@ fun shouldCollectEntityNames(c: Context): Context {
     return c
 }
 
+// Generate Kotlin version of the entities
+//
+// Conditions:
+// 1. Entity comments are available
+fun shouldGenerateKotlinEntities(c: Context): Context {
+    if (c.recentField == "entityComments") {
+        c.outputFileContents = genKotlinEntitiesFile(
+            c.entityNames,
+            c.entityComments
+        )
+        c.recentField = "outputFileContents"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Parse input file path
 //
 // Conditions:
@@ -123,9 +141,7 @@ fun shouldResetDbg(c: Context): Context {
 // Conditions:
 // 1. Finished preparing file contents
 fun shouldWriteOutputFile(c: Context): Context {
-    if (
-        c.recentField == "outputFileContents"
-    ) {
+    if (c.recentField == "outputFileContents") {
         fsWriteFile(c.outputFile, c.outputFileContents)
         c.didWriteOutputFile = true
         c.recentField = "didWriteOutputFile"
