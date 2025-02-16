@@ -9,7 +9,7 @@ data class Context(
     // The application did finish launching
     var didLaunch: Boolean = false,
     // Entity comments
-    var entityComments: Map<String, String> = mapOf(),
+    var entityComments: Map<Int, String> = mapOf(),
     // Names of entities in the order of appearance
     var entityNames: Array<String> = arrayOf(),
     // Finished writing to output file
@@ -70,7 +70,7 @@ data class Context(
         } else if (name == "didWriteOutputFile") {
             didWriteOutputFile = value as Boolean
         } else if (name == "entityComments") {
-            entityComments = value as Map<String, String>
+            entityComments = value as Map<Int, String>
         } else if (name == "entityNames") {
             entityNames = value as Array<String>
         } else if (name == "inputFile") {

@@ -6,7 +6,7 @@ package org.opengamestudio
 // 1. Entity names are available
 fun shouldCollectEntityComments(c: Context): Context {
     if (c.recentField == "entityNames") {
-        c.entityComments = entityCollectComments(c.entityNames, c.inputFileLines)
+        c.entityComments = parseEntityComments(c.inputFileLines)
         c.recentField = "entityComments"
         return c
     }
@@ -21,7 +21,7 @@ fun shouldCollectEntityComments(c: Context): Context {
 // 1. Input file contents are available
 fun shouldCollectEntityNames(c: Context): Context {
     if (c.recentField == "inputFileLines") {
-        c.entityNames = entityCollectNames(c.inputFileLines)
+        c.entityNames = parseEntityNames(c.inputFileLines)
         c.recentField = "entityNames"
         return c
     }
