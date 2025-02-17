@@ -1,14 +1,7 @@
 package org.opengamestudio
 
-const val TEMPLATE_KOTLIN_STRUCT = """
+const val TEMPLATE_KOTLIN_CONTEXT = """
 %COMMENT%
-data class %NAME%(
-%FIELDS%
-) {}
-"""
-
-/*
-const val FORMAT_KOTLIN_CONTEXT = """
 data class %NAME%(
 %FIELDS%
     override var recentField: String = "",
@@ -30,7 +23,13 @@ data class %NAME%(
     }
 }
 """
-*/
+
+const val TEMPLATE_KOTLIN_STRUCT = """
+%COMMENT%
+data class %NAME%(
+%FIELDS%
+) {}
+"""
 
 // REMOVE: OBSOLETE
 const val FORMAT_KOTLIN_ENTITY_END = ") {}"

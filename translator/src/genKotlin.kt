@@ -10,15 +10,17 @@ fun genKotlinComment(comment: String): String {
 
 // Generate Kotlin representation of all YAML entities in a single file
 fun genKotlinEntitiesFile(
+    entityComments: Map<Int, String>,
     entityNames: Array<String>,
-    entityComments: Map<Int, String>
+    entityTypes: Map<Int, String>
 ): String {
     var s = ""
     // Entity by id.
     var id = 0
-    for (entityName in entityNames) {
+    for (name in entityNames) {
         val comment = entityComments[id] ?: ""
-        s += genKotlinEntity(entityName, comment) + "\n"
+        val type = entityTypes[id] ?: ""
+        s += genKotlinEntity(comment, name, type)
         id++
     }
 
@@ -27,11 +29,18 @@ fun genKotlinEntitiesFile(
 
 // Generate Kotlin representation of a single entity
 fun genKotlinEntity(
+    comment: String,
     name: String,
-    comment: String
+    type: String
 ): String {
+    // Assume struct template by default.
+    var template = TEMPLATE_KOTLIN_STRUCT
+    if (type == TYPE_CONTEXT) {
+        template = TEMPLATE_KOTLIN_CONTEXT
+    }
+
     val genComment = genKotlinComment(comment)
-    return TEMPLATE_KOTLIN_STRUCT
+    return template
         .replace("%NAME%", name)
         .replace("%COMMENT%", genComment)
 }

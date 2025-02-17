@@ -8,10 +8,12 @@ data class Context(
     var consoleOutput: String = "",
     // The application did finish launching
     var didLaunch: Boolean = false,
-    // Entity comments
+    // Entity comments with entities referenced by index
     var entityComments: Map<Int, String> = mapOf(),
     // Names of entities in the order of appearance
     var entityNames: Array<String> = arrayOf(),
+    // Entity types with entities referenced by index
+    var entityTypes: Map<Int, String> = mapOf(),
     // Finished writing to output file
     var didWriteOutputFile: Boolean = false,
     // Path to input file
@@ -39,6 +41,8 @@ data class Context(
             return entityComments as T
         } else if (name == "entityNames") {
             return entityNames as T
+        } else if (name == "entityTypes") {
+            return entityTypes as T
         } else if (name == "inputFile") {
             return inputFile as T
         } else if (name == "inputFileLines") {
@@ -73,6 +77,8 @@ data class Context(
             entityComments = value as Map<Int, String>
         } else if (name == "entityNames") {
             entityNames = value as Array<String>
+        } else if (name == "entityTypes") {
+            entityTypes = value as Map<Int, String>
         } else if (name == "inputFile") {
             inputFile = value as String
         } else if (name == "inputFileLines") {

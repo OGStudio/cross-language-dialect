@@ -10,6 +10,7 @@ fun main(args: Array<String>) {
     arrayOf(
         ::shouldCollectEntityComments,
         ::shouldCollectEntityNames,
+        ::shouldCollectEntityTypes,
         ::shouldGenerateKotlinEntities,
         ::shouldParseInputFilePath,
         ::shouldPrintToConsole,

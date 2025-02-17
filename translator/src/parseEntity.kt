@@ -44,3 +44,20 @@ fun parseEntityNames(lines: Array<String>): Array<String> {
 
     return items
 }
+
+// Collect types of entities
+fun parseEntityTypes(lines: Array<String>): Map<Int, String> {
+    var d = mutableMapOf<Int, String>()
+    var entityId = -1
+    for (ln in lines) {
+        if (ln.startsWith(PREFIX_TYPE)) {
+            val prefixLen = PREFIX_TYPE.length
+            val type = ln.substring(prefixLen)
+            d[entityId] = type
+        } else if (!parseEntityName(ln).isEmpty()) {
+            entityId++
+        }
+    }
+
+    return d
+}
