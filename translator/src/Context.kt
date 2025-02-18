@@ -10,6 +10,8 @@ data class Context(
     var didLaunch: Boolean = false,
     // Entity comments with entities referenced by index
     var entityComments: Map<Int, String> = mapOf(),
+    var entityFieldNames: Map<Int, Array<String>> = mapOf(),
+    var entityFieldTypes: Map<Int, Array<String>> = mapOf(),
     // Names of entities in the order of appearance
     var entityNames: Array<String> = arrayOf(),
     // Entity types with entities referenced by index
@@ -39,6 +41,10 @@ data class Context(
             return didWriteOutputFile as T
         } else if (name == "entityComments") {
             return entityComments as T
+        } else if (name == "entityFieldNames") {
+            return entityFieldNames as T
+        } else if (name == "entityFieldTypes") {
+            return entityFieldTypes as T
         } else if (name == "entityNames") {
             return entityNames as T
         } else if (name == "entityTypes") {
@@ -75,6 +81,10 @@ data class Context(
             didWriteOutputFile = value as Boolean
         } else if (name == "entityComments") {
             entityComments = value as Map<Int, String>
+        } else if (name == "entityFieldNames") {
+            entityFieldNames = value as Map<Int, Array<String>>
+        } else if (name == "entityFieldTypes") {
+            entityFieldTypes = value as Map<Int, Array<String>>
         } else if (name == "entityNames") {
             entityNames = value as Array<String>
         } else if (name == "entityTypes") {
