@@ -18,6 +18,50 @@ fun parseEntityComments(lines: Array<String>): Map<Int, String> {
     return d
 }
 
+// Extract name and type of a field
+fun parseEntityField(ln: String): Array<String> {
+    // Verify prefix
+    if (!ln.startsWith(PREFIX_FIELD)) {
+        return arrayOf<String>()
+    }
+    val prefixLen = PREFIX_FIELD.length
+    val nameAndValue = ln.substring(prefixLen)
+    val parts = nameAndValue.split(FIELD_DELIMITER)
+    // Verify format
+    if (parts.length != 2) {
+        return arrayOf<String>()
+    }
+
+    return parts
+}
+
+// Extract entity field name from input line
+fun parseEntityFieldNames(ln: String): Map<Int, Array<String>> {
+    var d = mutableMapOf<Int, Array<String>>()
+    var entityId = -1
+    var isParsingFields = false
+    for (ln in lines) {
+        if (ln == SECTION_FIELDS) {
+            isParsingFields = true
+        } else if (
+            isParsingFields &&
+            !parseEntityName(ln).isEmpty()
+        ) {
+            isParsingFields = false
+            entityId++
+        } else if (
+            isParsingFields &&
+            !parseEntityField(ln).isEmpty()
+        ) {
+            val parts = parseEntityField(ln)
+            val name = parts[0]
+            d[entityId]!!.append(name)
+        }
+    }
+
+    return d
+}
+
 // Extract entity name from input line if it declares entity
 fun parseEntityName(ln: String): String {
     if (

@@ -9,6 +9,9 @@ fun main(args: Array<String>) {
     // Register behaviour.
     arrayOf(
         ::shouldCollectEntityComments,
+        ::shouldCollectEntityFieldNames,
+        //::shouldCollectEntityFieldTypes,
+        //::shouldCollectEntityFieldComments,
         ::shouldCollectEntityNames,
         ::shouldCollectEntityTypes,
         ::shouldGenerateKotlinEntities,
