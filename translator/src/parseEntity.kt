@@ -28,17 +28,18 @@ fun parseEntityField(ln: String): Array<String> {
     val nameAndValue = ln.substring(prefixLen)
     val parts = nameAndValue.split(FIELD_DELIMITER)
     // Verify format
-    if (parts.length != 2) {
+    if (parts.size != 2) {
         return arrayOf<String>()
     }
 
-    return parts
+    return parts.toTypedArray()
 }
 
 // Extract entity field name from input line
-fun parseEntityFieldNames(ln: String): Map<Int, Array<String>> {
+fun parseEntityFieldNames(lines: Array<String>): Map<Int, Array<String>> {
     var d = mutableMapOf<Int, Array<String>>()
     var entityId = -1
+    var entityFields = arrayOf<String>()
     var isParsingFields = false
     for (ln in lines) {
         if (ln == SECTION_FIELDS) {
@@ -49,13 +50,20 @@ fun parseEntityFieldNames(ln: String): Map<Int, Array<String>> {
         ) {
             isParsingFields = false
             entityId++
+            entityFields = arrayOf<String>()
         } else if (
             isParsingFields &&
             !parseEntityField(ln).isEmpty()
         ) {
             val parts = parseEntityField(ln)
             val name = parts[0]
-            d[entityId]!!.append(name)
+            entityFields += name
+        } else if (
+            isParsingFields &&
+            ln.isEmpty()
+        ) {
+            isParsingFields = false
+            d[entityId] = entityFields
         }
     }
 
