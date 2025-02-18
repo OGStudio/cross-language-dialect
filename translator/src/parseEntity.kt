@@ -38,7 +38,7 @@ fun parseEntityField(ln: String): Array<String> {
 // Extract entity field name from input line
 fun parseEntityFieldNames(lines: Array<String>): Map<Int, Array<String>> {
     var d = mutableMapOf<Int, Array<String>>()
-    var entityId = -1
+    var entityId = 0
     var entityFields = arrayOf<String>()
     var isParsingFields = false
     for (ln in lines) {
@@ -67,6 +67,7 @@ fun parseEntityFieldNames(lines: Array<String>): Map<Int, Array<String>> {
         }
     }
 
+    /**/println("parseEFN d: '$d'")
     return d
 }
 
