@@ -41,33 +41,34 @@ fun parseEntityFieldNames(lines: Array<String>): Map<Int, Array<String>> {
     var entityId = 0
     var entityFields = arrayOf<String>()
     var isParsingFields = false
+
     for (ln in lines) {
-        if (ln == SECTION_FIELDS) {
+        val isSectionMarker = (ln == SECTION_FIELDS)
+        val isField = isParsingFields && !parseEntityField(ln).isEmpty()
+        val isEntityEndMarker = isParsingFields && ln.isEmpty()
+        val isLastEntityEndMarker = isParsingFields && (ln == lines.last())
+
+        if (isSectionMarker) {
             isParsingFields = true
-        } else if (
-            isParsingFields &&
-            !parseEntityName(ln).isEmpty()
-        ) {
-            isParsingFields = false
-            entityId++
-            entityFields = arrayOf<String>()
-        } else if (
-            isParsingFields &&
-            !parseEntityField(ln).isEmpty()
-        ) {
+        }
+
+        if (isField) {
             val parts = parseEntityField(ln)
             val name = parts[0]
             entityFields += name
-        } else if (
-            isParsingFields &&
-            ln.isEmpty()
+        }
+
+        if (
+            isEntityEndMarker ||
+            isLastEntityEndMarker
         ) {
             isParsingFields = false
             d[entityId] = entityFields
+            entityId++
+            entityFields = arrayOf<String>()
         }
     }
 
-    /**/println("parseEFN d: '$d'")
     return d
 }
 
