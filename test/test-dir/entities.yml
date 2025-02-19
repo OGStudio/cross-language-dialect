@@ -17,7 +17,6 @@ Context:
         httpReply: String
         httpRequest: NetRequest
 
-# File system item representation
 FSFile:
     type: struct
     fields:
