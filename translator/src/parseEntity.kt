@@ -36,10 +36,10 @@ fun parseEntityField(ln: String): Array<String> {
 }
 
 // Extract entity field name from input line
-fun parseEntityFieldNames(lines: Array<String>): Map<Int, Array<String>> {
-    var d = mutableMapOf<Int, Array<String>>()
+fun parseEntityFields(lines: Array<String>): Map<Int, Map<String, String>> {
+    var d = mutableMapOf<Int, Map<String, String>>()
     var entityId = 0
-    var entityFields = arrayOf<String>()
+    var fields = mutableMapOf<String, String>()
     var isParsingFields = false
 
     for (ln in lines) {
@@ -55,7 +55,8 @@ fun parseEntityFieldNames(lines: Array<String>): Map<Int, Array<String>> {
         if (isField) {
             val parts = parseEntityField(ln)
             val name = parts[0]
-            entityFields += name
+            val type = parts[1]
+            fields[name] = type
         }
 
         if (
@@ -63,9 +64,9 @@ fun parseEntityFieldNames(lines: Array<String>): Map<Int, Array<String>> {
             isLastEntityEndMarker
         ) {
             isParsingFields = false
-            d[entityId] = entityFields
+            d[entityId] = fields
             entityId++
-            entityFields = arrayOf<String>()
+            fields = mutableMapOf<String, String>()
         }
     }
 

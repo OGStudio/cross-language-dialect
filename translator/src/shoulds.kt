@@ -15,14 +15,14 @@ fun shouldCollectEntityComments(c: Context): Context {
     return c
 }
 
-// Collect field names of the entities
+// Collect field names and values of the entities
 //
 // Conditions:
 // 1. Entity types are available
-fun shouldCollectEntityFieldNames(c: Context): Context {
+fun shouldCollectEntityFields(c: Context): Context {
     if (c.recentField == "entityTypes") {
-        c.entityFieldNames = parseEntityFieldNames(c.inputFileLines)
-        c.recentField = "entityFieldNames"
+        c.entityFields = parseEntityFields(c.inputFileLines)
+        c.recentField = "entityFields"
         return c
     }
 
@@ -63,9 +63,9 @@ fun shouldCollectEntityTypes(c: Context): Context {
 // Generate Kotlin version of the entities
 //
 // Conditions:
-// 1. Entity field names are available
+// 1. Entity fields are available
 fun shouldGenerateKotlinEntities(c: Context): Context {
-    if (c.recentField == "entityFieldNames") {
+    if (c.recentField == "entityFields") {
         c.outputFileContents = genKotlinEntitiesFile(
             c.entityComments,
             c.entityNames,
