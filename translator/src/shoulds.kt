@@ -21,7 +21,7 @@ fun shouldCollectEntityComments(c: Context): Context {
 // 1. Entity fields are available
 fun shouldCollectEntityFieldComments(c: Context): Context {
     if (c.recentField == "entityFields") {
-        c.entityFields = parseEntityFieldComments(c.inputFileLines)
+        c.entityFieldComments = parseEntityFieldComments(c.inputFileLines)
         c.recentField = "entityFieldComments"
         return c
     }

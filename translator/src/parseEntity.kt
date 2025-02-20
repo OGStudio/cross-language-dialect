@@ -66,6 +66,7 @@ fun parseEntityFieldComments(lines: Array<String>): Map<Int, Map<String, String>
             val parts = parseEntityField(ln)
             val name = parts[0]
             comments[name] = lastComment
+            lastComment = ""
         }
 
         if (
