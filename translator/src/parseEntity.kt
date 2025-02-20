@@ -35,6 +35,53 @@ fun parseEntityField(ln: String): Array<String> {
     return parts.toTypedArray()
 }
 
+// Extract entity field comments
+fun parseEntityFieldComments(lines: Array<String>): Map<Int, Map<String, String>> {
+    var d = mutableMapOf<Int, Map<String, String>>()
+    var entityId = 0
+    var comments = mutableMapOf<String, String>()
+    var isParsingFields = false
+    var lastComment = ""
+
+    for (ln in lines) {
+        val isSectionMarker = (ln == SECTION_FIELDS)
+        val isComment = isParsingFields && ln.startsWith(PREFIX_FIELD_COMMENT)
+        val isField = isParsingFields && !parseEntityField(ln).isEmpty()
+        val isEntityEndMarker = isParsingFields && ln.isEmpty()
+        val isLastEntityEndMarker = isParsingFields && (ln == lines.last())
+
+        if (isSectionMarker) {
+            isParsingFields = true
+        }
+
+        if (isComment) {
+            val prefixLen = PREFIX_FIELD_COMMENT.length
+            lastComment = ln.substring(prefixLen)
+        }
+
+        if (
+            isField &&
+            !lastComment.isEmpty()
+        ) {
+            val parts = parseEntityField(ln)
+            val name = parts[0]
+            comments[name] = lastComment
+        }
+
+        if (
+            isEntityEndMarker ||
+            isLastEntityEndMarker
+        ) {
+            isParsingFields = false
+            d[entityId] = comments
+            entityId++
+            comments = mutableMapOf<String, String>()
+        }
+    }
+
+    return d
+}
+
 // Extract entity field name from input line
 fun parseEntityFields(lines: Array<String>): Map<Int, Map<String, String>> {
     var d = mutableMapOf<Int, Map<String, String>>()
