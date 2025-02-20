@@ -6,6 +6,7 @@ kotlin: package org.opengamestudio
 Context:
     type: context
     fields:
+        # Command line arguments
         arguments: [String]
         consoleOutput: String
         defaultDir: String
@@ -29,5 +30,6 @@ NetRequest:
     type: struct
     fields:
         body: String
+        # GET, POST, etc.
         method: String
         path: String
