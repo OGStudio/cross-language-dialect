@@ -83,6 +83,8 @@ fun shouldGenerateKotlinEntities(c: Context): Context {
     if (c.recentField == "entityFieldComments") {
         c.outputFileContents = genKotlinEntitiesFile(
             c.entityComments,
+            c.entityFieldComments,
+            c.entityFields,
             c.entityNames,
             c.entityTypes
         )

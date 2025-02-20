@@ -5,8 +5,8 @@ fun parseEntityComments(lines: Array<String>): Map<Int, String> {
     var d = mutableMapOf<Int, String>()
     var entityId = 0
     for (ln in lines) {
-        if (ln.startsWith(PREFIX_COMMENT)) {
-            val prefixLen = PREFIX_COMMENT.length
+        if (ln.startsWith(PREFIX_ENTITY_COMMENT)) {
+            val prefixLen = PREFIX_ENTITY_COMMENT.length
             val comment = ln.substring(prefixLen)
             d[entityId] = comment 
         } else if (!parseEntityName(ln).isEmpty()) {
@@ -125,7 +125,7 @@ fun parseEntityFields(lines: Array<String>): Map<Int, Map<String, String>> {
 fun parseEntityName(ln: String): String {
     if (
         !ln.startsWith(" ") &&
-        !ln.startsWith(PREFIX_COMMENT) &&
+        !ln.startsWith(PREFIX_ENTITY_COMMENT) &&
         ln != "" &&
         ln.endsWith(POSTFIX_ENTITY) &&
         ln == ln.capitalize() // The first character is capitalized
