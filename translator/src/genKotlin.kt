@@ -17,9 +17,9 @@ fun genKotlinFields(
     val sortedFields = fields.toSortedMap()
     for (name in sortedFields.keys) {
         if (fieldComments.contains(name)) {
-            contents += PREFIX_KOTLIN_FIELD_COMMENT + fieldComments[name] ?: "invalid-comment" + "\n"
+            contents += "\n" + PREFIX_KOTLIN_FIELD_COMMENT + fieldComments[name] ?: "invalid-comment"
         }
-        contents += name + "\n"
+        contents += "\n" + name
     }
     return contents
 }
