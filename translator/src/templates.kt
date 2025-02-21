@@ -24,7 +24,7 @@ data class %NAME%(
 }
 """
 
-const val TEMPLATE_KOTLIN_FIELD = "    var %NAME%: %TYPE% = %DEFAULT,"
+const val TEMPLATE_KOTLIN_FIELD = "    var %NAME%: %TYPE% = %DEFAULT%,"
 
 const val TEMPLATE_KOTLIN_STRUCT = """
 %COMMENT%

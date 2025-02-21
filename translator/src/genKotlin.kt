@@ -8,38 +8,6 @@ fun genKotlinComment(comment: String): String {
     return ""
 }
 
-// Generate Kotlin field and its comment
-fun genKotlinField(
-    comment: String,
-    name: String,
-    type: String
-): String {
-    var contents = ""
-    if (!comment.isEmpty()) {
-        contents += PREFIX_KOTLIN_FIELD_COMMENT + comment + NEWLINE
-    }
-    contents += TEMPLATE_KOTLIN_FIELD
-        .replace("%NAME%", name)
-        .replace("%TYPE%", type)
-        //.replace("%DEFAULT%", default)
-    return contents + NEWLINE
-}
-
-// Generate Kotlin fields and their comments
-fun genKotlinFields(
-    fieldComments: Map<String, String>,
-    fields: Map<String, String>
-): String {
-    var contents = ""
-    val sortedFields = fields.toSortedMap()
-    for (name in sortedFields.keys) {
-        val comment = fieldComments[name] ?: ""
-        val type = sortedFields[name] ?: ""
-        contents += genKotlinField(comment, name, type)
-    }
-    return contents
-}
-
 // Generate Kotlin representation of all YAML entities in a single file
 fun genKotlinEntitiesFile(
     entityComments: Map<Int, String>,
@@ -83,4 +51,91 @@ fun genKotlinEntity(
         .replace("%NAME%", name)
         .replace("%COMMENT%", genComment)
         .replace("%FIELDS%", genFields)
+}
+
+// Generate Kotlin field and its comment
+fun genKotlinField(
+    comment: String,
+    name: String,
+    ymlType: String
+): String {
+    var contents = ""
+    if (!comment.isEmpty()) {
+        contents += PREFIX_KOTLIN_FIELD_COMMENT + comment + NEWLINE
+    }
+    val default = genKotlinFieldDefault(ymlType)
+    val type = genKotlinFieldType(ymlType)
+    contents += TEMPLATE_KOTLIN_FIELD
+        .replace("%NAME%", name)
+        .replace("%TYPE%", type)
+        .replace("%DEFAULT%", default)
+    return contents
+}
+
+// Construct type's default value string
+fun genKotlinFieldDefault(type: String): String {
+    // `Bool` -> `false`
+    if (type == "Bool") {
+        return "false"
+    }
+    // `Int` -> `0`
+    if (type == "Int") {
+        return "0"
+    }
+    // `String` -> `""`
+    if (type == "String") {
+        return "\"\""
+    }
+    // `[Type]` -> `arrayOf()`
+    if (
+        type.startsWith("[") &&
+        type.endsWith("]") &&
+        !type.contains(": ")
+    ) {
+        return "arrayOf()"
+    }
+
+    // `AnyOtherType` -> `AnyOtherType()`
+    return "$type()"
+}
+
+// Generate Kotlin fields and their comments
+fun genKotlinFields(
+    fieldComments: Map<String, String>,
+    fields: Map<String, String>
+): String {
+    var contents = ""
+    val sortedFields = fields.toSortedMap()
+    for (name in sortedFields.keys) {
+        // Add new line among fields
+        if (!contents.isEmpty()) {
+            contents += NEWLINE
+        }
+        val comment = fieldComments[name] ?: ""
+        val type = sortedFields[name] ?: ""
+        contents += genKotlinField(comment, name, type)
+    }
+    return contents
+}
+
+// Construct type string
+fun genKotlinFieldType(type: String): String {
+    // `Bool` -> `Boolean`
+    if (type == "Bool") {
+        return "Boolean"
+    }
+    // `[Type]` -> `Array<Type>`
+    if (
+        type.startsWith("[") &&
+        type.endsWith("]") &&
+        !type.contains(": ") // Exclude dictionary
+    ) {
+        val innerString = type.substring(1, type.length - 1)
+        // Recursive call to format inner string
+        val innerType = formatKotlinEntityFieldType(innerString)
+        return "Array<$innerType>"
+    }
+
+    // Return everything else as is
+    return type
 }
