@@ -8,6 +8,23 @@ fun genKotlinComment(comment: String): String {
     return ""
 }
 
+// Generate Kotlin field and its comment
+fun genKotlinField(
+    comment: String,
+    name: String,
+    type: String
+): String {
+    var contents = ""
+    if (!comment.isEmpty()) {
+        contents += PREFIX_KOTLIN_FIELD_COMMENT + comment + NEWLINE
+    }
+    contents += TEMPLATE_KOTLIN_FIELD
+        .replace("%NAME%", name)
+        .replace("%TYPE%", type)
+        //.replace("%DEFAULT%", default)
+    return contents + NEWLINE
+}
+
 // Generate Kotlin fields and their comments
 fun genKotlinFields(
     fieldComments: Map<String, String>,
@@ -16,10 +33,9 @@ fun genKotlinFields(
     var contents = ""
     val sortedFields = fields.toSortedMap()
     for (name in sortedFields.keys) {
-        if (fieldComments.contains(name)) {
-            contents += "\n" + PREFIX_KOTLIN_FIELD_COMMENT + fieldComments[name] ?: "invalid-comment"
-        }
-        contents += "\n" + name
+        val comment = fieldComments[name] ?: ""
+        val type = sortedFields[name] ?: ""
+        contents += genKotlinField(comment, name, type)
     }
     return contents
 }
