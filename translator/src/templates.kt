@@ -8,6 +8,7 @@ data class %NAME%(
 ): CLDContext {
     override fun <T> field(name: String): T {
 %GETTERS%
+        }
         return "unknown-field-name" as T
     }
 
@@ -22,6 +23,26 @@ data class %NAME%(
 %SETTERS%
     }
 }
+"""
+
+const val TEMPLATE_KOTLIN_CONTEXT_GETTER = """
+        } else if (name == "%NAME%") {
+            return %NAME% as T
+"""
+
+const val TEMPLATE_KOTLIN_CONTEXT_GETTER_FIRST = """
+        if (name == "%NAME%") {
+            return %NAME% as T
+"""
+
+const val TEMPLATE_KOTLIN_CONTEXT_SETTER = """
+        } else if (name == "%NAME%") {
+            %NAME% = value as %TYPE%
+"""
+
+const val TEMPLATE_KOTLIN_CONTEXT_SETTER_FIRST = """
+        if (name == "%NAME%") {
+            %NAME% = value as %TYPE%
 """
 
 const val TEMPLATE_KOTLIN_FIELD = "    var %NAME%: %TYPE% = %DEFAULT%,"
