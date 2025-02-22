@@ -19,7 +19,7 @@ data class %NAME%(
         name: String,
         value: Any?
     ) {
-%SETTERS%
+%SETTERS%        }
     }
 }
 """
