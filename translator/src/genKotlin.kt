@@ -39,7 +39,7 @@ fun genKotlinEntity(
     name: String,
     type: String
 ): String {
-    // Assume struct template by default.
+    // Use `struct` template by default
     var template = TEMPLATE_KOTLIN_STRUCT
     if (type == TYPE_CONTEXT) {
         template = TEMPLATE_KOTLIN_CONTEXT
@@ -47,10 +47,12 @@ fun genKotlinEntity(
 
     val genComment = genKotlinComment(comment)
     val genFields = genKotlinFields(fieldComments, fields)
+    val genGetters = genKotlinGetters(fields)
     return template
         .replace("%NAME%", name)
         .replace("%COMMENT%", genComment)
         .replace("%FIELDS%", genFields)
+        .replace("%GETTERS%", genGetters)
 }
 
 // Generate Kotlin field and its comment
@@ -139,3 +141,32 @@ fun genKotlinFieldType(type: String): String {
     // Return everything else as is
     return type
 }
+
+// Generate Kotlin Context getter
+fun genKotlinGetter(
+    isFirst: Boolean,
+    name: String
+): String {
+    // Use `GETTER` template by default
+    var template = TEMPLATE_KOTLIN_CONTEXT_GETTER
+    if (isFirst) {
+        template = TEMPLATE_KOTLIN_CONTEXT_GETTER_FIRST
+    }
+    var contents = ""
+    contents += template
+        .replace("%NAME%", name)
+    return contents
+}
+
+// Generate Kotlin Context getters
+fun genKotlinGetters(fields: Map<String, String>): String {
+    var contents = ""
+    var isFirst = true
+    val sortedFields = fields.toSortedMap()
+    for (name in sortedFields.keys) {
+        contents += genKotlinGetter(isFirst, name)
+        isFirst = false
+    }
+    return contents
+}
+
