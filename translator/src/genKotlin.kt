@@ -48,11 +48,13 @@ fun genKotlinEntity(
     val genComment = genKotlinComment(comment)
     val genFields = genKotlinFields(fieldComments, fields)
     val genGetters = genKotlinGetters(fields)
+    val genSetters = genKotlinSetters(fields)
     return template
         .replace("%NAME%", name)
         .replace("%COMMENT%", genComment)
         .replace("%FIELDS%", genFields)
         .replace("%GETTERS%", genGetters)
+        .replace("%SETTERS%", genSetters)
 }
 
 // Generate Kotlin field and its comment
@@ -170,3 +172,34 @@ fun genKotlinGetters(fields: Map<String, String>): String {
     return contents
 }
 
+// Generate Kotlin Context setter
+fun genKotlinSetter(
+    isFirst: Boolean,
+    name: String,
+    ymlType: String
+): String {
+    // Use `SETTER` template by default
+    var template = TEMPLATE_KOTLIN_CONTEXT_SETTER
+    if (isFirst) {
+        template = TEMPLATE_KOTLIN_CONTEXT_SETTER_FIRST
+    }
+    var contents = ""
+    val type = genKotlinFieldType(ymlType)
+    contents += template
+        .replace("%NAME%", name)
+        .replace("%TYPE%", type)
+    return contents
+}
+
+// Generate Kotlin Context setters
+fun genKotlinSetters(fields: Map<String, String>): String {
+    var contents = ""
+    var isFirst = true
+    val sortedFields = fields.toSortedMap()
+    for (name in sortedFields.keys) {
+        val type = sortedFields[name] ?: ""
+        contents += genKotlinSetter(isFirst, name, type)
+        isFirst = false
+    }
+    return contents
+}
