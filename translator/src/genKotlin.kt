@@ -14,9 +14,10 @@ fun genKotlinEntitiesFile(
     entityFieldComments: Map<Int, Map<String, String>>,
     entityFields: Map<Int, Map<String, String>>,
     entityNames: Array<String>,
-    entityTypes: Map<Int, String>
+    entityTypes: Map<Int, String>,
+    rawKotlin: String
 ): String {
-    var s = ""
+    var s = rawKotlin
     // Entity by id.
     var id = 0
     for (name in entityNames) {

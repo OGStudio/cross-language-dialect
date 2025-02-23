@@ -101,7 +101,8 @@ fun shouldGenerateKotlinEntities(c: Context): Context {
             c.entityFieldComments,
             c.entityFields,
             c.entityNames,
-            c.entityTypes
+            c.entityTypes,
+            c.rawKotlin
         )
         c.recentField = "outputFileContents"
         return c
