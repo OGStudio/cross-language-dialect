@@ -30,6 +30,8 @@ data class Context(
     var outputFile: String = "",
     // Contents to write to output file
     var outputFileContents: String = "",
+    // Raw Kotlin source code to insert as is at the beginning of the generated file
+    var rawKotlin: String = "",
     override var recentField: String = "",
 ): CLDContext {
     override fun <T> field(name: String): T {
@@ -61,6 +63,8 @@ data class Context(
             return outputFile as T
         } else if (name == "outputFileContents") {
             return outputFileContents as T
+        } else if (name == "rawKotlin") {
+            return rawKotlin as T
         }
         return "unknown-field-name" as T
     }
@@ -101,6 +105,8 @@ data class Context(
             outputFile = value as String
         } else if (name == "outputFileContents") {
             outputFileContents = value as String
+        } else if (name == "rawKotlin") {
+            rawKotlin = value as String
         }
     }
 }

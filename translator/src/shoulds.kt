@@ -75,6 +75,21 @@ fun shouldCollectEntityTypes(c: Context): Context {
     return c
 }
 
+// Collect raw Kotlin source code
+//
+// Conditions:
+// 1. Input file contents are available
+fun shouldCollectRawKotlin(c: Context): Context {
+    if (c.recentField == "inputFileLines") {
+        c.rawKotlin = parseRawKotlin(c.inputFileLines)
+        c.recentField = "rawKotlin"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Generate Kotlin version of the entities
 //
 // Conditions:

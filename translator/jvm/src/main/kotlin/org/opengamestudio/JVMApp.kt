@@ -13,6 +13,7 @@ fun main(args: Array<String>) {
         ::shouldCollectEntityFields,
         ::shouldCollectEntityNames,
         ::shouldCollectEntityTypes,
+        ::shouldCollectRawKotlin,
         ::shouldGenerateKotlinEntities,
         ::shouldParseInputFilePath,
         ::shouldPrintToConsole,

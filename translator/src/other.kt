@@ -51,3 +51,17 @@ fun dbgStringArray(items: Array<String>): String {
     output += "]"
     return output
 }
+
+// Collect raw Kotlin source code
+fun parseRawKotlin(lines: Array<String>): String {
+    var contents = ""
+    for (ln in lines) {
+        if (ln.startsWith(PREFIX_RAW_KOTLIN)) {
+            val prefixLen = PREFIX_RAW_KOTLIN.length
+            val kotlinCode = ln.substring(prefixLen)
+            contents += kotlinCode + NEWLINE
+        }
+    }
+
+    return contents
+}
