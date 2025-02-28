@@ -137,7 +137,7 @@ fun genKotlinFieldType(type: String): String {
     ) {
         val innerString = type.substring(1, type.length - 1)
         // Recursive call to format inner string
-        val innerType = formatKotlinEntityFieldType(innerString)
+        val innerType = genKotlinFieldType(innerString)
         return "Array<$innerType>"
     }
 
