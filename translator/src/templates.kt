@@ -48,8 +48,3 @@ data class %NAME%(
 %FIELDS%
 ) {}
 """
-
-// REMOVE: OBSOLETE
-const val FORMAT_KOTLIN_ENTITY_END = ") {}"
-const val FORMAT_KOTLIN_ENTITY_FIELD = "    var %NAME%: %TYPE% = %DEFAULT%,"
-const val FORMAT_KOTLIN_ENTITY_START = "data class %NAME%("
