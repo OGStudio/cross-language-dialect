@@ -6,6 +6,7 @@ kotlin: package org.opengamestudio
 Context:
     type: context
     fields:
+        # Command line arguments
         arguments: [String]
         consoleOutput: String
         defaultDir: String
@@ -17,7 +18,6 @@ Context:
         httpReply: String
         httpRequest: NetRequest
 
-# File system item representation
 FSFile:
     type: struct
     fields:
@@ -25,10 +25,11 @@ FSFile:
         isFile: Bool
         name: String
 
-# Client request representation
+# Network request representation
 NetRequest:
     type: struct
     fields:
         body: String
+        # GET, POST, etc.
         method: String
         path: String

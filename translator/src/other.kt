@@ -1,17 +1,13 @@
 package org.opengamestudio
 
-// Add field to entity
-fun entityAddField(
-    entities: MutableMap<String, MutableMap<String, String>>,
-    entityName: String,
-    fieldName: String,
-    fieldType: String
-) {
-    // Add first-level map if it's not yet present.
-    if (!entities.contains(entityName)) {
-        entities[entityName] = mutableMapOf<String, String>()
+// Detect the presence of debug command line argument
+fun cliDbg(args: Array<String>): Boolean {
+    for (arg in args) {
+        if (arg == ARGUMENT_DBG) {
+            return true
+        }
     }
-    entities[entityName]!![fieldName] = fieldType
+    return false
 }
 
 // Extract input file path from command line arguments
@@ -38,32 +34,34 @@ fun cliOutputFile(args: Array<String>): String {
     return ""
 }
 
-fun enumerateFields(fields: Map<String, String>): Array<String> {
-    var sortedKeys = arrayOf<String>()
-    fields?.keys?.forEach { key ->
-        sortedKeys += key
+// Convert string array to debug string
+fun dbgStringArray(items: Array<String>): String {
+    var output = "(${items.size})["
+    var i = 0
+    // Construct the preview.
+    for (str in items) {
+        output += str + ","
+        i += 1
+        // Interrupt the preview.
+        if (i > 2) {
+            output += "..."
+            break
+        }
     }
-    return sortedKeys
+    output += "]"
+    return output
 }
 
-// Detect target language based on output file extension
-fun fileExtTargetLang(outputFile: String): String {
-    if (outputFile.endsWith(".kt")) {
-        return LANGUAGE_KOTLIN
+// Collect raw Kotlin source code
+fun parseRawKotlin(lines: Array<String>): String {
+    var contents = ""
+    for (ln in lines) {
+        if (ln.startsWith(PREFIX_RAW_KOTLIN)) {
+            val prefixLen = PREFIX_RAW_KOTLIN.length
+            val kotlinCode = ln.substring(prefixLen)
+            contents += kotlinCode + NEWLINE
+        }
     }
 
-    return "unknown-language"
-}
-
-// Generate target language specific code for entity field
-fun formatEntityField(
-    lang: String,
-    name: String,
-    type: String
-): String {
-    if (lang == LANGUAGE_KOTLIN) {
-        return formatKotlinEntityField(name, type)
-    }
-
-    return "unknown-language field $name"
+    return contents
 }

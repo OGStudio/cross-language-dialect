@@ -1,10 +1,10 @@
 Cross-language dialect (**CLD**) is a set of tools and rules to write
 portable code for select programming languages at once.
 
-Kotlin subset is the source that can be translated to the subsets of the following
-languages:
+Context and Entities keep the state (data), they are described in YML and
+can be converted to:
 
-* Swift
+* Kotlin
 
 # Swift
 
@@ -34,7 +34,7 @@ $ `cd translator && ./gradlew jar`
 
 Parse entities' YML:
 
-$ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=../test/test-dir/entities.kt`
+$ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=../test/test-dir/entities.kt --dbg`
 
 # Current availability of functions
 

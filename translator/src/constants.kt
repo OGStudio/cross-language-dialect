@@ -1,41 +1,26 @@
 package org.opengamestudio
 
+const val ARGUMENT_DBG = "--dbg"
 const val ARGUMENT_FILE = "--file"
 const val ARGUMENT_OUT = "--out"
-const val FORMAT_KOTLIN_CONTEXT = """
-data class %NAME%(
-%FIELDS%
-    override var recentField: String = "",
-): CLDContext {
-    override fun <T> field(name: String): T {
-%GETTERS%
-        return "unknown-field-name" as T
-    }
-
-    override fun selfCopy(): CLDContext {
-        return this.copy()
-    }
-
-    override fun setField(
-        name: String,
-        value: Any?
-    ) {
-%SETTERS%
-    }
-}
-"""
-const val FORMAT_KOTLIN_STRUCT = """
-data class %NAME%(
-%FIELDS%
-) {}
-"""
+const val DBG_LEN = 50
+const val FIELD_DELIMITER = ": "
+const val FILE_EXTENSION_JAVASCRIPT = "js"
+const val FILE_EXTENSION_KOTLIN = "kt"
+const val FILE_EXTENSION_SWIFT = "swift"
+const val LANGUAGE_JAVASCRIPT = "JavaScript"
 const val LANGUAGE_KOTLIN = "Kotlin"
 const val LANGUAGE_SWIFT = "Swift"
-const val PREFIX_KOTLIN = "kotlin: "
-const val PREFIX_TYPE = "type: "
-const val SECTION_FIELDS = "fields:"
-
-// TODO: REMOVE, OBSOLETE
-const val FORMAT_KOTLIN_ENTITY_END = ") {}"
-const val FORMAT_KOTLIN_ENTITY_FIELD = "    var %NAME%: %TYPE% = %DEFAULT%,"
-const val FORMAT_KOTLIN_ENTITY_START = "data class %NAME%("
+const val NEWLINE = "\n"
+const val POSTFIX_ENTITY = ":"
+const val PREFIX_ENTITY_COMMENT = "# "
+const val PREFIX_FIELD = "        "
+const val PREFIX_FIELD_COMMENT = "        # "
+const val PREFIX_KOTLIN_ENTITY_COMMENT = "// "
+const val PREFIX_KOTLIN_FIELD_COMMENT = "    // "
+const val PREFIX_RAW_JAVASCRIPT = "javascript: "
+const val PREFIX_RAW_KOTLIN = "kotlin: "
+const val PREFIX_RAW_SWIFT = "swift: "
+const val PREFIX_TYPE = "    type: "
+const val SECTION_FIELDS = "    fields:"
+const val TYPE_CONTEXT = "context"
