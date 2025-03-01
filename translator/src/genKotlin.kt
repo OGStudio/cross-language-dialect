@@ -157,8 +157,8 @@ fun genKotlinFieldType(type: String): String {
         val innerString = type.substring(1, type.length - 1)
         val parts = innerString.split(DICTIONARY_DELIMITER)
         // Recursive calls to format types
-        val innerTypeA = genKotlinFieldType(parts.first!!)
-        val innerTypeB = genKotlinFieldType(parts.last!!)
+        val innerTypeA = genKotlinFieldType(parts.first()!!)
+        val innerTypeB = genKotlinFieldType(parts.last()!!)
         return "Map<$innerTypeA, $innerTypeB>"
     }
 
