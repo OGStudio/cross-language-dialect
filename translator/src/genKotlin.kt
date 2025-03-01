@@ -95,9 +95,17 @@ fun genKotlinFieldDefault(type: String): String {
     if (
         type.startsWith("[") &&
         type.endsWith("]") &&
-        !type.contains(": ")
+        !type.contains(DICTIONARY_DELIMITER)
     ) {
         return "arrayOf()"
+    }
+    // `[TypeA: TypeB]` -> `mapOf()`
+    if (
+        type.startsWith("[") &&
+        type.endsWith("]") &&
+        type.contains(DICTIONARY_DELIMITER)
+    ) {
+        return "mapOf()"
     }
 
     // `AnyOtherType` -> `AnyOtherType()`
@@ -133,12 +141,25 @@ fun genKotlinFieldType(type: String): String {
     if (
         type.startsWith("[") &&
         type.endsWith("]") &&
-        !type.contains(": ") // Exclude dictionary
+        !type.contains(DICTIONARY_DELIMITER) // Exclude dictionary
     ) {
         val innerString = type.substring(1, type.length - 1)
         // Recursive call to format inner string
         val innerType = genKotlinFieldType(innerString)
         return "Array<$innerType>"
+    }
+    // `[TypeA: TypeB]` -> `Map<TypeA, TypeB>`
+    if (
+        type.startsWith("[") &&
+        type.endsWith("]") &&
+        type.contains(DICTIONARY_DELIMITER)
+    ) {
+        val innerString = type.substring(1, type.length - 1)
+        val parts = innerString.split(DICTIONARY_DELIMITER)
+        // Recursive calls to format types
+        val innerTypeA = genKotlinFieldType(parts.first!!)
+        val innerTypeB = genKotlinFieldType(parts.last!!)
+        return "Map<$innerTypeA, $innerTypeB>"
     }
 
     // Return everything else as is
