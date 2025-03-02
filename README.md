@@ -40,10 +40,10 @@ $ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=..
 
 ## Generation of entities
 
-| № | Type    | Kotlin |
-|---|---      |---     |
-| 1 | struct  | √      |
-| 2 | context | X      |
+| № | Type    | Kotlin | Swift |
+|---|---      |---     |---    |
+| 1 | struct  | √      | X     |
+| 2 | context | √      | X     |
 
 ## Generation of entity fields for Kotlin
 
@@ -52,3 +52,4 @@ $ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=..
 | 1 | `Bool`   | `Boolean`   | `false`       | `didLaunch: Bool` | `var didLaunch: Boolean = false` |
 | 2 | `String` | `String`    | `""`          | `method: String`  | `var method: String = ""` |
 | 3 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
+| 4 | `[TypeA: TypeB]` | `Map<TypeA, TypeB>` | `mapOf()` | `templates: [String: String]` | `var templates: Map<String, String> = mapOf()` |
