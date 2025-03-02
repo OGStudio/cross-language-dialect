@@ -155,7 +155,7 @@ fun genKotlinFieldType(type: String): String {
         type.contains(DICTIONARY_DELIMITER)
     ) {
         val innerString = type.substring(1, type.length - 1)
-        /**/println("ИГР genKFT-00 type: '$type'")
+        /**/println("ИГР genKFT-00 innerS: '$innerString'")
         val parts = innerString.split(DICTIONARY_DELIMITER)
         /**/println("ИГР genKFT-01 parts-1/2: '${parts.first()}'/'${parts.last()}'")
         // Recursive calls to format types
