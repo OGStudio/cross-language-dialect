@@ -9,13 +9,10 @@ Context:
         # Command line arguments
         arguments: [String]
         consoleOutput: String
-        defaultDir: String
         didLaunch: Bool
-        dir: String
+        # Dictionary of dictionaries
+        entityFieldComments: [Int: [String: String]]
         httpDefaultPort: Int
-        httpLaunch: Bool
-        httpPort: Int
-        httpReply: String
         httpRequest: NetRequest
 
 FSFile:
