@@ -4,4 +4,4 @@
 DIR=$(cd "$(dirname "$0")" ; pwd -P)
 # Relative path to Cross-language dialect's translator
 TR=$DIR/../translator
-$TR/run/run-java --file=$DIR/entities.yml --out=$DIR/../src/entities.kt
+$TR/run/run-java --file=$DIR/entities.yml --out=$TR/src/entities.kt

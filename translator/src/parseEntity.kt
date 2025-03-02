@@ -26,7 +26,6 @@ fun parseEntityField(ln: String): Array<String> {
     }
     val prefixLen = PREFIX_FIELD.length
     val nameAndValue = ln.substring(prefixLen)
-    /**/println("DDBG parseEF ln/nameAV: '$ln'/'$nameAndValue'")
     val parts = nameAndValue.split(FIELD_DELIMITER, limit = 2)
     if (parts.size != 2) {
         return arrayOf<String>()

@@ -1,3 +1,7 @@
+version: 1
+
+kotlin: package org.opengamestudio
+
 Context:
     type: context
     fields:
