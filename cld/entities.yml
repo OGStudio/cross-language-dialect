@@ -1,0 +1,25 @@
+Context:
+    type: context
+    fields:
+        # Command line arguments
+        arguments: [String]
+        consoleOutput: String
+        didLaunch: Bool
+        # Entity comments with entities referenced by index
+        entityComments: [Int: String]
+        # Entity id -> Field name -> Field comment
+        entityFieldComments: [Int: [String: String]]
+        # Entity id -> Field name -> Field type
+        entityFields: [Int: [String: String]]
+        # Entity names in the order of appearance
+        entityNames: [String]
+        entityTypes: [Int: String]
+        didWriteOutputFile: Bool
+        inputFile: String
+        inputFileLines: [String]
+        isDbg: Bool
+        outputFile: String
+        # Contents to write to output file
+        outputFileContents: String
+        # Kotlin source code to insert as is at the beginning of each generated file
+        rawKotlin: String
