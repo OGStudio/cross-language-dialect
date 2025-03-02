@@ -10,9 +10,9 @@ data class Context(
     // Entity comments with entities referenced by index
     var entityComments: Map<Int, String> = mapOf(),
     // Entity id -> Field name -> Field comment
-    var entityFieldComments: Map<Int, String]> = mapOf(),
+    var entityFieldComments: Map<Int, Map<String, String>> = mapOf(),
     // Entity id -> Field name -> Field type
-    var entityFields: Map<Int, String]> = mapOf(),
+    var entityFields: Map<Int, Map<String, String>> = mapOf(),
     // Entity names in the order of appearance
     var entityNames: Array<String> = arrayOf(),
     var entityTypes: Map<Int, String> = mapOf(),
@@ -80,9 +80,9 @@ data class Context(
         } else if (name == "entityComments") {
             entityComments = value as Map<Int, String>
         } else if (name == "entityFieldComments") {
-            entityFieldComments = value as Map<Int, String]>
+            entityFieldComments = value as Map<Int, Map<String, String>>
         } else if (name == "entityFields") {
-            entityFields = value as Map<Int, String]>
+            entityFields = value as Map<Int, Map<String, String>>
         } else if (name == "entityNames") {
             entityNames = value as Array<String>
         } else if (name == "entityTypes") {
