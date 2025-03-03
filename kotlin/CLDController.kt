@@ -1,8 +1,8 @@
 /**
  * This file is part of Cross-language dialect:
  *     https://github.com/OGStudio/cross-language-dialect
- * License: MIT
- * Version: 1.0.0
+ * License: CC0
+ * Version: 1.0.1
  */
 
 package org.opengamestudio

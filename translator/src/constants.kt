@@ -1,5 +1,13 @@
+/**
+ * This file is part of Cross-language dialect:
+ *     https://github.com/OGStudio/cross-language-dialect
+ * License: CC0
+ * Version: 1.0.1
+ */
+
 package org.opengamestudio
 
+const val APP_VERSION = "1.0.1"
 const val ARGUMENT_DBG = "--dbg"
 const val ARGUMENT_FILE = "--file"
 const val ARGUMENT_OUT = "--out"
