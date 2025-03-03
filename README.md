@@ -40,10 +40,10 @@ $ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=..
 
 ## Generation of entities
 
-| № | Type    | Kotlin | Swift |
-|---|---      |---     |---    |
-| 1 | struct  | √      | X     |
-| 2 | context | √      | X     |
+| № | Type    | JavaScript | Kotlin | Swift |
+|---|---      |---         |---     |---    |
+| 1 | struct  | X          | √      | X     |
+| 2 | context | X          | √      | X     |
 
 ## Generation of entity fields for Kotlin
 
