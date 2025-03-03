@@ -1,3 +1,10 @@
+/**
+ * This file is part of Cross-language dialect:
+ *     https://github.com/OGStudio/cross-language-dialect
+ * License: CC0
+ * Version: 1.0.1
+ */
+
 package org.opengamestudio
 
 // Collect comments of entities
@@ -26,12 +33,10 @@ fun parseEntityField(ln: String): Array<String> {
     }
     val prefixLen = PREFIX_FIELD.length
     val nameAndValue = ln.substring(prefixLen)
-    val parts = nameAndValue.split(FIELD_DELIMITER)
-    // Verify format
+    val parts = nameAndValue.split(FIELD_DELIMITER, limit = 2)
     if (parts.size != 2) {
         return arrayOf<String>()
     }
-
     return parts.toTypedArray()
 }
 

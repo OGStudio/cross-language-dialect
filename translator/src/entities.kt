@@ -1,36 +1,28 @@
 package org.opengamestudio
 
-// Application state
+
 data class Context(
     // Command line arguments
     var arguments: Array<String> = arrayOf(),
-    // String to print to console
     var consoleOutput: String = "",
-    // The application did finish launching
     var didLaunch: Boolean = false,
+    var didWriteOutputFile: Boolean = false,
     // Entity comments with entities referenced by index
     var entityComments: Map<Int, String> = mapOf(),
     // Entity id -> Field name -> Field comment
     var entityFieldComments: Map<Int, Map<String, String>> = mapOf(),
     // Entity id -> Field name -> Field type
     var entityFields: Map<Int, Map<String, String>> = mapOf(),
-    // Names of entities in the order of appearance
+    // Entity names in the order of appearance
     var entityNames: Array<String> = arrayOf(),
-    // Entity types with entities referenced by index
     var entityTypes: Map<Int, String> = mapOf(),
-    // Finished writing to output file
-    var didWriteOutputFile: Boolean = false,
-    // Path to input file
     var inputFile: String = "",
-    // Input file contents as lines
     var inputFileLines: Array<String> = arrayOf(),
-    // Debug output state
     var isDbg: Boolean = false,
-    // Path to output file
     var outputFile: String = "",
     // Contents to write to output file
     var outputFileContents: String = "",
-    // Raw Kotlin source code to insert as is at the beginning of the generated file
+    // Kotlin source code to insert as is at the beginning of each generated file
     var rawKotlin: String = "",
     override var recentField: String = "",
 ): CLDContext {
