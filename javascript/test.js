@@ -38,3 +38,9 @@ function ExampleContext() {
     };
 }
 
+/// Validate field access by name
+function t01_ExampleContext_field() {
+    var c = new ExampleContext();
+    c.host = "abc";
+    return c.host == c.field("host");
+}
