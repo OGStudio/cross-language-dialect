@@ -70,7 +70,7 @@ function CLDController(context) {
     };
 
     this.set = function(fieldName, value) {
-        let c - this.context.selfCopy();
+        let c = this.context.selfCopy();
         c.setField(fieldName, value);
         c.recentField = fieldName;
         this.queue.push(c);
