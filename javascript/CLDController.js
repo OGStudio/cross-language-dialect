@@ -46,36 +46,34 @@ function CLDController(context) {
         this.isProcessingQueue = false;
     };
 
-    fun registerCallback(cb: (c: CLDContext) -> Unit) {
-        callbacks.add(cb)
-    }
- 
-    fun registerFieldCallback(
-        fieldName: String,
-        cb: (CLDContext) -> Unit
-    ) {
-        callbacks.add({ c ->
+    this.registerCallback = function(cb) {
+        this.callbacks.push(cb);
+    };
+
+    this.registerFieldCallback = function(fieldName, cb) {
+        this.callbacks.push((c) => {
             if (c.recentField == fieldName) {
-                cb(c)
+                cb(c);
             }
-        })
-    }
- 
-    fun registerFunction(f: (CLDContext) -> CLDContext) {
-        functions.add(f)
-    }
- 
-    fun reportContext() {
-        for (cb in callbacks) {
-            cb(context)
+        });
+    };
+
+    this.registerFunction = function(f) {
+        this.functions.push(f);
+    };
+
+    this.reportContext = function() {
+        for (let i in this.callbacks) {
+            let cb = this.callbacks[i];
+            cb(this.context);
         }
-    }
- 
-    fun set(fieldName: String, value: Any) {
-        var c = context.selfCopy()
-        c.setField(fieldName, value)
-        c.recentField = fieldName
-        queue.add(c)
-        processQueue()
-    }
+    };
+
+    this.set = function(fieldName, value) {
+        let c - this.context.selfCopy();
+        c.setField(fieldName, value);
+        c.recentField = fieldName;
+        this.queue.push(c);
+        this.processQueue();
+    };
 }
