@@ -6,10 +6,8 @@ let tests = [
     t02_ExampleContext_setField,
     t03_CLDController_executeFunctions_set,
     t04_CLDController_processQueue,
-    /*
-    t07_CLDController_registerFieldCallback_match,
-    t08_CLDController_registerFieldCallback_mismatch,
-    */
+    t05_CLDController_registerFieldCallback_match,
+    t06_CLDController_registerFieldCallback_mismatch,
 ];
 
 var okCount = 0;

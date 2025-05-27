@@ -95,3 +95,36 @@ function t04_CLDController_processQueue() {
     return c.didLaunch == true;
 }
 
+/// Validate `registerFieldCallback()` if an expected field was changed
+function t05_CLDController_registerFieldCallback_match() {
+    var ec = new ExampleContext();
+    ec.host = "123";
+    ec.recentField = "host";
+    var callbackHost = "";
+
+    let ctrl = new CLDController(ec);
+    ctrl.registerFieldCallback("host", (c) => {
+        callbackHost = c.host;
+    });
+    ctrl.reportContext();
+
+    let c = ctrl.context;
+    return c.host == callbackHost;
+}
+
+/// Validate `registerFieldCallback()` if an unexpected field was changed, i.e.,
+/// callback should not be called
+function t06_CLDController_registerFieldCallback_mismatch() {
+    var ec = new ExampleContext();
+    ec.host = "123";
+    ec.recentField = "host";
+    var callbackHost = "";
+
+    let ctrl = new CLDController(ec);
+    ctrl.registerFieldCallback("didLaunch", (c) => {
+        callbackHost = c.host;
+    });
+    ctrl.reportContext();
+
+    return callbackHost == "";
+}
