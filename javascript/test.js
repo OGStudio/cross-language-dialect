@@ -1,15 +1,16 @@
 
-/// Sample Context used for testing
-class ExampleContext {
-    constructor() {
+/// Sample Context for testing
+function ExampleContext() {
+    this._construct = function() {
         this.didLaunch = false;
         this.host = "";
-        // NOTE: JavaScript has no optionals, that's why `sometimes` field is missing.
+        // NOTE: JavaScript has no optionals, that's why `sometimes` field is absent
 
         this.recentField = "";
-    }
+    };
+    this._construct();
 
-    field(name) {
+    this.field = function(name) {
         if (name == "didLaunch") {
             return this.didLaunch;
         } else if (name == "host") {
@@ -19,18 +20,20 @@ class ExampleContext {
         return "unknown-field-name";
     };
 
-    selfCopy() {
-        let that = structuredClone(this);
+    this.selfCopy = function() {
+        let that = new ExampleContext();
+        that.didLaunch = this.didLaunch;
+        that.host = this.host;
         return that;
-    }
+    };
 
-    setField(name, value) {
+    this.setField = function(name, value) {
         if (name == "didLaunch") {
             this.didLaunch = value;
         } else if (name == "host") {
             this.host = value;
         }
-    }
+    };
 }
 
 /// Sample function for processing context change
@@ -73,8 +76,10 @@ function t03_CLDController_executeFunctions_set() {
     ctrl.registerFunction(hostToDidLaunch);
 
     // Apply `host` value.
+    /**/console.log("ИГР t03-01");
     ctrl.executeFunctions();
     // Apply `didLaunch` value.
+    /**/console.log("ИГР t03-02");
     ctrl.executeFunctions();
 
     let c = ctrl.context;
