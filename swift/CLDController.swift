@@ -10,7 +10,6 @@ public class CLDController {
     }
 
     func executeFunctions() {
-        /**/print("ИГР executeF-01 queue.count:", queue.count);
         let c = queue.removeFirst()
         context.recentField = c.recentField
         context.setField(c.recentField, c.fieldAny(c.recentField))
