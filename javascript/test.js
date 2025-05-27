@@ -85,3 +85,13 @@ function t03_CLDController_executeFunctions_set() {
     return c.host == "123" &&
         c.didLaunch == true;
 }
+
+/// Validate `processQueue()`
+function t04_CLDController_processQueue() {
+    let ctrl = new CLDController(new ExampleContext());
+    ctrl.registerFunction(hostToDidLaunch);
+    ctrl.set("host", "123");
+    let c = ctrl.context;
+    return c.didLaunch == true;
+}
+

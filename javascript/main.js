@@ -5,8 +5,8 @@ let tests = [
     t01_ExampleContext_field,
     t02_ExampleContext_setField,
     t03_CLDController_executeFunctions_set,
+    t04_CLDController_processQueue,
     /*
-    t06_CLDController_processQueue,
     t07_CLDController_registerFieldCallback_match,
     t08_CLDController_registerFieldCallback_mismatch,
     */
