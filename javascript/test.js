@@ -24,6 +24,7 @@ function ExampleContext() {
         let that = new ExampleContext();
         that.didLaunch = this.didLaunch;
         that.host = this.host;
+        that.recentField = this.recentField;
         return that;
     };
 
@@ -76,10 +77,8 @@ function t03_CLDController_executeFunctions_set() {
     ctrl.registerFunction(hostToDidLaunch);
 
     // Apply `host` value.
-    /**/console.log("ИГР t03-01");
     ctrl.executeFunctions();
     // Apply `didLaunch` value.
-    /**/console.log("ИГР t03-02");
     ctrl.executeFunctions();
 
     let c = ctrl.context;

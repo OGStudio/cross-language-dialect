@@ -16,7 +16,6 @@ function CLDController(context) {
     this._construct();
  
     this.executeFunctions = function() {
-        /**/console.log("ИГР executeF-01 this.queue.length:", this.queue.length);
         let c = this.queue.shift();
         this.context.recentField = c.recentField;
         this.context.setField(c.recentField, c.field(c.recentField));

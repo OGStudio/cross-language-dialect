@@ -98,10 +98,8 @@ func t05_CLDController_executeFunctions_set() -> Bool {
     }
 
     // Apply `host` value.
-    /**/print("ИГР t05-01")
     ctrl.executeFunctions()
     // Apply `didLaunch` value.
-    /**/print("ИГР t05-02")
     ctrl.executeFunctions()
 
     let c = ctrl.context as! ExampleContext
