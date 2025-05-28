@@ -6,6 +6,10 @@ can be converted to:
 
 * Kotlin
 
+# JavaScript
+
+Run tests in a web browser by opening `./javascript/do-test.html`
+
 # Swift
 
 Build tests on macOS:
