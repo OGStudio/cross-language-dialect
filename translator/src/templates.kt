@@ -9,6 +9,7 @@ package org.opengamestudio
 
 const val TEMPLATE_KOTLIN_CONTEXT = """
 %COMMENT%
+%PREFIX%
 data class %NAME%(
 %FIELDS%
     override var recentField: String = "",
@@ -51,6 +52,7 @@ const val TEMPLATE_KOTLIN_FIELD = "    var %NAME%: %TYPE% = %DEFAULT%,"
 
 const val TEMPLATE_KOTLIN_STRUCT = """
 %COMMENT%
+%PREFIX%
 data class %NAME%(
 %FIELDS%
 ) {}

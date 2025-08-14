@@ -15,6 +15,7 @@ data class Context(
     var entityFields: Map<Int, Map<String, String>> = mapOf(),
     // Entity names in the order of appearance
     var entityNames: Array<String> = arrayOf(),
+    var entityPrefixesKotlin: Map<Int, String> = mapOf(),
     var entityTypes: Map<Int, String> = mapOf(),
     var inputFile: String = "",
     var inputFileLines: Array<String> = arrayOf(),
@@ -43,6 +44,8 @@ data class Context(
             return entityFields as T
         } else if (name == "entityNames") {
             return entityNames as T
+        } else if (name == "entityPrefixesKotlin") {
+            return entityPrefixesKotlin as T
         } else if (name == "entityTypes") {
             return entityTypes as T
         } else if (name == "inputFile") {
@@ -85,6 +88,8 @@ data class Context(
             entityFields = value as Map<Int, Map<String, String>>
         } else if (name == "entityNames") {
             entityNames = value as Array<String>
+        } else if (name == "entityPrefixesKotlin") {
+            entityPrefixesKotlin = value as Map<Int, String>
         } else if (name == "entityTypes") {
             entityTypes = value as Map<Int, String>
         } else if (name == "inputFile") {

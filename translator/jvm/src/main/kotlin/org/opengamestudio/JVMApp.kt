@@ -12,6 +12,7 @@ fun main(args: Array<String>) {
         ::shouldCollectEntityFieldComments,
         ::shouldCollectEntityFields,
         ::shouldCollectEntityNames,
+        ::shouldCollectEntityPrefixesKotlin,
         ::shouldCollectEntityTypes,
         ::shouldCollectRawKotlin,
         ::shouldGenerateKotlinEntities,

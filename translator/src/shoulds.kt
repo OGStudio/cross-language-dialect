@@ -67,6 +67,25 @@ fun shouldCollectEntityNames(c: Context): Context {
     return c
 }
 
+// Collect prefixes of the entities for Kotlin
+//
+// Conditions:
+// 1. Entity comments are available
+fun shouldCollectEntityPrefixesKotlin(c: Context): Context {
+    if (c.recentField == "entityComments") {
+        c.entityPrefixesKotlin =
+            parseEntityPrefixes(
+              c.inputFileLines,
+              PREFIX_PREFIX_KOTLIN
+            )
+        c.recentField = "entityPrefixesKotlin"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
 // Collect types of the entities
 //
 // Conditions:
@@ -108,6 +127,7 @@ fun shouldGenerateKotlinEntities(c: Context): Context {
             c.entityFieldComments,
             c.entityFields,
             c.entityNames,
+            c.entityPrefixesKotlin,
             c.entityTypes,
             c.rawKotlin
         )
