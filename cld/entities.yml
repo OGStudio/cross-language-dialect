@@ -17,6 +17,7 @@ Context:
         entityFields: [Int: [String: String]]
         # Entity names in the order of appearance
         entityNames: [String]
+        entityPrefixesKotlin: [Int: String]
         entityTypes: [Int: String]
         didWriteOutputFile: Bool
         inputFile: String

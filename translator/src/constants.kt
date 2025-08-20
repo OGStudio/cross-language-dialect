@@ -2,7 +2,7 @@
  * This file is part of Cross-language dialect:
  *     https://github.com/OGStudio/cross-language-dialect
  * License: CC0
- * Version: 1.0.1
+ * Version: 1.1.0
  */
 
 package org.opengamestudio
@@ -27,6 +27,7 @@ const val PREFIX_FIELD = "        "
 const val PREFIX_FIELD_COMMENT = "        # "
 const val PREFIX_KOTLIN_ENTITY_COMMENT = "// "
 const val PREFIX_KOTLIN_FIELD_COMMENT = "    // "
+const val PREFIX_PREFIX_KOTLIN = "    prefix-kotlin: "
 const val PREFIX_RAW_JAVASCRIPT = "javascript: "
 const val PREFIX_RAW_KOTLIN = "kotlin: "
 const val PREFIX_RAW_SWIFT = "swift: "

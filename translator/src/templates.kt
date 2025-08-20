@@ -2,13 +2,14 @@
  * This file is part of Cross-language dialect:
  *     https://github.com/OGStudio/cross-language-dialect
  * License: CC0
- * Version: 1.0.1
+ * Version: 1.1.0
  */
 
 package org.opengamestudio
 
 const val TEMPLATE_KOTLIN_CONTEXT = """
 %COMMENT%
+%PREFIX%
 data class %NAME%(
 %FIELDS%
     override var recentField: String = "",
@@ -51,6 +52,7 @@ const val TEMPLATE_KOTLIN_FIELD = "    var %NAME%: %TYPE% = %DEFAULT%,"
 
 const val TEMPLATE_KOTLIN_STRUCT = """
 %COMMENT%
+%PREFIX%
 data class %NAME%(
 %FIELDS%
 ) {}

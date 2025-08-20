@@ -2,7 +2,7 @@
  * This file is part of Cross-language dialect:
  *     https://github.com/OGStudio/cross-language-dialect
  * License: CC0
- * Version: 1.0.1
+ * Version: 1.1.0
  */
 
 package org.opengamestudio
@@ -151,6 +151,26 @@ fun parseEntityNames(lines: Array<String>): Array<String> {
     }
 
     return items
+}
+
+// Collect prefixes for entities
+fun parseEntityPrefixes(
+    lines: Array<String>,
+    pre: String
+): Map<Int, String> {
+    var d = mutableMapOf<Int, String>()
+    var entityId = -1
+    for (ln in lines) {
+        if (ln.startsWith(pre)) {
+            val prefixLen = pre.length
+            val value = ln.substring(prefixLen)
+            d[entityId] = value
+        } else if (!parseEntityName(ln).isEmpty()) {
+            entityId++
+        }
+    }
+
+    return d
 }
 
 // Collect types of entities

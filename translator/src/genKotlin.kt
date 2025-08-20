@@ -2,7 +2,7 @@
  * This file is part of Cross-language dialect:
  *     https://github.com/OGStudio/cross-language-dialect
  * License: CC0
- * Version: 1.0.1
+ * Version: 1.1.0
  */
 
 package org.opengamestudio
@@ -21,6 +21,7 @@ fun genKotlinEntitiesFile(
     entityFieldComments: Map<Int, Map<String, String>>,
     entityFields: Map<Int, Map<String, String>>,
     entityNames: Array<String>,
+    entityPrefixes: Map<Int, String>,
     entityTypes: Map<Int, String>,
     rawKotlin: String
 ): String {
@@ -29,10 +30,11 @@ fun genKotlinEntitiesFile(
     var id = 0
     for (name in entityNames) {
         val comment = entityComments[id] ?: ""
+        val prefix = entityPrefixes[id] ?: ""
         val type = entityTypes[id] ?: ""
         val fieldComments = entityFieldComments[id] ?: mapOf<String, String>()
         val fields = entityFields[id] ?: mapOf<String, String>()
-        s += genKotlinEntity(comment, fieldComments, fields, name, type)
+        s += genKotlinEntity(comment, fieldComments, fields, name, prefix, type)
         id++
     }
 
@@ -45,6 +47,7 @@ fun genKotlinEntity(
     fieldComments: Map<String, String>,
     fields: Map<String, String>,
     name: String,
+    prefix: String,
     type: String
 ): String {
     // Use `struct` template by default
@@ -62,6 +65,7 @@ fun genKotlinEntity(
         .replace("%COMMENT%", genComment)
         .replace("%FIELDS%", genFields)
         .replace("%GETTERS%", genGetters)
+        .replace("%PREFIX%", prefix)
         .replace("%SETTERS%", genSetters)
 }
 
