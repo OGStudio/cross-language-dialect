@@ -62,4 +62,4 @@ $ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=..
 
 Updating the version in all files:
 
-$ `./util/set-vesion 1.0.1 1.1.0`
+$ `./util/update-vesion 1.0.1 1.1.0`
