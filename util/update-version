@@ -1,0 +1,11 @@
+#!/bin/bash
+
+WAS="Version: $1"
+NOW="Version: $2"
+
+FILES=$(grep -lR "$WAS" .)
+
+for file in $FILES; do
+    echo $file
+    sed -i'' s/$WAS/$NOW/g
+done
