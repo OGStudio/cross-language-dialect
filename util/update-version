@@ -7,6 +7,6 @@ FILES=$(grep -lR "$WAS" .)
 
 for file in $FILES; do
     echo $file
-    sed -i.bak 's/$WAS/$NOW/g' $file
+    sed -i '' 's/$WAS/$NOW/g' $file
     #rm $file.bak
 done
