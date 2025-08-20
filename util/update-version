@@ -6,7 +6,6 @@ NOW="Version: $2"
 FILES=$(grep -lR "$WAS" .)
 
 for file in $FILES; do
-    echo $file
-    echo "sed -i '' 's/$WAS/$NOW/g' $file"
-    sed -e -i '' 's/$WAS/$NOW/g' $file
+    cmd="sed -i '' 's/$WAS/$NOW/g' $file"
+    eval "$cmd"
 done
