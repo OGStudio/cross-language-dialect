@@ -57,3 +57,9 @@ $ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=..
 | 2 | `String` | `String`    | `""`          | `method: String`  | `var method: String = ""` |
 | 3 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
 | 4 | `[TypeA: TypeB]` | `Map<TypeA, TypeB>` | `mapOf()` | `templates: [String: String]` | `var templates: Map<String, String> = mapOf()` |
+
+# Utilities
+
+Updating the version in all files:
+
+$ `./util/set-vesion 1.0.1 1.1.0`
