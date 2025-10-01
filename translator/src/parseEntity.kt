@@ -96,12 +96,14 @@ fun parseEntityFields(lines: Array<String>): Map<Int, Map<String, String>> {
     var isParsingFields = false
 
     for (ln in lines) {
+        println("ИГР parseEF-01 ln: '$ln'")
         val isSectionMarker = (ln == SECTION_FIELDS)
         val isField = isParsingFields && !parseEntityField(ln).isEmpty()
         val isEntityEndMarker = isParsingFields && ln.isEmpty()
         val isLastEntityEndMarker = isParsingFields && (ln == lines.last())
 
         if (isSectionMarker) {
+            println("ИГР parseEF-02 isPF: 'true'")
             isParsingFields = true
         }
 
@@ -116,6 +118,7 @@ fun parseEntityFields(lines: Array<String>): Map<Int, Map<String, String>> {
             isEntityEndMarker ||
             isLastEntityEndMarker
         ) {
+            println("ИГР parseEF-02 isEEM/isLEEM: '$isEntityEndMarker'/'$isLastEntityEndMarker'")
             isParsingFields = false
             d[entityId] = fields
             entityId++
