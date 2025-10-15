@@ -2,7 +2,7 @@
  * This file is part of Cross-language dialect:
  *     https://github.com/OGStudio/cross-language-dialect
  * License: CC0
- * Version: 1.1.0
+ * Version: 1.1.1
  */
 
 package org.opengamestudio
@@ -95,11 +95,11 @@ fun parseEntityFields(lines: Array<String>): Map<Int, Map<String, String>> {
     var fields = mutableMapOf<String, String>()
     var isParsingFields = false
 
-    for (ln in lines) {
+    for ((i, ln) in lines.withIndex()) {
         val isSectionMarker = (ln == SECTION_FIELDS)
         val isField = isParsingFields && !parseEntityField(ln).isEmpty()
         val isEntityEndMarker = isParsingFields && ln.isEmpty()
-        val isLastEntityEndMarker = isParsingFields && (ln == lines.last())
+        val isLastEntityEndMarker = isParsingFields && (i == lines.size - 1)
 
         if (isSectionMarker) {
             isParsingFields = true
