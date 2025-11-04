@@ -1,4 +1,11 @@
 
+## [1.1.1](https://github.com/OGStudio/cross-language-dialect/pull/10)
+#### 2025-10-15
+
+1. Fix translator interruption when parsing fields in YML
+
+2. Replace `removeFirst()` with `removeAt(0)` in `CLDController.kt` due to [crashes on Android](https://www.reddit.com/r/androiddev/comments/1gspjrs/dont_use_kotlins_removefirst_and_removelast_when/)
+
 ## [1.1.0](https://github.com/OGStudio/cross-language-dialect/pull/9)
 #### 2025-08-13
 
