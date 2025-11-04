@@ -1,5 +1,5 @@
 
-## 1.1.0
+## [1.1.0](https://github.com/OGStudio/cross-language-dialect/pull/9)
 #### 2025-08-13
 
 1. Update to Gradle 8.12.0
