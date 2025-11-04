@@ -1,5 +1,5 @@
 /**
- * This file is part of Cross-language dialect:
+ * This file is a part of Cross-language dialect:
  *     https://github.com/OGStudio/cross-language-dialect
  * License: CC0
  * Version: 1.1.1

@@ -1,5 +1,7 @@
 import org.opengamestudio.*
 
+private typealias EC = ExampleContext
+
 // Sample context used for testing
 data class ExampleContext(
     var didLaunch: Boolean = false,
@@ -164,4 +166,22 @@ fun t09_CLDController_registerFieldCallback_mismatch(): Boolean {
     ctrl.reportContext()
 
     return callbackHost == ""
+}
+
+/// See if `registerOneliners()` can register several callbacks
+/// into a controller
+fun t10_registerOneliners(): Boolean {
+    val ctrl = CLDController(ExampleContext())
+    fun printSmth(c: ExampleContext) {
+        println("ИГР registerO: todo count calls")
+    }
+    val oneliners = arrayOf(
+      "host", { c: EC -> printSmth(c) },
+    )
+    registerOneliners(ctrl, oneliners)
+
+    ctrl.set("host", "1")
+
+
+    return false
 }
