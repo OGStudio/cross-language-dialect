@@ -5,5 +5,5 @@
 
 2. Introduce `prefix-kotlin` to entity YML
 
-`prefix-kotlin` allows you to specify a line of source code
-that is placed one line before a class declaration
+    `prefix-kotlin` allows you to specify a line of source code
+    that is placed one line before a class declaration
