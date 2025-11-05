@@ -6,6 +6,7 @@ private typealias EC = ExampleContext
 data class ExampleContext(
     var didLaunch: Boolean = false,
     var host: String = "",
+    var hostCount: Int = 0,
     var sometimes: String? = null,
 
     override var recentField: String = "",
@@ -15,6 +16,8 @@ data class ExampleContext(
             return didLaunch as T
         } else if (name == "host") {
             return host as T
+        } else if (name == "hostCount") {
+            return hostCount as T
         } else if (name == "sometimes") {
             return sometimes as T
         }
@@ -34,19 +37,34 @@ data class ExampleContext(
             didLaunch = value as Boolean
         } else if (name == "host") {
             host = value as String
+        } else if (name == "hostCount") {
+            hostCount = value as Int
         } else if (name == "sometimes") {
             sometimes = value as String?
         }
     }
 }
 
-// Sample function for processing context change
-fun hostToDidLaunch(c: ExampleContext): ExampleContext {
+// Sample function: react to context change by changing the context
+fun shouldChangeDidLaunch(c: ExampleContext): ExampleContext {
     if (c.recentField == "host") {
         c.didLaunch = true
         c.recentField = "didLaunch"
         return c
     }
+
+    c.recentField = "none"
+    return c
+}
+
+// Sample function: count how many times host has been changed
+fun shouldResetHostCount(c: ExampleContext): ExampleContext {
+    if (c.recentField == "host") {
+        c.hostCount += 1
+        c.recentField = "hostCount"
+        return c
+    }
+
     c.recentField = "none"
     return c
 }
@@ -109,7 +127,7 @@ fun t06_CLDController_executeFunctions_set(): Boolean {
     ctrl.set("host", "123")
 
     ctrl.registerFunction({ c ->
-        hostToDidLaunch(c as ExampleContext)
+        shouldChangeDidLaunch(c as ExampleContext)
     })
 
     // Apply `host` value.
@@ -127,7 +145,7 @@ fun t07_CLDController_processQueue(): Boolean {
     val ctrl = CLDController(ExampleContext())
 
     ctrl.registerFunction({ c ->
-        hostToDidLaunch(c as ExampleContext)
+        shouldChangeDidLaunch(c as ExampleContext)
     })
     ctrl.set("host", "123")
     val c = ctrl.context as ExampleContext
@@ -171,17 +189,19 @@ fun t09_CLDController_registerFieldCallback_mismatch(): Boolean {
 /// See if `registerOneliners()` can register several callbacks
 /// into a controller
 fun t10_registerOneliners(): Boolean {
-    val ctrl = CLDController(ExampleContext())
-    fun printSmth(c: ExampleContext) {
-        println("ИГР registerO: todo count calls")
+    var count = 0
+    fun increaseCount(c: ExampleContext) {
+        count += 1
     }
+
     val oneliners = arrayOf(
-      "host", { c: EC -> printSmth(c) },
+      "host", { c: EC -> increaseCount(c) },
+      "host", { c: EC -> increaseCount(c) },
     )
+
+    val ctrl = CLDController(ExampleContext())
     registerOneliners(ctrl, oneliners)
+    ctrl.set("host", "abc")
 
-    ctrl.set("host", "1")
-
-
-    return false
+    return count == 2
 }
