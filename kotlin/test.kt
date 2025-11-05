@@ -57,18 +57,6 @@ fun shouldChangeDidLaunch(c: ExampleContext): ExampleContext {
     return c
 }
 
-// Sample function: count how many times host has been changed
-fun shouldResetHostCount(c: ExampleContext): ExampleContext {
-    if (c.recentField == "host") {
-        c.hostCount += 1
-        c.recentField = "hostCount"
-        return c
-    }
-
-    c.recentField = "none"
-    return c
-}
-
 // Validate field access by name
 fun t01_ExampleContext_field(): Boolean {
     var c = ExampleContext()
