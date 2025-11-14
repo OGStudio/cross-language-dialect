@@ -1,3 +1,7 @@
+# [1.2.0](https://github.com/OGStudio/cross-language-dialect/pull/11)
+#### 2025-11-15
+
+1. Add `registerOneliners()` to simplify registration of effects
 
 ## [1.1.1](https://github.com/OGStudio/cross-language-dialect/pull/10)
 #### 2025-10-15
