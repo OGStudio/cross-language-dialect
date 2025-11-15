@@ -1,12 +1,12 @@
 # [1.2.0](https://github.com/OGStudio/cross-language-dialect/pull/11)
 #### 2025-11-15
 
-1. Add `registerOneliners()` to simplify registration of multiple callbacks (effects) into `CLDController` in a single call
+1. Kotlin: Add `registerOneliners()` to simplify registration of multiple callbacks (effects) into `CLDController` in a single call
 
 ## [1.1.1](https://github.com/OGStudio/cross-language-dialect/pull/10)
 #### 2025-10-15
 
-1. Replace `removeFirst()` with `removeAt(0)` in `CLDController.kt` because `removeFirst()` [crashes on Android](https://www.reddit.com/r/androiddev/comments/1gspjrs/dont_use_kotlins_removefirst_and_removelast_when/)
+1. Kotlin: Replace `removeFirst()` with `removeAt(0)` in `CLDController.kt` because `removeFirst()` [crashes on Android](https://www.reddit.com/r/androiddev/comments/1gspjrs/dont_use_kotlins_removefirst_and_removelast_when/)
 
 2. Fix translator interruption when parsing fields in YML
 
