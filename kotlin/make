@@ -1,12 +1,14 @@
 #!/bin/bash -e
-SCRIPT_DIR=$(cd "$(dirname "$0")" ; pwd -P)
+SDIR=$(cd "$(dirname "$0")" ; pwd -P)
 
 kotlinc-native \
-    -o $SCRIPT_DIR/do-test \
-    $SCRIPT_DIR/CLDContext.kt \
-    $SCRIPT_DIR/CLDController.kt \
-    $SCRIPT_DIR/test.kt \
-    $SCRIPT_DIR/main.kt
+    $SDIR/CLDContext.kt \
+    $SDIR/CLDController.kt \
+    $SDIR/main.kt \
+    $SDIR/registerOneliners.kt \
+    $SDIR/test.kt \
+    -o $SDIR/do-test
 
-# Remove weird `kexe` extension
-mv $SCRIPT_DIR/do-test{.kexe,}
+# Get rid of the weird `kexe` extension on *nix
+# JetBrains: Seriously, dudes, you won't break that rule, drop it
+mv $SDIR/do-test{.kexe,}

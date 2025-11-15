@@ -11,6 +11,7 @@ fun main() {
         ::t07_CLDController_processQueue,
         ::t08_CLDController_registerFieldCallback_match,
         ::t09_CLDController_registerFieldCallback_mismatch,
+        ::t10_registerOneliners,
     )
 
     var okCount = 0
