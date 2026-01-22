@@ -1,3 +1,8 @@
+# [1.3.0](https://github.com/OGStudio/cross-language-dialect/pull/12)
+#### 2026-01-22
+
+1. Translator: Support `Double` and `Long` types
+
 # [1.2.0](https://github.com/OGStudio/cross-language-dialect/pull/11)
 #### 2025-11-15
 

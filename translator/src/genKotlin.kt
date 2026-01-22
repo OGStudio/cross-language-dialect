@@ -2,7 +2,7 @@
  * This file is part of Cross-language dialect:
  *     https://github.com/OGStudio/cross-language-dialect
  * License: CC0
- * Version: 1.2.0
+ * Version: 1.3.0
  */
 
 package org.opengamestudio
@@ -94,8 +94,16 @@ fun genKotlinFieldDefault(type: String): String {
     if (type == "Bool") {
         return "false"
     }
+    // `Double` -> `0`
+    if (type == "Double") {
+        return "0"
+    }
     // `Int` -> `0`
     if (type == "Int") {
+        return "0"
+    }
+    // `Long` -> `0`
+    if (type == "Long") {
         return "0"
     }
     // `String` -> `""`
@@ -147,6 +155,14 @@ fun genKotlinFieldType(type: String): String {
     // `Bool` -> `Boolean`
     if (type == "Bool") {
         return "Boolean"
+    }
+    // `Double` -> `Double`
+    if (type == "Double") {
+        return "Double"
+    }
+    // `Long` -> `Long`
+    if (type == "Long") {
+        return "Long"
     }
     // `[Type]` -> `Array<Type>`
     if (

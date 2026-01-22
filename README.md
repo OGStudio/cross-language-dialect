@@ -54,12 +54,16 @@ $ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=..
 | № | YML type | Kotlin type | Default value | YML example | Kotlin example |
 |---|---       |---          |---            |---          |---             |
 | 1 | `Bool`   | `Boolean`   | `false`       | `didLaunch: Bool` | `var didLaunch: Boolean = false` |
-| 2 | `String` | `String`    | `""`          | `method: String`  | `var method: String = ""` |
-| 3 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
-| 4 | `[TypeA: TypeB]` | `Map<TypeA, TypeB>` | `mapOf()` | `templates: [String: String]` | `var templates: Map<String, String> = mapOf()` |
+| 2 | `Double`   | `Double`   | `0`       | `angle: Double` | `var angle: Double = 0` |
+| 3 | `Int`   | `Int`   | `0`       | `selectedItemId: Int` | `var selectedItemId: Int = 0` |
+| 4 | `Long`   | `Long`   | `0`       | `timestamp: Long` | `var timestamp: Long = 0` |
+| 5 | `String` | `String`    | `""`          | `method: String`  | `var method: String = ""` |
+| 6 | `Type` | `Type`    | `Type()`          | `request: NetRequest`  | `var request: NetRequest = NetRequest()` |
+| 7 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
+| 8 | `[TypeA: TypeB]` | `Map<TypeA, TypeB>` | `mapOf()` | `templates: [String: String]` | `var templates: Map<String, String> = mapOf()` |
 
 # Utilities
 
 Updating the version in all files:
 
-$ `./util/update-vesion 1.0.1 1.1.0`
+$ `./util/update-version 1.0.1 1.1.0`
