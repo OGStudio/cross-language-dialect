@@ -54,9 +54,11 @@ $ `cd translator && ./run/run-java --file=../test/test-dir/entities.yml --out=..
 | № | YML type | Kotlin type | Default value | YML example | Kotlin example |
 |---|---       |---          |---            |---          |---             |
 | 1 | `Bool`   | `Boolean`   | `false`       | `didLaunch: Bool` | `var didLaunch: Boolean = false` |
-| 2 | `String` | `String`    | `""`          | `method: String`  | `var method: String = ""` |
-| 3 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
-| 4 | `[TypeA: TypeB]` | `Map<TypeA, TypeB>` | `mapOf()` | `templates: [String: String]` | `var templates: Map<String, String> = mapOf()` |
+| 2 | `Double`   | `Double`   | `0`       | `angle: Double` | `var angle: Double = 0` |
+| 3 | `Long`   | `Long`   | `0`       | `timestamp: Long` | `var timestamp: Long = 0` |
+| 4 | `String` | `String`    | `""`          | `method: String`  | `var method: String = ""` |
+| 5 | `[Type]` | `Array<Type>` | `arrayOf()` | `arguments: [String]` | `var arguments: Array<String> = arrayOf()` |
+| 6 | `[TypeA: TypeB]` | `Map<TypeA, TypeB>` | `mapOf()` | `templates: [String: String]` | `var templates: Map<String, String> = mapOf()` |
 
 # Utilities
 
