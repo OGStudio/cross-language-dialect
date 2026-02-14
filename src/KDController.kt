@@ -47,7 +47,7 @@ class KDController(
         isProcessingQueue = false
     }
  
-    fun registerCallback(cb: (c: CLDContext) -> Unit) {
+    fun registerCallback(cb: (c: KDContext) -> Unit) {
         callbacks.add(cb)
     }
  

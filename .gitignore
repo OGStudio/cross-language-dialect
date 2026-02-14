@@ -1,8 +1,7 @@
 __pycache__
 .DS_Store
-kotlin/do-test*
-swift/do-test
+do-test*
 local.properties
 .gradle
 build
-test/test-dir/entities.kt
+test-dir/entities.kt
