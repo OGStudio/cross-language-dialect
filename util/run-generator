@@ -1,0 +1,7 @@
+#!/bin/bash -e
+SDIR=$(cd "$(dirname "$0")" ; pwd -P)
+
+GEN_DIR=$SDIR/../generator/ver-nodejs/app
+
+cd $GEN_DIR
+./gradlew jsNodeDevelopmentRun

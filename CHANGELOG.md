@@ -1,6 +1,9 @@
 # [2.0](https://github.com/OGStudio/kotlin-dialect/pull/13)
 
-1. TODO The project has been renamed to Kotlin Dialect to emphasize....
+TODO
+
+1. The project has been renamed to Kotlin Dialect to emphasize....
+1. Version 1.x has been moved to history/2025
 
 # [1.3.0](https://github.com/OGStudio/cross-language-dialect/pull/12)
 #### 2026-01-22
