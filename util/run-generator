@@ -1,7 +1,11 @@
 #!/bin/bash -e
 SDIR=$(cd "$(dirname "$0")" ; pwd -P)
 
+BUILD_DIR=$SDIR/../generator/ver-nodejs/build/js/packages/ver-nodejs-app/kotlin
 GEN_DIR=$SDIR/../generator/ver-nodejs
 
 cd $GEN_DIR
-./gradlew --debug jsNodeDevelopmentRun
+./gradlew kotlinUpgradeYarnLock
+./gradlew jsNodeProductionRun
+
+node $BUILD_DIR/gen.js

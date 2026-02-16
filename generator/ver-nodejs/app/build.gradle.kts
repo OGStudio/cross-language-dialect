@@ -14,12 +14,6 @@ kotlin {
                 optIn("kotlin.js.ExperimentalJsExport")
             }
         }
-        val jsMain by getting {
-            dependencies {
-                // Convert file name to MIME type
-                implementation(npm("mime-types", "3.0.1"))
-            }
-        }
     }
 }
 
