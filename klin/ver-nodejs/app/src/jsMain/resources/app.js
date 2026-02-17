@@ -5,17 +5,17 @@ let KT = require("./ver-nodejs-app").org.opengamestudio;
 
 //!<-- API -->
 
-function genCtrlSet(key, value) {
+function appCtrlSet(key, value) {
     cmp.ctrl.set(key, value);
 }
 
 //!<-- Constants -->
 
-//let GEN_TMP = "BINARY";
+//let APP_TMP = "BINARY";
 
 //!<-- Component -->
 
-function GenComponent() {
+function AppComponent() {
     this._construct = function() {
         // TODO 1. Create ctrl instance in KMP
         // TODO Only reference it here
@@ -64,8 +64,8 @@ function srvDeleteFile(fileName) {
 
 //<!-- Installation -->
 
-let cmp = new GenComponent();
+let cmp = new AppComponent();
 
 //<!-- Main loop -->
 
-console.log("ИГР Gen hello world");
+console.log("ИГР App hello world");
