@@ -7,8 +7,11 @@
 
 package org.opengamestudio
 
+import kotlin.js.JsExport
+
 val KD_FIELD_NONE = "none"
 
+@JsExport
 class KDController(
     var context: KDContext
 ) {

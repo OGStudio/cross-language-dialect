@@ -7,6 +7,9 @@
 
 package org.opengamestudio
 
+import kotlin.js.JsExport
+
+@JsExport
 interface KDContext {
     /**
      * Name of the field that has just been changed
