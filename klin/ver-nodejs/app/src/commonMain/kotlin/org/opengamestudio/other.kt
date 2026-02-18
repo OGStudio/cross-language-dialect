@@ -1,9 +1,13 @@
+/**
+ * This file is a part of Kotlin dialect:
+ *     https://github.com/OGStudio/kotlin-dialect
+ * License: CC0
+ * Version: 2.0.0
+ */
+
 package org.opengamestudio
 
-import kotlin.js.JsExport
-
 // Extract command line argument value
-@JsExport
 fun cliArgumentValue(
     args: Array<String>,
     argument: String
@@ -18,8 +22,20 @@ fun cliArgumentValue(
     return ""
 }
 
+// Detect command line argument presence
+fun cliHasArgument(
+    args: Array<String>,
+    argument: String
+): Boolean {
+    for (arg in args) {
+        if (arg == argument) {
+            return true
+        }
+    }
+    return false
+}
+
 // Debug representation of a value
-@JsExport
 fun debugString(v: Any): String {
     // Prepend a string with its length
     if (v is String) {
@@ -52,4 +68,18 @@ fun debugString(v: Any): String {
 
     // For other types return whatever Kotlin returns by default
     return "$v"
+}
+
+// Collect raw Kotlin source code
+fun parseRawKotlin(lines: Array<String>): String {
+    var contents = ""
+    for (ln in lines) {
+        if (ln.startsWith(PREFIX_RAW_KOTLIN)) {
+            val prefixLen = PREFIX_RAW_KOTLIN.length
+            val kotlinCode = ln.substring(prefixLen)
+            contents += kotlinCode + NEWLINE
+        }
+    }
+
+    return contents
 }

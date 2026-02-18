@@ -1,0 +1,1 @@
+../../../../../../../../src/registerOneliners.kt

@@ -1,0 +1,250 @@
+/**
+ * This file is a part of Kotlin dialect:
+ *     https://github.com/OGStudio/kotlin-dialect
+ * License: CC0
+ * Version: 2.0.0
+ */
+
+package org.opengamestudio
+
+// Collect comments of the entities
+//
+// Conditions:
+// 1. Entity names are available
+fun shouldCollectEntityComments(c: Context): Context {
+    if (c.recentField == "entityNames") {
+        c.entityComments = parseEntityComments(c.inputFileLines)
+        c.recentField = "entityComments"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Collect field comments
+//
+// Conditions:
+// 1. Entity fields are available
+fun shouldCollectEntityFieldComments(c: Context): Context {
+    if (c.recentField == "entityFields") {
+        c.entityFieldComments = parseEntityFieldComments(c.inputFileLines)
+        c.recentField = "entityFieldComments"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Collect field names and values of the entities
+//
+// Conditions:
+// 1. Entity types are available
+fun shouldCollectEntityFields(c: Context): Context {
+    if (c.recentField == "entityTypes") {
+        c.entityFields = parseEntityFields(c.inputFileLines)
+        c.recentField = "entityFields"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Collect names of the declared entities
+//
+// Conditions:
+// 1. Input file contents are available
+fun shouldCollectEntityNames(c: Context): Context {
+    if (c.recentField == "inputFileLines") {
+        c.entityNames = parseEntityNames(c.inputFileLines)
+        c.recentField = "entityNames"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Collect prefixes of the entities for Kotlin
+//
+// Conditions:
+// 1. Entity comments are available
+fun shouldCollectEntityPrefixesKotlin(c: Context): Context {
+    if (c.recentField == "entityComments") {
+        c.entityPrefixesKotlin =
+            parseEntityPrefixes(
+              c.inputFileLines,
+              PREFIX_PREFIX_KOTLIN
+            )
+        c.recentField = "entityPrefixesKotlin"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Collect types of the entities
+//
+// Conditions:
+// 1. Entity comments are available
+fun shouldCollectEntityTypes(c: Context): Context {
+    if (c.recentField == "entityComments") {
+        c.entityTypes = parseEntityTypes(c.inputFileLines)
+        c.recentField = "entityTypes"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Collect raw Kotlin source code
+//
+// Conditions:
+// 1. Input file contents are available
+fun shouldCollectRawKotlin(c: Context): Context {
+    if (c.recentField == "inputFileLines") {
+        c.rawKotlin = parseRawKotlin(c.inputFileLines)
+        c.recentField = "rawKotlin"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Generate Kotlin version of the entities
+//
+// Conditions:
+// 1. Entity field comments are available
+fun shouldGenerateKotlinEntities(c: Context): Context {
+    if (c.recentField == "entityFieldComments") {
+        c.outputFileContents = genKotlinEntitiesFile(
+            c.entityComments,
+            c.entityFieldComments,
+            c.entityFields,
+            c.entityNames,
+            c.entityPrefixesKotlin,
+            c.entityTypes,
+            c.rawKotlin
+        )
+        c.recentField = "outputFileContents"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Parse input file path
+//
+// Conditions:
+// 1. At app launch input file was specified with command line argument
+fun shouldParseInputFilePath(c: Context): Context {
+    if (
+        c.recentField == "didLaunch" &&
+        cliArgumentValue(c.arguments, ARGUMENT_FILE).length > 0
+    ) {
+        c.inputFile = cliArgumentValue(c.arguments, ARGUMENT_FILE)
+        c.recentField = "inputFile"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Parse output file path
+//
+// Conditions:
+// 1. At app launch output file was specified with command line argument
+fun shouldParseOutputFilePath(c: Context): Context {
+    if (
+        c.recentField == "didLaunch" &&
+        cliArgumentValue(c.arguments, ARGUMENT_OUT).length > 0
+    ) {
+        c.outputFile = cliArgumentValue(c.arguments, ARGUMENT_OUT)
+        c.recentField = "outputFile"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+// Print to console
+//
+// Conditions:
+// 1. At app launch no command line arguments were provided
+// 2. Line is parsed
+fun shouldPrintToConsole(c: Context): Context {
+    if (
+        c.recentField == "didLaunch" &&
+        c.arguments.isEmpty()
+    ) {
+        c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml --out=/path/to/file.kt"
+        c.recentField = "consoleOutput"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+/////////////// TODO Convert to effect
+// Read input file
+//
+// Conditions:
+// 1. Input file path is available
+/*
+fun shouldReadInputFile(c: Context): Context {
+    if (c.recentField == "inputFile") {
+        c.inputFileLines = fsReadFile(c.inputFile)
+        c.recentField = "inputFileLines"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+*/
+
+// Reset debug output state
+//
+// Conditions:
+// 1. Arguments are available
+fun shouldResetDbg(c: Context): Context {
+    if (
+        c.recentField == "arguments" &&
+        cliHasArgument(c.arguments, ARGUMENT_DBG)
+    ) {
+        c.isDbg = cliHasArgument(c.arguments, ARGUMENT_DBG)
+        c.recentField = "isDbg"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+
+///////// Convert to effect
+// Save generated contents to output file
+//
+// Conditions:
+// 1. Finished preparing file contents
+/*
+fun shouldWriteOutputFile(c: Context): Context {
+    if (c.recentField == "outputFileContents") {
+        fsWriteFile(c.outputFile, c.outputFileContents)
+        c.didWriteOutputFile = true
+        c.recentField = "didWriteOutputFile"
+        return c
+    }
+
+    c.recentField = "none"
+    return c
+}
+*/
