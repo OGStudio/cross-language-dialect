@@ -83,3 +83,14 @@ fun parseRawKotlin(lines: Array<String>): String {
 
     return contents
 }
+
+fun setupComponentDebugging(
+    ctrl: KDController,
+    prefix: String
+) {
+    ctrl.registerCallback { c ->
+        //val value = "${c.field<String>(c.recentField)}"
+        val value = debugString(c.fieldAny(c.recentField))
+        println("ИГР $prefix k/v: '${c.recentField}'/'$value'")
+    }
+}
