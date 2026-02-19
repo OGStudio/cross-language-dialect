@@ -8,4 +8,6 @@ cd $GRADLE_DIR
 ./gradlew kotlinUpgradeYarnLock
 ./gradlew jsNodeProductionRun
 
-node $BUILD_DIR/app.js $@
+node $BUILD_DIR/app.js \
+    --file=$SDIR/../klin.yml \
+    --out=$SDIR/../src/klin.kt
