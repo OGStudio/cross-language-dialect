@@ -12,5 +12,23 @@ object AppProto {
 
     init {
         ctrl = KDController(AppContext())
+        arrayOf(
+            ::appShouldCollectEntityComments,
+            ::appShouldCollectEntityFieldComments,
+            ::appShouldCollectEntityFields,
+            ::appShouldCollectEntityNames,
+            ::appShouldCollectEntityPrefixesKotlin,
+            ::appShouldCollectEntityTypes,
+            ::appShouldCollectRawKotlin,
+            ::appShouldGenerateKotlinEntities,
+            ::appShouldParseInputFilePath,
+            ::appShouldPrintToConsole,
+            ::appShouldParseOutputFilePath,
+            //::appShouldReadInputFile,
+            ::appShouldResetDbg,
+            //::appShouldWriteOutputFile,
+        ).forEach { f ->
+            ctrl.registerFunction { c -> f(c as AppContext) }
+        }
     }
 }
