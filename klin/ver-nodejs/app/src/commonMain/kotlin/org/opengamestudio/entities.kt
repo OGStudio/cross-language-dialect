@@ -1,7 +1,7 @@
 package org.opengamestudio
 
 
-data class Context(
+data class AppContext(
     // Command line arguments
     var arguments: Array<String> = arrayOf(),
     var consoleOutput: String = "",

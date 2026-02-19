@@ -7,11 +7,15 @@
 
 package org.opengamestudio
 
+import kotlin.js.JsExport
+
+//<!-- Shoulds -->
+
 // Collect comments of the entities
 //
 // Conditions:
 // 1. Entity names are available
-fun shouldCollectEntityComments(c: Context): Context {
+fun appShouldCollectEntityComments(c: AppContext): AppContext {
     if (c.recentField == "entityNames") {
         c.entityComments = parseEntityComments(c.inputFileLines)
         c.recentField = "entityComments"
@@ -26,7 +30,7 @@ fun shouldCollectEntityComments(c: Context): Context {
 //
 // Conditions:
 // 1. Entity fields are available
-fun shouldCollectEntityFieldComments(c: Context): Context {
+fun appShouldCollectEntityFieldComments(c: AppContext): AppContext {
     if (c.recentField == "entityFields") {
         c.entityFieldComments = parseEntityFieldComments(c.inputFileLines)
         c.recentField = "entityFieldComments"
@@ -41,7 +45,7 @@ fun shouldCollectEntityFieldComments(c: Context): Context {
 //
 // Conditions:
 // 1. Entity types are available
-fun shouldCollectEntityFields(c: Context): Context {
+fun appShouldCollectEntityFields(c: AppContext): AppContext {
     if (c.recentField == "entityTypes") {
         c.entityFields = parseEntityFields(c.inputFileLines)
         c.recentField = "entityFields"
@@ -56,7 +60,7 @@ fun shouldCollectEntityFields(c: Context): Context {
 //
 // Conditions:
 // 1. Input file contents are available
-fun shouldCollectEntityNames(c: Context): Context {
+fun appShouldCollectEntityNames(c: AppContext): AppContext {
     if (c.recentField == "inputFileLines") {
         c.entityNames = parseEntityNames(c.inputFileLines)
         c.recentField = "entityNames"
@@ -71,7 +75,7 @@ fun shouldCollectEntityNames(c: Context): Context {
 //
 // Conditions:
 // 1. Entity comments are available
-fun shouldCollectEntityPrefixesKotlin(c: Context): Context {
+fun appShouldCollectEntityPrefixesKotlin(c: AppContext): AppContext {
     if (c.recentField == "entityComments") {
         c.entityPrefixesKotlin =
             parseEntityPrefixes(
@@ -90,7 +94,7 @@ fun shouldCollectEntityPrefixesKotlin(c: Context): Context {
 //
 // Conditions:
 // 1. Entity comments are available
-fun shouldCollectEntityTypes(c: Context): Context {
+fun appShouldCollectEntityTypes(c: AppContext): AppContext {
     if (c.recentField == "entityComments") {
         c.entityTypes = parseEntityTypes(c.inputFileLines)
         c.recentField = "entityTypes"
@@ -105,7 +109,7 @@ fun shouldCollectEntityTypes(c: Context): Context {
 //
 // Conditions:
 // 1. Input file contents are available
-fun shouldCollectRawKotlin(c: Context): Context {
+fun appShouldCollectRawKotlin(c: AppContext): AppContext {
     if (c.recentField == "inputFileLines") {
         c.rawKotlin = parseRawKotlin(c.inputFileLines)
         c.recentField = "rawKotlin"
@@ -120,7 +124,7 @@ fun shouldCollectRawKotlin(c: Context): Context {
 //
 // Conditions:
 // 1. Entity field comments are available
-fun shouldGenerateKotlinEntities(c: Context): Context {
+fun appShouldGenerateKotlinEntities(c: AppContext): AppContext {
     if (c.recentField == "entityFieldComments") {
         c.outputFileContents = genKotlinEntitiesFile(
             c.entityComments,
@@ -143,7 +147,7 @@ fun shouldGenerateKotlinEntities(c: Context): Context {
 //
 // Conditions:
 // 1. At app launch input file was specified with command line argument
-fun shouldParseInputFilePath(c: Context): Context {
+fun appShouldParseInputFilePath(c: AppContext): AppContext {
     if (
         c.recentField == "didLaunch" &&
         cliArgumentValue(c.arguments, ARGUMENT_FILE).length > 0
@@ -161,7 +165,7 @@ fun shouldParseInputFilePath(c: Context): Context {
 //
 // Conditions:
 // 1. At app launch output file was specified with command line argument
-fun shouldParseOutputFilePath(c: Context): Context {
+fun appShouldParseOutputFilePath(c: AppContext): AppContext {
     if (
         c.recentField == "didLaunch" &&
         cliArgumentValue(c.arguments, ARGUMENT_OUT).length > 0
@@ -180,7 +184,7 @@ fun shouldParseOutputFilePath(c: Context): Context {
 // Conditions:
 // 1. At app launch no command line arguments were provided
 // 2. Line is parsed
-fun shouldPrintToConsole(c: Context): Context {
+fun appShouldPrintToConsole(c: AppContext): AppContext {
     if (
         c.recentField == "didLaunch" &&
         c.arguments.isEmpty()
@@ -200,7 +204,7 @@ fun shouldPrintToConsole(c: Context): Context {
 // Conditions:
 // 1. Input file path is available
 /*
-fun shouldReadInputFile(c: Context): Context {
+fun appShouldReadInputFile(c: AppContext): AppContext {
     if (c.recentField == "inputFile") {
         c.inputFileLines = fsReadFile(c.inputFile)
         c.recentField = "inputFileLines"
@@ -216,7 +220,7 @@ fun shouldReadInputFile(c: Context): Context {
 //
 // Conditions:
 // 1. Arguments are available
-fun shouldResetDbg(c: Context): Context {
+fun appShouldResetDbg(c: AppContext): AppContext {
     if (
         c.recentField == "arguments" &&
         cliHasArgument(c.arguments, ARGUMENT_DBG)
@@ -236,7 +240,7 @@ fun shouldResetDbg(c: Context): Context {
 // Conditions:
 // 1. Finished preparing file contents
 /*
-fun shouldWriteOutputFile(c: Context): Context {
+fun appShouldWriteOutputFile(c: AppContext): AppContext {
     if (c.recentField == "outputFileContents") {
         fsWriteFile(c.outputFile, c.outputFileContents)
         c.didWriteOutputFile = true
@@ -248,3 +252,10 @@ fun shouldWriteOutputFile(c: Context): Context {
     return c
 }
 */
+
+//<!-- Other functions -->
+
+@JsExport
+fun appCtrl(): KDController {
+    return AppProto.ctrl
+}

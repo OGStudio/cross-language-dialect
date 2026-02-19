@@ -5,8 +5,8 @@ let KT = require("./ver-nodejs-app").org.opengamestudio;
 
 //!<-- API -->
 
-function appCtrlSet(key, value) {
-    cmp.ctrl.set(key, value);
+function appSet(key, value) {
+    KT.appCtrl().set(key, value);
 }
 
 //!<-- Constants -->
@@ -35,10 +35,7 @@ function AppComponent() {
         */
 
         // Defaults.
-        /*
-        srvCtrl().set("arguments", process.argv);
-        srvCtrl().set("defaultBrowserDir", __dirname + "/../ver-browser");
-        */
+        appSet("arguments", process.argv);
     };
 
     this._construct();
