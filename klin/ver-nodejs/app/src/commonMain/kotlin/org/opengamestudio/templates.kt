@@ -13,13 +13,13 @@ const val TEMPLATE_KOTLIN_CONTEXT = """
 data class %NAME%(
 %FIELDS%
     override var recentField: String = "",
-): CLDContext {
+): KDContext {
     override fun <T> field(name: String): T {
 %GETTERS%        }
         return "unknown-field-name" as T
     }
 
-    override fun selfCopy(): CLDContext {
+    override fun selfCopy(): KDContext {
         return this.copy()
     }
 

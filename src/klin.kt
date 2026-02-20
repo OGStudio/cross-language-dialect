@@ -28,7 +28,7 @@ data class AppContext(
     // Kotlin source code to insert as is at the beginning of each generated file
     var rawKotlin: String = "",
     override var recentField: String = "",
-): CLDContext {
+): KDContext {
     override fun <T> field(name: String): T {
         if (name == "arguments") {
             return arguments as T
@@ -66,7 +66,7 @@ data class AppContext(
         return "unknown-field-name" as T
     }
 
-    override fun selfCopy(): CLDContext {
+    override fun selfCopy(): KDContext {
         return this.copy()
     }
 
