@@ -24,7 +24,6 @@ AppContext:
         didWriteOutputFile: Bool
         inputFile: String
         inputFileLines: [String]
-        isDbg: Bool
         outputFile: String
         # Contents to write to output file
         outputFileContents: String
