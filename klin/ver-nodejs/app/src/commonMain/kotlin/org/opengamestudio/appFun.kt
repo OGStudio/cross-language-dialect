@@ -149,11 +149,11 @@ fun appShouldGenerateKotlinEntities(c: AppContext): AppContext {
 // 1. At app launch input file was specified with command line argument
 fun appShouldParseInputFilePath(c: AppContext): AppContext {
     if (
-        c.recentField == "didLaunch" &&
+        c.recentField == F.didLaunch &&
         cliArgumentValue(c.arguments, ARGUMENT_FILE).length > 0
     ) {
         c.inputFile = cliArgumentValue(c.arguments, ARGUMENT_FILE)
-        c.recentField = "inputFile"
+        c.recentField = F.inputFile
         return c
     }
 
@@ -191,24 +191,6 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
     ) {
         c.consoleOutput = "Usage: {bin} --file=/path/to/file.yml --out=/path/to/file.kt"
         c.recentField = "consoleOutput"
-        return c
-    }
-
-    c.recentField = "none"
-    return c
-}
-
-// Reset debug output state
-//
-// Conditions:
-// 1. Arguments are available
-fun appShouldResetDbg(c: AppContext): AppContext {
-    if (
-        c.recentField == "arguments" &&
-        cliHasArgument(c.arguments, ARGUMENT_DBG)
-    ) {
-        c.isDbg = cliHasArgument(c.arguments, ARGUMENT_DBG)
-        c.recentField = "isDbg"
         return c
     }
 

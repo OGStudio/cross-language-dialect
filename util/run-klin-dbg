@@ -10,4 +10,5 @@ cd $GRADLE_DIR
 
 node $BUILD_DIR/app.js \
     --file=$SDIR/../klin.yml \
-    --out=$SDIR/../src/klin.kt
+    --out=/tmp/klin.kt
+    #--out=$SDIR/../src/klin.kt
