@@ -17,22 +17,12 @@ function appSet(key, value) {
 
 function AppComponent() {
     this._construct = function() {
-        // TODO 1. Create ctrl instance in KMP
-        // TODO Only reference it here
-        // TODO 2. Accept isDbg to enabled dbg output
- 
         // Effects
-        /*
         let oneliners = [ 
-            "deleteFile", (c) => { srvDeleteFile(c.deleteFile) },
-            "listDir", (c) => { srvListDir(c.listDir) },
-            "projectDir", (c) => { srvResolvePath(c.projectDir) },
-            "readFile", (c) => { srvReadFile(c.readFile) },
-            "url", (c) => { open(c.url) },
-            "writeFile", (c) => { srvWriteFile(c.writeFile[0], c.writeFile[1]) },
+            "inputFile", (c) => { appReadFile(c.inputFile) },
+            //"writeFile", (c) => { appWriteFile(c.writeFile[0], c.writeFile[1]) },
         ];
-        KT.registerOneliners(this.ctrl, oneliners);
-        */
+        KT.registerOneliners(KT.appCtrl(), oneliners);
 
         // Defaults.
         appSet("arguments", process.argv);
@@ -56,13 +46,17 @@ function srvDeleteFile(fileName) {
 }
 */
 
-//<!-- Functions -->
+//<!-- Other functions -->
 
+function appReadFile(fileName) {
+    let contents = fs.readFileSync(fileName, { encoding: "utf8", flag: "r" });
+    let lines = contents.split("\n");
+    appSet("inputFileLines", lines);
+}
 
 //<!-- Installation -->
 
 let cmp = new AppComponent();
 
-//<!-- Main loop -->
-
-console.log("ИГР App hello world");
+//<!-- Run -->
+appSet("didLaunch", true);
