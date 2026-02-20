@@ -3,6 +3,7 @@ version: 1
 kotlin: package org.opengamestudio
 
 AppContext:
+    prefix-kotlin: @JsExport
     type: context
     fields:
         # Command line arguments

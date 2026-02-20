@@ -198,24 +198,6 @@ fun appShouldPrintToConsole(c: AppContext): AppContext {
     return c
 }
 
-/////////////// TODO Convert to effect
-// Read input file
-//
-// Conditions:
-// 1. Input file path is available
-/*
-fun appShouldReadInputFile(c: AppContext): AppContext {
-    if (c.recentField == "inputFile") {
-        c.inputFileLines = fsReadFile(c.inputFile)
-        c.recentField = "inputFileLines"
-        return c
-    }
-
-    c.recentField = "none"
-    return c
-}
-*/
-
 // Reset debug output state
 //
 // Conditions:

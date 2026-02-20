@@ -20,7 +20,7 @@ function AppComponent() {
         // Effects
         let oneliners = [ 
             "inputFile", (c) => { appReadFile(c.inputFile) },
-            //"writeFile", (c) => { appWriteFile(c.writeFile[0], c.writeFile[1]) },
+            "writeFile", (c) => { appWriteFile(c.outputFile, c.outputFileContets) },
         ];
         KT.registerOneliners(KT.appCtrl(), oneliners);
 
@@ -52,6 +52,11 @@ function appReadFile(fileName) {
     let contents = fs.readFileSync(fileName, { encoding: "utf8", flag: "r" });
     let lines = contents.split("\n");
     appSet("inputFileLines", lines);
+}
+
+function appWriteFile(fileName, contents) {
+    fs.writeFileSync(fileName, contents);
+    appSet("didWriteOutputFile", true);
 }
 
 //<!-- Installation -->
