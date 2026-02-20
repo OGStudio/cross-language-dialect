@@ -12,7 +12,7 @@ object AppProto {
 
     init {
         ctrl = KDController(AppContext())
-        setupComponentDebugging(ctrl, "App")
+        //setupComponentDebugging(ctrl, "App")
         arrayOf(
             ::appShouldCollectEntityComments,
             ::appShouldCollectEntityFieldComments,

@@ -1,6 +1,7 @@
 version: 1
 
 kotlin: package org.opengamestudio
+kotlin: import kotlin.js.JsExport
 
 AppContext:
     prefix-kotlin: @JsExport

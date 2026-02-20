@@ -20,7 +20,7 @@ function AppComponent() {
         // Effects
         let oneliners = [ 
             "inputFile", (c) => { appReadFile(c.inputFile) },
-            "outputFileContents", (c) => { appWriteFile(c.outputFile, c.outputFileContets) },
+            "outputFileContents", (c) => { appWriteFile(c.outputFile, c.outputFileContents) },
         ];
         KT.registerOneliners(KT.appCtrl(), oneliners);
 
@@ -32,21 +32,6 @@ function AppComponent() {
 }
 
 //<!-- Effects -->
-
-/*
-function srvDeleteFile(fileName) {
-    var isOk = true;
-    try {
-        fs.rmSync(fileName);
-    } catch (e) {
-        console.error("ERR srvDF e:", e);
-        isOk = false;
-    }
-    srvCtrl().set("didDeleteFile", isOk);
-}
-*/
-
-//<!-- Other functions -->
 
 function appReadFile(fileName) {
     let contents = fs.readFileSync(fileName, { encoding: "utf8", flag: "r" });
