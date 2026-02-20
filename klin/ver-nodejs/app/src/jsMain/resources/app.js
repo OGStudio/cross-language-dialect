@@ -20,7 +20,7 @@ function AppComponent() {
         // Effects
         let oneliners = [ 
             "inputFile", (c) => { appReadFile(c.inputFile) },
-            "writeFile", (c) => { appWriteFile(c.outputFile, c.outputFileContets) },
+            "outputFileContents", (c) => { appWriteFile(c.outputFile, c.outputFileContets) },
         ];
         KT.registerOneliners(KT.appCtrl(), oneliners);
 
