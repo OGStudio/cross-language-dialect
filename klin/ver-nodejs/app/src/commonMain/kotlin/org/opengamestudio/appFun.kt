@@ -216,25 +216,6 @@ fun appShouldResetDbg(c: AppContext): AppContext {
     return c
 }
 
-///////// Convert to effect
-// Save generated contents to output file
-//
-// Conditions:
-// 1. Finished preparing file contents
-/*
-fun appShouldWriteOutputFile(c: AppContext): AppContext {
-    if (c.recentField == "outputFileContents") {
-        fsWriteFile(c.outputFile, c.outputFileContents)
-        c.didWriteOutputFile = true
-        c.recentField = "didWriteOutputFile"
-        return c
-    }
-
-    c.recentField = "none"
-    return c
-}
-*/
-
 //<!-- Other functions -->
 
 @JsExport
