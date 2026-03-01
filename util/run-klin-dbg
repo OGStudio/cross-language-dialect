@@ -1,0 +1,14 @@
+#!/bin/bash -e
+SDIR=$(cd "$(dirname "$0")" ; pwd -P)
+
+BUILD_DIR=$SDIR/../klin/ver-nodejs/build/js/packages/ver-nodejs-app/kotlin
+GRADLE_DIR=$SDIR/../klin/ver-nodejs
+
+cd $GRADLE_DIR
+./gradlew kotlinUpgradeYarnLock
+./gradlew jsNodeProductionRun
+
+node $BUILD_DIR/app.js \
+    --file=$SDIR/../klin.yml \
+    --out=/tmp/klin.kt
+    #--out=$SDIR/../src/klin.kt

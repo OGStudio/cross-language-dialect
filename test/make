@@ -1,0 +1,14 @@
+#!/bin/bash -e
+SDIR=$(cd "$(dirname "$0")" ; pwd -P)
+
+kotlinc-native \
+    $SDIR/../src/KDContext.kt \
+    $SDIR/../src/KDController.kt \
+    $SDIR/../src/registerOneliners.kt \
+    $SDIR/main.kt \
+    $SDIR/tests.kt \
+    -o $SDIR/do-test
+
+# Get rid of the weird `kexe` extension on *nix
+# JetBrains, seriously, drop this
+mv $SDIR/do-test{.kexe,}

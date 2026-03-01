@@ -1,0 +1,8 @@
+#!/bin/bash -e
+SDIR=$(cd "$(dirname "$0")" ; pwd -P)
+
+cd $SDIR/../klin/ver-nodejs/app/src/jsMain/resources
+tmux new-window -n js
+
+cd $SDIR/../klin/ver-nodejs/app/src/commonMain/kotlin/org/opengamestudio
+tmux new-window -n kt

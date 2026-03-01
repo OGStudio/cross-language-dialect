@@ -1,0 +1,31 @@
+version: 1
+
+kotlin: package org.opengamestudio
+kotlin: import kotlin.js.JsExport
+
+AppContext:
+    prefix-kotlin: @JsExport
+    type: context
+    fields:
+        # Command line arguments
+        arguments: [String]
+        consoleOutput: String
+        didLaunch: Bool
+        # Entity comments with entities referenced by index
+        entityComments: [Int: String]
+        # Entity id -> Field name -> Field comment
+        entityFieldComments: [Int: [String: String]]
+        # Entity id -> Field name -> Field type
+        entityFields: [Int: [String: String]]
+        # Entity names in the order of appearance
+        entityNames: [String]
+        entityPrefixesKotlin: [Int: String]
+        entityTypes: [Int: String]
+        didWriteOutputFile: Bool
+        inputFile: String
+        inputFileLines: [String]
+        outputFile: String
+        # Contents to write to output file
+        outputFileContents: String
+        # Kotlin source code to insert as is at the beginning of each generated file
+        rawKotlin: String
